@@ -16,8 +16,7 @@ class Pedido extends Model
         'total',
         'fk_idsucursal',
         'fk_idcliente',
-        'fk_idestado',
-        'fk_idpedidoproducto'
+        'fk_idestado'
     ];
 
     public function obtenerTodos()
@@ -28,9 +27,8 @@ class Pedido extends Model
             total,
             fk_idsucursal,
             fk_idcliente,
-            fk_idestado,
-            fk_idpedidoproducto
-            FROM pedidos ORDER BY idpedido ASC";
+            fk_idestado
+            FROM pedidos ORDER BY fecha DESC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -43,8 +41,7 @@ class Pedido extends Model
             total,
             fk_idsucursal,
             fk_idcliente,
-            fk_idestado,
-            fk_idpedidoproducto
+            fk_idestado
             FROM pedidos WHERE idpedido = $idPedido";
         $lstRetorno = DB::select($sql);
 
@@ -55,7 +52,6 @@ class Pedido extends Model
             $this->fk_idsucursal = $lstRetorno[0]->fk_idsucursal;
             $this->fk_idcliente = $lstRetorno[0]->fk_idcliente;
             $this->fk_idestado = $lstRetorno[0]->fk_idestado;
-            $this->fk_idpedidoproducto = $lstRetorno[0]->fk_idpedidoproducto;
             return $this;
         }
         return null;
@@ -69,7 +65,6 @@ class Pedido extends Model
             fk_idsucursal=$this->fk_idsucursal
             fk_idcliente=$this->fk_idcliente
             fk_idestado=$this->fk_idestado
-            fk_idpedidoproducto=$this->fk_idpedidoproducto
             WHERE idpedido=?";
         $affected = DB::update($sql, [$this->idpedido]);
     }
@@ -88,16 +83,14 @@ class Pedido extends Model
             total,
             fk_idsucursal,
             fk_idcliente,
-            fk_idestado,
-            fk_idpedidoproducto
-            ) VALUES (?, ?, ?, ?, ?, ?, ?);";
+            fk_idestado
+            ) VALUES (?, ?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->fecha,
             $this->total,
             $this->fk_idsucursal,
             $this->fk_idcliente,
             $this->fk_idestado,
-            $this->fk_idpedidoproducto,
         ]);
         return $this->idpedido = DB::getPdo()->lastInsertId();
     }
