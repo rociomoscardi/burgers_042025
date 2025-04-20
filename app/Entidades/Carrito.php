@@ -19,10 +19,10 @@ class Carrito extends Model
     public function obtenerTodos()
     {
         $sql = "SELECT
-                    idcarrito,
-                    fk_idcliente,
-                    fk_idproducto
-                  FROM carritos ORDER BY fk_idcliente ASC";
+            idcarrito,
+            fk_idcliente,
+            fk_idproducto
+            FROM carritos ORDER BY fk_idcliente ASC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -30,10 +30,10 @@ class Carrito extends Model
     public function obtenerPorId($idCarrito)
     {
         $sql = "SELECT
-                idcarrito,
-                fk_idcliente,
-                fk_idproducto
-                FROM carritos WHERE idcarrito = $idCarrito";
+            idcarrito,
+            fk_idcliente,
+            fk_idproducto
+            FROM carritos WHERE idcarrito = $idCarrito";
         $lstRetorno = DB::select($sql);
 
         if (count($lstRetorno) > 0) {
@@ -64,8 +64,8 @@ class Carrito extends Model
     public function insertar()
     {
         $sql = "INSERT INTO carritos (
-                fk_idcliente,
-                fk_idproducto
+            fk_idcliente,
+            fk_idproducto
             ) VALUES (?, ?);";
         $result = DB::insert($sql, [
             $this->fk_idcliente,

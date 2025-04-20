@@ -22,13 +22,13 @@ class Postulacion extends Model
     public function obtenerTodos()
     {
         $sql = "SELECT
-                idpostulacion,
-                nombre,
-                apellido,
-                telefono,
-                correo,
-                link_cv
-                FROM postulaciones ORDER BY nombre ASC";
+            idpostulacion,
+            nombre,
+            apellido,
+            telefono,
+            correo,
+            link_cv
+            FROM postulaciones ORDER BY nombre ASC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -36,13 +36,13 @@ class Postulacion extends Model
     public function obtenerPorId($idPostulacion)
     {
         $sql = "SELECT
-                idpostulacion,
-                nombre,
-                apellido,
-                telefono,
-                correo,
-                link_cv
-                FROM postulaciones WHERE idpostulacion = $idPostulacion";
+            idpostulacion,
+            nombre,
+            apellido,
+            telefono,
+            correo,
+            link_cv
+            FROM postulaciones WHERE idpostulacion = $idPostulacion";
         $lstRetorno = DB::select($sql);
 
         if (count($lstRetorno) > 0) {
@@ -79,11 +79,11 @@ class Postulacion extends Model
     public function insertar()
     {
         $sql = "INSERT INTO postulaciones (
-                nombre,
-                apellido,
-                telefono,
-                correo,
-                link_cv
+            nombre,
+            apellido,
+            telefono,
+            correo,
+            link_cv
             ) VALUES (?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->nombre,

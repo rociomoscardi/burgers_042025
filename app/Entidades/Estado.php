@@ -18,9 +18,9 @@ class Estado extends Model
     public function obtenerTodos()
     {
         $sql = "SELECT
-                    idestado,
-                    nombre
-                  FROM estados ORDER BY nombre ASC";
+            idestado,
+            nombre
+            FROM estados ORDER BY nombre ASC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -28,9 +28,9 @@ class Estado extends Model
     public function obtenerPorId($idEstado)
     {
         $sql = "SELECT
-                    idestado,
-                    nombre
-                FROM estados WHERE idestado = $idEstado";
+            idestado,
+            nombre
+            FROM estados WHERE idestado = $idEstado";
         $lstRetorno = DB::select($sql);
 
         if (count($lstRetorno) > 0) {
@@ -59,7 +59,7 @@ class Estado extends Model
     public function insertar()
     {
         $sql = "INSERT INTO estados (
-                nombre
+            nombre
             ) VALUES (?);";
         $result = DB::insert($sql, [
             $this->nombre,

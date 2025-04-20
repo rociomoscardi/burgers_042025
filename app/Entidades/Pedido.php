@@ -23,14 +23,14 @@ class Pedido extends Model
     public function obtenerTodos()
     {
         $sql = "SELECT
-                  idpedido,
-                  fecha,
-                  total,
-                  fk_idsucursal,
-                  fk_idcliente,
-                  fk_idestado,
-                  fk_idpedidoproducto
-                  FROM pedidos ORDER BY idpedido ASC";
+            idpedido,
+            fecha,
+            total,
+            fk_idsucursal,
+            fk_idcliente,
+            fk_idestado,
+            fk_idpedidoproducto
+            FROM pedidos ORDER BY idpedido ASC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -38,14 +38,14 @@ class Pedido extends Model
     public function obtenerPorId($idPedido)
     {
         $sql = "SELECT
-                  idpedido,
-                  fecha,
-                  total,
-                  fk_idsucursal,
-                  fk_idcliente,
-                  fk_idestado,
-                  fk_idpedidoproducto
-                FROM pedidos WHERE idpedido = $idPedido";
+            idpedido,
+            fecha,
+            total,
+            fk_idsucursal,
+            fk_idcliente,
+            fk_idestado,
+            fk_idpedidoproducto
+            FROM pedidos WHERE idpedido = $idPedido";
         $lstRetorno = DB::select($sql);
 
         if (count($lstRetorno) > 0) {
@@ -84,12 +84,12 @@ class Pedido extends Model
     public function insertar()
     {
         $sql = "INSERT INTO pedidos (
-                  fecha,
-                  total,
-                  fk_idsucursal,
-                  fk_idcliente,
-                  fk_idestado,
-                  fk_idpedidoproducto
+            fecha,
+            total,
+            fk_idsucursal,
+            fk_idcliente,
+            fk_idestado,
+            fk_idpedidoproducto
             ) VALUES (?, ?, ?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->fecha,
