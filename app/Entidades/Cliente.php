@@ -101,4 +101,14 @@ class Cliente extends Model
         ]);
         return $this->idcliente = DB::getPdo()->lastInsertId();
     }
+
+    public function cargarDesdeRequest($request) { //recibe el request del formulario y lo empieza a setear en el propio objeto
+        $this->idcliente = $request->input('id') != "0" ? $request->input('id') : $this->idcliente; //esto solo va en los int, si es un string o viene o queda un string vacío
+        $this->nombre = $request->input('txtNombre');
+        $this->apellido = $request->input('txtApellido');
+        $this->telefono = $request->input('txtTelefono');
+        $this->correo = $request->input('txtCorreo');
+        $this->dni = $request->input('txtDni');
+        $this->clave = $request->input('txtClave');
+    }
 }

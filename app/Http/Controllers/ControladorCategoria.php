@@ -8,4 +8,9 @@ class ControladorCategoria extends Controller{
         $titulo = "Nueva categoría";
         return view("sistema.categoria-nuevo", compact("titulo"));
     }
+
+    public function index(){
+        $titulo = "Listado de categorías";
+        return view("sistema.categoria-listar", compact("titulo"));
+    }
 }

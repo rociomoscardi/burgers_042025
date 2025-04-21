@@ -8,4 +8,9 @@ class ControladorSucursal extends Controller{
         $titulo = "Nueva sucursal";
         return view("sistema.sucursal-nuevo", compact("titulo"));
     }
+
+    public function index (){
+        $titulo = "Listado de sucursales";
+        return view("sistema.sucursal-listar", compact("titulo"));
+    }
 }

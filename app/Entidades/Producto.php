@@ -101,4 +101,14 @@ class Producto extends Model
         ]);
         return $this->idproducto = DB::getPdo()->lastInsertId();
     }
+
+    public function cargarDesdeRequest($request) { //recibe el request del formulario y lo empieza a setear en el propio objeto
+        $this->idproducto = $request->input('id') != "0" ? $request->input('id') : $this->idproducto; //esto solo va en los int, si es un string o viene o queda un string vacío
+        $this->titulo = $request->input('txtTitulo');
+        $this->descripcion = $request->input('txtDescripcion');
+        $this->precio = $request->input('txtPrecio') != "0" ? $request->input('txtPrecio') : $this->precio;
+        $this->cantidad = $request->input('txtCantidad');
+        //$this->imagen = $request->input('archivo');
+        $this->fk_idtipoproducto = $request->input('lstTipoProducto') != "0" ? $request->input('lstTipoProducto') : $this->fk_idtipoproducto;
+    }
 }

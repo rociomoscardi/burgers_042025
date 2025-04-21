@@ -35,7 +35,7 @@ if (isset($msg)) {
 }
 ?>
 <div class="panel-body">
-    <form id="form1" method="POST">
+    <form id="form1" method="POST" enctype="multipart/form-data">
         <div class="row">
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
@@ -55,7 +55,9 @@ if (isset($msg)) {
                 <label for="lstTipoProducto">Tipo de producto: *</label>
                 <select class="form-control" name="lstTipoProducto" id="lstTipoProducto">
                   <option selected="" class="form-control" value="">Seleccionar</option>
-                  <option value=""></option>
+                  @foreach ($aCategorias as $categoria)
+                    <option value="{{$categoria->idtipoproducto}}">{{ $categoria->nombre}}</option>
+                @endforeach
                 </select>
             </div>
             <div class="form-group col-lg-6">

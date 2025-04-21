@@ -52,12 +52,12 @@ if (isset($msg)) {
                 <input type="text" id="txtTelefono" name="txtTelefono" class="form-control" value="" required>
             </div>
             <div class="form-group col-lg-6">
-                <label>Correo: *</label>
-                <input type="email" id="txtCorreo" name="txtCorreo" class="form-control" value="" required>
-            </div>
-            <div class="form-group col-lg-6">
                 <label>DNI: *</label>
                 <input type="text" id="txtDni" name="txtDni" class="form-control" value="" required>
+            </div>
+            <div class="form-group col-lg-6">
+                <label>Correo: *</label>
+                <input type="email" id="txtCorreo" name="txtCorreo" class="form-control" value="" required>
             </div>
             <div class="form-group col-lg-6">
                 <label>Clave: *</label>

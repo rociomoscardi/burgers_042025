@@ -8,4 +8,9 @@ class ControladorPedido extends Controller{
         $titulo = "Nuevo pedido";
         return view("sistema.pedido-nuevo", compact("titulo"));
     }
+
+    public function index(){
+        $titulo = "Listado de pedidos";
+        return view("sistema.pedido-listar", compact("titulo"));
+    }
 }
