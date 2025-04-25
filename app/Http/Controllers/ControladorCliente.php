@@ -58,6 +58,13 @@ class ControladorCliente extends Controller{
         return view('sistema.cliente-nuevo', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
     }
 
+    public function editar($id){
+        $titulo = "Editar cliente";
+        $cliente = new Cliente();
+        $cliente->obtenerPorId($id);
+        return view("sistema.cliente-nuevo", compact("titulo", "cliente"));
+    }
+
     public function cargarGrilla(Request $request){
         $request = $_REQUEST;
 
@@ -73,7 +80,7 @@ class ControladorCliente extends Controller{
 
         for ($i = $inicio; $i < count($aClientes) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = "<a href='/admin/cliente" . $aClientes[$i]->idcliente . "'>" . $aClientes[$i]->nombre . "</a>"; 
+            $row[] = "<a href='/admin/cliente/" . $aClientes[$i]->idcliente . "'>" . $aClientes[$i]->nombre . "</a>"; 
             $row[] = $aClientes[$i]->apellido;
             $row[] = $aClientes[$i]->correo;
             $row[] = $aClientes[$i]->dni;

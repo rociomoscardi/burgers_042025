@@ -104,6 +104,7 @@ Route::get('/admin/cliente/nuevo', 'ControladorCliente@nuevo');
 Route::post('/admin/cliente/nuevo', 'ControladorCliente@guardar');
 Route::get('/admin/clientes', 'ControladorCliente@index');
 Route::get('/admin/clientes/cargarGrilla', 'ControladorCliente@cargarGrilla')->name('cliente.cargarGrilla');
+Route::get('/admin/cliente/{id}', 'ControladorCliente@editar');
 
 /* --------------------------------------------- */
 /* CONTROLADOR PRODUCTOS                           */
@@ -112,6 +113,8 @@ Route::get('/admin/producto/nuevo', 'ControladorProducto@nuevo');
 Route::post('/admin/producto/nuevo', 'ControladorProducto@guardar');
 Route::get('/admin/productos', 'ControladorProducto@index');
 Route::get('/admin/productos/cargarGrilla', 'ControladorProducto@cargarGrilla')->name('producto.cargarGrilla');
+Route::get('/admin/producto/{id}', 'ControladorProducto@editar');
+
 
 /* --------------------------------------------- */
 /* CONTROLADOR PEDIDOS                        */

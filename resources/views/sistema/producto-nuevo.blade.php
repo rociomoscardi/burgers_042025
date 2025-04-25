@@ -41,28 +41,28 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label for="txtTitulo">Título: *</label>
-                <input type="text" id="txtTitulo" name="txtTitulo" class="form-control" value="" required>
+                <input type="text" id="txtTitulo" name="txtTitulo" class="form-control" value="{{$producto->titulo}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label for="txtPrecio">Precio: *</label>
-                <input type="text" id="txtPrecio" name="txtPrecio" class="form-control" value="" placeholder="$0,00" required>
+                <input type="text" id="txtPrecio" name="txtPrecio" class="form-control" value="{{$producto->precio}}" placeholder="$0,00" required>
             </div>
             <div class="form-group col-lg-6">
                 <label for="txtCantidad">Cantidad: *</label>
-                <input type="number" id="txtCantidad" name="txtCantidad" class="form-control" value="" required>
+                <input type="number" id="txtCantidad" name="txtCantidad" class="form-control" value="{{$producto->cantidad}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label for="lstTipoProducto">Tipo de producto: *</label>
                 <select class="form-control" name="lstTipoProducto" id="lstTipoProducto">
                   <option selected="" class="form-control" value="">Seleccionar</option>
                   @foreach ($aCategorias as $categoria)
-                    <option value="{{$categoria->idtipoproducto}}">{{ $categoria->nombre}}</option>
+                    <option value="{{$categoria->idtipoproducto}}">{{$categoria->nombre}}</option>
                 @endforeach
                 </select>
             </div>
             <div class="form-group col-lg-6">
                 <label for="txtDescripcion">Descripción: *</label>
-                <textarea name="txtDescripcion" id="txtDescripcion" class="form-control"></textarea>
+                <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" value="{{$producto->descripcion}}"></textarea>
             </div>
             <div class="form-group col-lg-6">
                 <label for="archivo">Imagen:</label><br> 
