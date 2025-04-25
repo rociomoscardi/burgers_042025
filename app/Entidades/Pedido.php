@@ -94,4 +94,39 @@ class Pedido extends Model
         ]);
         return $this->idpedido = DB::getPdo()->lastInsertId();
     }
+
+    public function obtenerFiltrado(){
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'P.idpedido',
+            1 => 'S.nombre',
+            2 => 'C.nombre',
+            3 => 'P.fecha',
+            4 => 'P.total',
+        );
+        $sql = "SELECT DISTINCT
+                    P.idpedido,
+                    S.nombre as sucursal,
+                    C.nombre as cliente,
+                    P.fecha,
+                    P.total
+                    FROM pedidos P
+                    INNER JOIN sucursales S ON S.idsucursal = P.fk_idsucursal
+                    INNER JOIN clientes C ON C.idcliente = P.fk_idcliente
+                WHERE 1=1
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( S.nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR C.nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.fecha LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.total LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
 }

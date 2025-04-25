@@ -111,4 +111,34 @@ class Producto extends Model
         //$this->imagen = $request->input('archivo');
         $this->fk_idtipoproducto = $request->input('lstTipoProducto') != "0" ? $request->input('lstTipoProducto') : $this->fk_idtipoproducto;
     }
+
+    public function obtenerFiltrado(){
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'P.titulo',
+            1 => 'C.nombre',
+            2 => 'P.precio',
+        );
+        $sql = "SELECT DISTINCT
+                    idproducto,
+                    titulo,
+                    C.nombre as tipo,
+                    precio
+                    FROM productos P
+                    LEFT JOIN tipo_productos C ON C.idtipoproducto = P.fk_idtipoproducto
+                WHERE 1=1
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( P.titulo LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR C.nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR P.Precio LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
 }

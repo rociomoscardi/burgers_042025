@@ -7,6 +7,7 @@ use App\Entidades\Sistema\MenuArea;
 use App\Entidades\Sistema\Patente;
 use App\Entidades\Sistema\Usuario;
 use Illuminate\Http\Request;
+use Exception;
 
 require app_path() . '/start/constants.php';
 

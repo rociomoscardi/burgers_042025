@@ -61,5 +61,36 @@ class ControladorProducto extends Controller{
 
         return view('sistema.producto-nuevo', compact('msg', 'producto', 'titulo')) . '?id=' . $producto->idproducto;
     } 
+
+    public function cargarGrilla(Request $request){
+        $request = $_REQUEST;
+
+        $entidad = new Producto();
+        $aProductos = $entidad->obtenerFiltrado();
+
+        $data = array();
+        $cont = 0;
+
+        $inicio = $request['start'];
+        $registros_por_pagina = $request['length'];
+
+
+        for ($i = $inicio; $i < count($aProductos) && $cont < $registros_por_pagina; $i++) {
+            $row = array();
+            $row[] = "<a href='/admin/producto" . $aProductos[$i]->idproducto . "'>" . $aProductos[$i]->titulo . "</a>"; 
+            $row[] = $aProductos[$i]->tipo;
+            $row[] = $aProductos[$i]->precio;
+            $cont++;
+            $data[] = $row;
+        }
+
+        $json_data = array(
+            "draw" => intval($request['draw']),
+            "recordsTotal" => count($aProductos), //cantidad total de registros sin paginar
+            "recordsFiltered" => count($aProductos), //cantidad total de registros en la paginacion
+            "data" => $data,
+        );
+        return json_encode($json_data);
+    }
 }
 

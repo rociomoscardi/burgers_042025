@@ -111,4 +111,39 @@ class Cliente extends Model
         $this->dni = $request->input('txtDni');
         $this->clave = $request->input('txtClave');
     }
+
+    public function obtenerFiltrado(){
+        $request = $_REQUEST;
+        $columns = array(
+            0 => 'nombre',
+            1 => 'apellido',
+            2 => 'correo',
+            3 => 'dni',
+            4 => 'telefono',
+        );
+        $sql = "SELECT DISTINCT
+                    idcliente,
+                    nombre,
+                    apellido,
+                    correo,
+                    dni,
+                    telefono
+                    FROM clientes
+                WHERE 1=1 /* siempre es verdadero */
+                ";
+
+        //Realiza el filtrado
+        if (!empty($request['search']['value'])) {
+            $sql .= " AND ( nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR apellido LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR correo LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR dni LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR telefono LIKE '%" . $request['search']['value'] . "%' )";
+        }
+        $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
+
+        $lstRetorno = DB::select($sql);
+
+        return $lstRetorno;
+    }
 }

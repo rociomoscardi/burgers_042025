@@ -24,7 +24,6 @@ if (isset($msg)) {
 <table id="grilla" class="display">
     <thead>
         <tr>
-            <th></th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Teléfono</th>
@@ -42,7 +41,7 @@ if (isset($msg)) {
 	    "bSearchable": true,
         "pageLength": 25,
         "order": [[ 0, "asc" ]],
-	    "ajax": "{{ route('menu.cargarGrilla') }}"
+	    "ajax": "{{ route('postulacion.cargarGrilla') }}"
 	});
 </script>
 @endsection
