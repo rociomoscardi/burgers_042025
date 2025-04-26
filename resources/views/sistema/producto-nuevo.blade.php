@@ -34,6 +34,7 @@ if (isset($msg)) {
     echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
+
 <div class="panel-body">
     <form id="form1" method="POST" enctype="multipart/form-data">
         <div class="row">
@@ -41,15 +42,15 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label for="txtTitulo">Título: *</label>
-                <input type="text" id="txtTitulo" name="txtTitulo" class="form-control" value="{{$producto->titulo}}" required>
+                <input type="text" id="txtTitulo" name="txtTitulo" class="form-control" value="{{$producto->titulo ?? ''}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label for="txtPrecio">Precio: *</label>
-                <input type="text" id="txtPrecio" name="txtPrecio" class="form-control" value="{{$producto->precio}}" placeholder="$0,00" required>
+                <input type="text" id="txtPrecio" name="txtPrecio" class="form-control" value="{{$producto->precio ?? ''}}" placeholder="$0,00" required>
             </div>
             <div class="form-group col-lg-6">
                 <label for="txtCantidad">Cantidad: *</label>
-                <input type="number" id="txtCantidad" name="txtCantidad" class="form-control" value="{{$producto->cantidad}}" required>
+                <input type="number" id="txtCantidad" name="txtCantidad" class="form-control" value="{{$producto->cantidad ?? ''}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label for="lstTipoProducto">Tipo de producto: *</label>
@@ -62,7 +63,7 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label for="txtDescripcion">Descripción: *</label>
-                <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" value="{{$producto->descripcion}}"></textarea>
+                <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" value="{{$producto->descripcion ?? ''}}"></textarea>
             </div>
             <div class="form-group col-lg-6">
                 <label for="archivo">Imagen:</label><br> 
