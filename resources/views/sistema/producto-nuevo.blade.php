@@ -55,10 +55,10 @@ if (isset($msg)) {
             <div class="form-group col-lg-6">
                 <label for="lstTipoProducto">Tipo de producto: *</label>
                 <select class="form-control" name="lstTipoProducto" id="lstTipoProducto">
-                  <option selected="" class="form-control" value="">Seleccionar</option>
-                  @foreach ($aCategorias as $categoria)
+                    <option selected="" class="form-control" value="">Seleccionar</option>
+                    @foreach ($aCategorias as $categoria)
                     <option value="{{$categoria->idtipoproducto}}">{{$categoria->nombre}}</option>
-                @endforeach
+                    @endforeach
                 </select>
             </div>
             <div class="form-group col-lg-6">
@@ -66,7 +66,7 @@ if (isset($msg)) {
                 <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" value="{{$producto->descripcion ?? ''}}"></textarea>
             </div>
             <div class="form-group col-lg-6">
-                <label for="archivo">Imagen:</label><br> 
+                <label for="archivo">Imagen:</label><br>
                 <input type="file" name="archivo" id="archivo">
             </div>
         </div>

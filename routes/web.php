@@ -120,8 +120,11 @@ Route::get('/admin/producto/{id}', 'ControladorProducto@editar');
 /* CONTROLADOR PEDIDOS                        */
 /* --------------------------------------------- */
 Route::get('/admin/pedido/nuevo', 'ControladorPedido@nuevo');
+Route::post('/admin/pedido/nuevo', 'ControladorPedido@guardar');
 Route::get('/admin/pedidos', 'ControladorPedido@index');
 Route::get('/admin/pedidos/cargarGrilla', 'ControladorPedido@cargarGrilla')->name('pedido.cargarGrilla');
+Route::get('/admin/pedido/{id}', 'ControladorPedido@editar');
+
 
 /* --------------------------------------------- */
 /* CONTROLADOR POSTULACIONES                        */

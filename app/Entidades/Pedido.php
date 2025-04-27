@@ -42,8 +42,8 @@ class Pedido extends Model
             fk_idsucursal,
             fk_idcliente,
             fk_idestado
-            FROM pedidos WHERE idpedido = $idPedido";
-        $lstRetorno = DB::select($sql);
+            FROM pedidos WHERE idpedido = ?";
+        $lstRetorno = DB::select($sql, [$idPedido]);
 
         if (count($lstRetorno) > 0) {
             $this->idpedido = $lstRetorno[0]->idpedido;
@@ -95,19 +95,28 @@ class Pedido extends Model
         return $this->idpedido = DB::getPdo()->lastInsertId();
     }
 
+    public function cargarDesdeRequest($request) { //recibe el request del formulario y lo empieza a setear en el propio objeto
+        $this->idpedido = $request->input('id') != "0" ? $request->input('id') : $this->idpedido; //esto solo va en los int, si es un string o viene o queda un string vacío
+        $this->fecha = $request->input('txtFecha');
+        $this->total = $request->input('txtTotal')!= "0" ? $request->input('txtTotal') : $this->total;
+        $this->fk_idsucursal = $request->input('lstSucursal') != "0" ? $request->input('lstSucursal') : $this->fk_idsucursal;
+        $this->fk_idcliente = $request->input('lstCliente') != "0" ? $request->input('lstCliente') : $this->fk_idcliente;
+        $this->fk_idestado = $request->input('lstEstado') != "0" ? $request->input('lstEstado') : $this->fk_idestado;
+    }
+
     public function obtenerFiltrado(){
         $request = $_REQUEST;
         $columns = array(
             0 => 'P.idpedido',
             1 => 'S.nombre',
-            2 => 'C.nombre',
+            2 => 'C.apellido',
             3 => 'P.fecha',
             4 => 'P.total',
         );
         $sql = "SELECT DISTINCT
                     P.idpedido,
                     S.nombre as sucursal,
-                    C.nombre as cliente,
+                    C.apellido as cliente,
                     P.fecha,
                     P.total
                     FROM pedidos P
@@ -119,7 +128,7 @@ class Pedido extends Model
         //Realiza el filtrado
         if (!empty($request['search']['value'])) {
             $sql .= " AND ( S.nombre LIKE '%" . $request['search']['value'] . "%' ";
-            $sql .= " OR C.nombre LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " OR C.apellido LIKE '%" . $request['search']['value'] . "%' ";
             $sql .= " OR P.fecha LIKE '%" . $request['search']['value'] . "%' )";
             $sql .= " OR P.total LIKE '%" . $request['search']['value'] . "%' )";
         }

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 use App\Entidades\Producto;
 use App\Entidades\Tipo_producto;
-use Exception;
 use Illuminate\Http\Request;
+use Exception;
 require app_path() . '/start/constants.php';
 
 class ControladorProducto extends Controller{
