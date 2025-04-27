@@ -42,8 +42,8 @@ class Postulacion extends Model
             telefono,
             correo,
             link_cv
-            FROM postulaciones WHERE idpostulacion = $idPostulacion";
-        $lstRetorno = DB::select($sql);
+            FROM postulaciones WHERE idpostulacion = ?";
+        $lstRetorno = DB::select($sql, [$idPostulacion]);
 
         if (count($lstRetorno) > 0) {
             $this->idpostulacion = $lstRetorno[0]->idpostulacion;
@@ -93,6 +93,15 @@ class Postulacion extends Model
             $this->link_cv,
         ]);
         return $this->idpostulacion = DB::getPdo()->lastInsertId();
+    }
+
+    public function cargarDesdeRequest($request) { //recibe el request del formulario y lo empieza a setear en el propio objeto
+        $this->idpostulacion = $request->input('id') != "0" ? $request->input('id') : $this->idpostulacion; //esto solo va en los int, si es un string o viene o queda un string vacío
+        $this->nombre = $request->input('txtNombre');
+        $this->apellido = $request->input('txtApellido');
+        $this->telefono = $request->input('txtTelefono');
+        $this->correo = $request->input('txtCorreo');
+        //$this->link_cv = $request->input('fileCV');
     }
 
     public function obtenerFiltrado(){

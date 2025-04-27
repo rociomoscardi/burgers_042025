@@ -60,10 +60,10 @@ class Pedido extends Model
     public function guardar()
     {
         $sql = "UPDATE pedidos SET
-            fecha=$this->fecha
-            total=$this->total
-            fk_idsucursal=$this->fk_idsucursal
-            fk_idcliente=$this->fk_idcliente
+            fecha=$this->fecha,
+            total=$this->total,
+            fk_idsucursal=$this->fk_idsucursal,
+            fk_idcliente=$this->fk_idcliente,
             fk_idestado=$this->fk_idestado
             WHERE idpedido=?";
         $affected = DB::update($sql, [$this->idpedido]);
@@ -84,7 +84,7 @@ class Pedido extends Model
             fk_idsucursal,
             fk_idcliente,
             fk_idestado
-            ) VALUES (?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->fecha,
             $this->total,

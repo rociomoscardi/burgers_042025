@@ -55,9 +55,9 @@ if (isset($msg)) {
                 <label>Correo: *</label>
                 <input type="text" id="txtCorreo" name="txtCorreo" class="form-control" value="" required>
             </div>
-            <div class="form-group col-lg-6">
+            <div class="form-group col-lg-6 py-2">
                 <label>Link CV: *</label>
-                <input type="text" id="txtCV" name="txtCV" class="form-control" value="" required>
+                <input type="file" name="fileCV" id="fileCV">
         </div>
     </form>
 </div>

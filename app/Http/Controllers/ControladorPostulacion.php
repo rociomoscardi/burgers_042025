@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 use App\Entidades\Postulacion;
 use Illuminate\Http\Request;
+use Exception;
+require app_path() . '/start/constants.php';
 class ControladorPostulacion extends Controller{
 
     public function nuevo(){
@@ -13,6 +15,47 @@ class ControladorPostulacion extends Controller{
     public function index(){
         $titulo = "Listado de postulaciones";
         return view("sistema.postulacion-listar", compact("titulo"));
+    }
+
+    public function guardar(Request $request) {
+        try {
+            //Define la entidad servicio
+            $titulo = "Modificar postulación";
+            $entidad = new Postulacion();
+            $entidad->cargarDesdeRequest($request);
+
+            //validaciones
+            if ($entidad->nombre == "" || $entidad->apellido == "" || $entidad->telefono == "" || $entidad->correo == "") {
+                $msg["ESTADO"] = MSG_ERROR;
+                $msg["MSG"] = "Complete todos los datos";
+            } else {
+                if ($_POST["id"] > 0) {
+                    //Es actualizacion
+                    $entidad->guardar();
+
+                    $msg["ESTADO"] = MSG_SUCCESS;
+                    $msg["MSG"] = OKINSERT;
+                } else {
+                    //Es nuevo
+                    $entidad->insertar();
+
+                    $msg["ESTADO"] = MSG_SUCCESS;
+                    $msg["MSG"] = OKINSERT;
+                }
+
+                $_POST["id"] = $entidad->idpostulacion;
+                return view('sistema.postulacion-listar', compact('titulo', 'msg'));
+            }
+        } catch (Exception $e) {
+            $msg["ESTADO"] = MSG_ERROR;
+            $msg["MSG"] = ERRORINSERT;
+        }
+        
+        $id = $entidad->idpostulacion; //si da algun error al menos le deja los datos que tenía previamente
+        $postulacion = new Postulacion();
+        $postulacion->obtenerPorId($id);
+
+        return view('sistema.postulacion-nuevo', compact('msg', 'postulacion', 'titulo')) . '?id=' . $postulacion->idpostulacion;
     }
 
     public function cargarGrilla(Request $request){

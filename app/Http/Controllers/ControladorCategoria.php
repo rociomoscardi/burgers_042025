@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Entidades\Tipo_producto;
 use Illuminate\Http\Request;
+use Exception;
+require app_path() . '/start/constants.php';
 
 class ControladorCategoria extends Controller{
 
@@ -16,6 +18,47 @@ class ControladorCategoria extends Controller{
         $titulo = "Listado de categorías";
         return view("sistema.categoria-listar", compact("titulo"));
     }
+
+    public function guardar(Request $request) {
+        try {
+            //Define la entidad servicio
+            $titulo = "Modificar categoría";
+            $entidad = new Tipo_producto();
+            $entidad->cargarDesdeRequest($request);
+
+            //validaciones
+            if ($entidad->nombre == "") {
+                $msg["ESTADO"] = MSG_ERROR;
+                $msg["MSG"] = "Complete todos los datos";
+            } else {
+                if ($_POST["id"] > 0) {
+                    //Es actualizacion
+                    $entidad->guardar();
+
+                    $msg["ESTADO"] = MSG_SUCCESS;
+                    $msg["MSG"] = OKINSERT;
+                } else {
+                    //Es nuevo
+                    $entidad->insertar();
+
+                    $msg["ESTADO"] = MSG_SUCCESS;
+                    $msg["MSG"] = OKINSERT;
+                }
+
+                $_POST["id"] = $entidad->idcategoria;
+                return view('sistema.categoria-listar', compact('titulo', 'msg'));
+            }
+        } catch (Exception $e) {
+            $msg["ESTADO"] = MSG_ERROR;
+            $msg["MSG"] = ERRORINSERT;
+        }
+        
+        $id = $entidad->idcategoria; //si da algun error al menos le deja los datos que tenía previamente
+        $categoria = new Tipo_producto();
+        $categoria->obtenerPorId($id);
+
+        return view('sistema.categoria-nuevo', compact('msg', 'categoria', 'titulo')) . '?id=' . $categoria->idcategoria;
+    } 
 
     public function cargarGrilla(Request $request){
         $request = $_REQUEST;

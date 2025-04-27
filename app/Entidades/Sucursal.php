@@ -95,6 +95,15 @@ class Sucursal extends Model
         return $this->idsucursal = DB::getPdo()->lastInsertId();
     }
 
+    public function cargarDesdeRequest($request) { //recibe el request del formulario y lo empieza a setear en el propio objeto
+        $this->idsucursal = $request->input('id') != "0" ? $request->input('id') : $this->idsucursal; //esto solo va en los int, si es un string o viene o queda un string vacío
+        $this->nombre = $request->input('txtNombre');
+        $this->direccion = $request->input('txtDireccion');
+        $this->telefono = $request->input('txtTelefono');
+        $this->link_mapa = $request->input('txtMapa');
+        $this->horarios = $request->input('txtHorarios');
+    }
+
     public function obtenerFiltrado(){
         $request = $_REQUEST;
         $columns = array(

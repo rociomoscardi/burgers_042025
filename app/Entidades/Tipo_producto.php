@@ -60,11 +60,16 @@ class Tipo_producto extends Model
     {
         $sql = "INSERT INTO tipo_productos (
             nombre
-            ) VALUES (?, ?);";
+            ) VALUES (?);";
         $result = DB::insert($sql, [
             $this->nombre,
         ]);
         return $this->idtipoproducto = DB::getPdo()->lastInsertId();
+    }
+
+    public function cargarDesdeRequest($request) { //recibe el request del formulario y lo empieza a setear en el propio objeto
+        $this->idtipoproducto = $request->input('id') != "0" ? $request->input('id') : $this->idtipoproducto; //esto solo va en los int, si es un string o viene o queda un string vacío
+        $this->nombre = $request->input('txtNombre');
     }
 
     public function obtenerFiltrado(){
