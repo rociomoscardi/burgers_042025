@@ -58,6 +58,13 @@ class ControladorPostulacion extends Controller{
         return view('sistema.postulacion-nuevo', compact('msg', 'postulacion', 'titulo')) . '?id=' . $postulacion->idpostulacion;
     }
 
+    public function editar($id){
+        $titulo = "Editar postulación";
+        $postulacion = new Postulacion();
+        $postulacion->obtenerPorId($id);
+        return view("sistema.postulacion-nuevo", compact("titulo", "postulacion"));
+    }
+
     public function cargarGrilla(Request $request){
         $request = $_REQUEST;
 
@@ -73,7 +80,7 @@ class ControladorPostulacion extends Controller{
 
         for ($i = $inicio; $i < count($aPostulacion) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = "<a href='/admin/postulacion" . $aPostulacion[$i]->idpostulacion . "'>" . $aPostulacion[$i]->nombre . "</a>"; 
+            $row[] = "<a href='/admin/postulacion/" . $aPostulacion[$i]->idpostulacion . "'>" . $aPostulacion[$i]->nombre . "</a>"; 
             $row[] = $aPostulacion[$i]->apellido;
             $row[] = $aPostulacion[$i]->telefono;
             $row[] = $aPostulacion[$i]->correo;

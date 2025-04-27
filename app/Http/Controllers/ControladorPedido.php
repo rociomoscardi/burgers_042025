@@ -30,7 +30,7 @@ class ControladorPedido extends Controller{
     public function guardar(Request $request) {
         try {
             //Define la entidad servicio
-            $titulo = "Modificar cliente";
+            $titulo = "Modificar pedido";
             $entidad = new Pedido();
             $entidad->cargarDesdeRequest($request);
 
@@ -78,7 +78,7 @@ class ControladorPedido extends Controller{
         $aClientes = $cliente->obtenerTodos();
         $estado = new Estado();
         $aEstados = $estado->obtenerTodos();
-        return view("sistema.producto-nuevo", compact("titulo", "producto", "aSucursales", "aClientes", "aEstados"));
+        return view("sistema.pedido-nuevo", compact("titulo", "pedido", "aSucursales", "aClientes", "aEstados"));
     }
 
     public function cargarGrilla(Request $request){
@@ -96,7 +96,7 @@ class ControladorPedido extends Controller{
 
         for ($i = $inicio; $i < count($aPedidos) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = "<a href='/admin/pedido" . $aPedidos[$i]->idpedido . "'>" . $aPedidos[$i]->idpedido . "</a>"; 
+            $row[] = "<a href='/admin/pedido/" . $aPedidos[$i]->idpedido . "'>" . $aPedidos[$i]->idpedido . "</a>"; 
             $row[] = $aPedidos[$i]->sucursal;
             $row[] = $aPedidos[$i]->cliente;
             $row[] = $aPedidos[$i]->fecha;

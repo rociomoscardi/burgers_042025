@@ -35,20 +35,20 @@ if (isset($msg)) {
 }
 ?>
 <div class="panel-body">
-    <form id="form1" method="POST">
+    <form id="form1" method="POST" action="{{ url('admin/pedido/nuevo') }}">
         <div class="row">
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Fecha: *</label>
-                <input type="date" id="txtFecha" name="txtFecha" class="form-control" value="" required>
+                <input type="date" id="txtFecha" name="txtFecha" class="form-control" value="{{$pedido->fecha ?? ''}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label>Sucursal: *</label>
                 <select class="form-control" name="lstSucursal" id="lstSucursal">
                     <option selected="" class="form-control" value="">Seleccionar</option>
                     @foreach ($aSucursales as $sucursal)
-                    <option value="{{$sucursal->idsucursal}}">{{$sucursal->nombre}}</option>
+                    <option value="{{$sucursal->idsucursal ?? ''}}">{{$sucursal->nombre}}</option>
                     @endforeach
                 </select>
             </div>
@@ -57,7 +57,7 @@ if (isset($msg)) {
                 <select class="form-control" name="lstCliente" id="lstCliente">
                     <option selected="" class="form-control" value="">Seleccionar</option>
                     @foreach ($aClientes as $cliente)
-                    <option value="{{$cliente->idcliente}}">{{$cliente->apellido}}</option>
+                    <option value="{{$cliente->idcliente ?? ''}}">{{$cliente->apellido}}</option>
                     @endforeach
                 </select>
             </div>
@@ -66,13 +66,13 @@ if (isset($msg)) {
                 <select class="form-control" name="lstEstado" id="lstEstado">
                     <option selected="" class="form-control" value="">Seleccionar</option>
                     @foreach ($aEstados as $estado)
-                    <option value="{{$estado->idestado}}">{{$estado->nombre}}</option>
+                    <option value="{{$estado->idestado ?? ''}}">{{$estado->nombre}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="form-group col-lg-6">
                 <label>Total: *</label>
-                <input type="text" id="txtTotal" name="txtTotal" class="form-control" value="" placeholder="$0,00" required>
+                <input type="number" name="txtTotal" id="txtTotal" class="form-control" value="{{$pedido->total ?? ''}}" placeholder="$0,00" required>
             </div>
         </div>
     </form>
