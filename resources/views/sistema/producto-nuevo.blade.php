@@ -63,7 +63,7 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label for="txtDescripcion">Descripción: *</label>
-                <textarea name="txtDescripcion" id="txtDescripcion" class="form-control" value="{{$producto->descripcion ?? ''}}"></textarea>
+                <textarea name="txtDescripcion" id="txtDescripcion" class="form-control">{{$producto->descripcion ?? ''}}</textarea>
             </div>
             <div class="form-group col-lg-6">
                 <label for="archivo">Imagen:</label><br>
