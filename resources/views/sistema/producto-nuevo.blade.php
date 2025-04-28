@@ -13,7 +13,7 @@
     <li class="breadcrumb-item active">Modificar</li>
 </ol>
 <ol class="toolbar">
-    <li class="btn-item"><a title="Nuevo" href="/admin/producto/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
+    <li class="btn-item"><a title="Nuevo" href="/admin/sistema/producto/nuevo" class="fa fa-plus-circle" aria-hidden="true"><span>Nuevo</span></a></li>
     <li class="btn-item"><a title="Guardar" href="#" class="fa fa-floppy-o" aria-hidden="true" onclick="javascript: $('#modalGuardar').modal('toggle');"><span>Guardar</span></a>
     </li>
     @if($globalId > 0)
@@ -56,8 +56,12 @@ if (isset($msg)) {
                 <label for="lstTipoProducto">Tipo de producto: *</label>
                 <select class="form-control" name="lstTipoProducto" id="lstTipoProducto">
                     <option selected="" class="form-control" value="">Seleccionar</option>
-                    @foreach ($aCategorias as $categoria)
-                    <option value="{{$categoria->idtipoproducto}}">{{$categoria->nombre}}</option>
+                    @foreach ($aCategorias as $categoria) 
+                    @if ($categoria->idtipoproducto ?? '' == $producto->fk_idtipoproducto ?? '') 
+                    <option selected value="{{$categoria->idtipoproducto}}">{{$categoria->nombre}}</option>
+                    @else
+                    <option selected value="{{$categoria->idtipoproducto}}">{{$categoria->nombre}}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
