@@ -60,7 +60,7 @@ class Pedido extends Model
     public function guardar()
     {
         $sql = "UPDATE pedidos SET
-            fecha=$this->fecha,
+            fecha='$this->fecha',
             total=$this->total,
             fk_idsucursal=$this->fk_idsucursal,
             fk_idcliente=$this->fk_idcliente,

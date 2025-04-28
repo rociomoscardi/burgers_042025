@@ -42,8 +42,8 @@ class Sucursal extends Model
             telefono,
             link_mapa,
             horarios
-            FROM sucursales WHERE idsucursal = $idSucursal";
-        $lstRetorno = DB::select($sql);
+            FROM sucursales WHERE idsucursal = ?";
+        $lstRetorno = DB::select($sql, [$idSucursal]);
 
         if (count($lstRetorno) > 0) {
             $this->idsucursal = $lstRetorno[0]->idsucursal;
@@ -57,7 +57,7 @@ class Sucursal extends Model
         return null;
     }
 
-    public function guardar()
+    /*public function guardar()
     {
         $sql = "UPDATE sucursales SET
             nombre='$this->nombre',
@@ -67,7 +67,24 @@ class Sucursal extends Model
             horarios='$this->horarios'
             WHERE idsucursal=?";
         $affected = DB::update($sql, [$this->idsucursal]);
+    }*/
+    public function guardar() {
+        $affected = \DB::update("UPDATE sucursales SET 
+                nombre = ?, 
+                direccion = ?, 
+                telefono = ?, 
+                link_mapa = ?, 
+                horarios = ? 
+                WHERE idsucursal = ?", [
+            $this->nombre,
+            $this->direccion,
+            $this->telefono,
+            $this->link_mapa,
+            $this->horarios,
+            $this->idsucursal
+        ]);
     }
+    
 
     public function eliminar()
     {

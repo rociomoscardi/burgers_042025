@@ -45,7 +45,7 @@ class ControladorCategoria extends Controller{
                     $msg["MSG"] = OKINSERT;
                 }
 
-                $_POST["id"] = $entidad->idcategoria;
+                $_POST["id"] = $entidad->idtipoproducto;
                 return view('sistema.categoria-listar', compact('titulo', 'msg'));
             }
         } catch (Exception $e) {
@@ -53,12 +53,19 @@ class ControladorCategoria extends Controller{
             $msg["MSG"] = ERRORINSERT;
         }
         
-        $id = $entidad->idcategoria; //si da algun error al menos le deja los datos que tenía previamente
+        $id = $entidad->idtipoproducto; //si da algun error al menos le deja los datos que tenía previamente
         $categoria = new Tipo_producto();
         $categoria->obtenerPorId($id);
 
-        return view('sistema.categoria-nuevo', compact('msg', 'categoria', 'titulo')) . '?id=' . $categoria->idcategoria;
+        return view('sistema.categoria-nuevo', compact('msg', 'categoria', 'titulo')) . '?id=' . $categoria->idtipoproducto;
     } 
+
+    public function editar($id){
+        $titulo = "Editar categoría";
+        $categoria = new Tipo_producto();
+        $categoria->obtenerPorId($id);
+        return view("sistema.categoria-nuevo", compact("titulo", "categoria"));
+    }
 
     public function cargarGrilla(Request $request){
         $request = $_REQUEST;
@@ -75,7 +82,7 @@ class ControladorCategoria extends Controller{
 
         for ($i = $inicio; $i < count($aTiposProductos) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = "<a href='/admin/categoria" . $aTiposProductos[$i]->idtipoproducto . "'>" . $aTiposProductos[$i]->nombre . "</a>"; 
+            $row[] = "<a href='/admin/categoria/" . $aTiposProductos[$i]->idtipoproducto . "'>" . $aTiposProductos[$i]->nombre . "</a>"; 
             $cont++;
             $data[] = $row;
         }

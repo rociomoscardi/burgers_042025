@@ -1,17 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Entidades\Pedido;
 use App\Entidades\Sucursal;
 use App\Entidades\Cliente;
 use App\Entidades\Estado;
 use Illuminate\Http\Request;
 use Exception;
+
 require app_path() . '/start/constants.php';
 
-class ControladorPedido extends Controller{
+class ControladorPedido extends Controller
+{
 
-    public function nuevo(){
+    public function nuevo()
+    {
         $titulo = "Nuevo pedido";
         $sucursal = new Sucursal();
         $aSucursales = $sucursal->obtenerTodos();
@@ -22,12 +26,14 @@ class ControladorPedido extends Controller{
         return view("sistema.pedido-nuevo", compact("titulo", "aSucursales", "aClientes", "aEstados"));
     }
 
-    public function index(){
+    public function index()
+    {
         $titulo = "Listado de pedidos";
         return view("sistema.pedido-listar", compact("titulo"));
     }
 
-    public function guardar(Request $request) {
+    public function guardar(Request $request)
+    {
         try {
             //Define la entidad servicio
             $titulo = "Modificar pedido";
@@ -58,17 +64,18 @@ class ControladorPedido extends Controller{
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
-            $msg["MSG"] = ERRORINSERT;
+            $msg["MSG"] = ERRORINSERT . " " . $e->getMessage();
         }
-        
+
         $id = $entidad->idpedido; //si da algun error al menos le deja los datos que tenía previamente
         $pedido = new Pedido();
         $pedido->obtenerPorId($id);
-
+        
         return view('sistema.pedido-nuevo', compact('msg', 'pedido', 'titulo')) . '?id=' . $pedido->idpedido;
     }
 
-    public function editar($id){
+    public function editar($id)
+    {
         $titulo = "Editar pedido";
         $pedido = new Pedido();
         $pedido->obtenerPorId($id);
@@ -81,7 +88,8 @@ class ControladorPedido extends Controller{
         return view("sistema.pedido-nuevo", compact("titulo", "pedido", "aSucursales", "aClientes", "aEstados"));
     }
 
-    public function cargarGrilla(Request $request){
+    public function cargarGrilla(Request $request)
+    {
         $request = $_REQUEST;
 
         $entidad = new Pedido();
@@ -96,7 +104,7 @@ class ControladorPedido extends Controller{
 
         for ($i = $inicio; $i < count($aPedidos) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = "<a href='/admin/pedido/" . $aPedidos[$i]->idpedido . "'>" . $aPedidos[$i]->idpedido . "</a>"; 
+            $row[] = "<a href='/admin/pedido/" . $aPedidos[$i]->idpedido . "'>" . $aPedidos[$i]->idpedido . "</a>";
             $row[] = $aPedidos[$i]->sucursal;
             $row[] = $aPedidos[$i]->cliente;
             $row[] = $aPedidos[$i]->fecha;

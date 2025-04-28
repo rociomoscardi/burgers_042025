@@ -2,8 +2,8 @@
 @section('titulo', "$titulo")
 @section('scripts')
 <script>
-    globalId = '<?php echo isset($categoria->idcategoria) && $categoria->idcategoria > 0 ? $categoria->idcategoria : 0; ?>';
-    <?php $globalId = isset($categoria->idcategoria) ? $categoria->idcategoria : "0"; ?>
+    globalId = '<?php echo isset($categoria->idtipoproducto) && $categoria->idtipoproducto > 0 ? $categoria->idtipoproducto : 0; ?>';
+    <?php $globalId = isset($categoria->idtipoproducto) ? $categoria->idtipoproducto : "0"; ?>
 </script>
 @endsection
 @section('breadcrumb')
@@ -35,13 +35,13 @@ if (isset($msg)) {
 }
 ?>
 <div class="panel-body">
-    <form id="form1" method="POST">
+<form id="form1" method="POST" action="{{ url('admin/categoria/nuevo') }}">
         <div class="row">
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Nombre: *</label>
-                <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="" required>
+                <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$categoria->nombre ?? ''}}" required>
             </div>
         </div>
     </form>

@@ -58,7 +58,14 @@ class ControladorSucursal extends Controller{
         $sucursal->obtenerPorId($id);
 
         return view('sistema.sucursal-nuevo', compact('msg', 'sucursal', 'titulo')) . '?id=' . $sucursal->idsucursal;
-    } 
+    }
+
+    public function editar($id){
+        $titulo = "Editar sucursal";
+        $sucursal = new Sucursal();
+        $sucursal->obtenerPorId($id);
+        return view("sistema.sucursal-nuevo", compact("titulo", "sucursal"));
+    }
 
     public function cargarGrilla(Request $request){
         $request = $_REQUEST;
@@ -75,7 +82,7 @@ class ControladorSucursal extends Controller{
 
         for ($i = $inicio; $i < count($aSucursales) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = "<a href='/admin/sucursal" . $aSucursales[$i]->idsucursal . "'>" . $aSucursales[$i]->nombre . "</a>"; 
+            $row[] = "<a href='/admin/sucursal/" . $aSucursales[$i]->idsucursal . "'>" . $aSucursales[$i]->nombre . "</a>"; 
             $row[] = $aSucursales[$i]->direccion;
             $row[] = "<a target='_blank' href= '" . $aSucursales[$i]->link_mapa . "'>" . $aSucursales[$i]->link_mapa . "</a>";
             $row[] = $aSucursales[$i]->telefono;
