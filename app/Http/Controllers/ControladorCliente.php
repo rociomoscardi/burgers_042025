@@ -1,23 +1,31 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Entidades\Cliente;
+use App\Entidades\Pedido;
 use Exception;
 use Illuminate\Http\Request;
-require app_path() . '/start/constants.php';
-class ControladorCliente extends Controller{
 
-    public function nuevo(){
+require app_path() . '/start/constants.php';
+class ControladorCliente extends Controller
+{
+
+    public function nuevo()
+    {
         $titulo = "Nuevo cliente";
-        return view("sistema.cliente-nuevo", compact("titulo"));
+        $cliente = new Cliente();
+        return view("sistema.cliente-nuevo", compact("titulo", "cliente"));
     }
 
-    public function index(){
+    public function index()
+    {
         $titulo = "Listado de clientes";
         return view("sistema.cliente-listar", compact("titulo"));
     }
 
-    public function guardar(Request $request) {
+    public function guardar(Request $request)
+    {
         try {
             //Define la entidad servicio
             $titulo = "Modificar cliente";
@@ -50,7 +58,7 @@ class ControladorCliente extends Controller{
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = ERRORINSERT;
         }
-        
+
         $id = $entidad->idcliente; //si da algun error al menos le deja los datos que tenía previamente
         $cliente = new Cliente();
         $cliente->obtenerPorId($id);
@@ -58,14 +66,35 @@ class ControladorCliente extends Controller{
         return view('sistema.cliente-nuevo', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
     }
 
-    public function editar($id){
+    public function editar($id)
+    {
         $titulo = "Editar cliente";
         $cliente = new Cliente();
         $cliente->obtenerPorId($id);
         return view("sistema.cliente-nuevo", compact("titulo", "cliente"));
     }
 
-    public function cargarGrilla(Request $request){
+    public function eliminar(Request $request)
+    {
+        $idCliente = $request->input("id");
+        $pedido = new Pedido();
+        //si el cliente tiene un pedido asociado no se tiene que poder borrar
+        if ($pedido->existePedidosPorCliente($idCliente)) {
+            $resultado["err"] = EXIT_FAILURE;
+            $resultado["mensaje"] = "No se puede eliminar un cliente con pedidos asociados.";
+        } else {
+            //si no, sí
+            $cliente = new Cliente();
+            $cliente->idcliente = $idCliente;
+            $cliente->eliminar();
+            $resultado["err"] = EXIT_SUCCESS; //del otro lado lo interpreta como data
+            $resultado["mensaje"] = "Registro eliminado exitosamente.";
+        }
+        return json_encode($resultado);
+    }
+
+    public function cargarGrilla(Request $request)
+    {
         $request = $_REQUEST;
 
         $entidad = new Cliente();
@@ -80,7 +109,7 @@ class ControladorCliente extends Controller{
 
         for ($i = $inicio; $i < count($aClientes) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = "<a href='/admin/cliente/" . $aClientes[$i]->idcliente . "'>" . $aClientes[$i]->nombre . "</a>"; 
+            $row[] = "<a href='/admin/cliente/" . $aClientes[$i]->idcliente . "'>" . $aClientes[$i]->nombre . "</a>";
             $row[] = $aClientes[$i]->apellido;
             $row[] = $aClientes[$i]->correo;
             $row[] = $aClientes[$i]->dni;

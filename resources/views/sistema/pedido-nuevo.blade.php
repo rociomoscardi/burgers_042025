@@ -35,7 +35,7 @@ if (isset($msg)) {
 }
 ?>
 <div class="panel-body">
-    <form id="form1" method="POST" action="{{ url('admin/pedido/nuevo') }}">
+    <form id="form1" method="POST">
         <div class="row">
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
@@ -84,7 +84,7 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label>Total: *</label>
-                <input type="number" name="txtTotal" id="txtTotal" class="form-control" value="{{$pedido->total ?? ''}}" placeholder="$0,00" required>
+                <input type="text" name="txtTotal" id="txtTotal" class="form-control" value="{{$pedido->total ?? ''}}" placeholder="$0,00" required>
             </div>
         </div>
     </form>

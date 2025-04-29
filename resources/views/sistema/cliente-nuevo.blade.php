@@ -34,6 +34,7 @@ if (isset($msg)) {
     echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
+<div id = "msg"></div>
 <div class="panel-body">
     <form id="form1" method="POST">
         <div class="row">
@@ -41,23 +42,23 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Nombre: *</label>
-                <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$cliente->nombre ?? ''}}" required>
+                <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$cliente->nombre}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label>Apellido: *</label>
-                <input type="text" id="txtApellido" name="txtApellido" class="form-control" value="{{$cliente->apellido ?? ''}}" required>
+                <input type="text" id="txtApellido" name="txtApellido" class="form-control" value="{{$cliente->apellido}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label>Teléfono: *</label>
-                <input type="text" id="txtTelefono" name="txtTelefono" class="form-control" value="{{$cliente->telefono ?? ''}}" required>
+                <input type="text" id="txtTelefono" name="txtTelefono" class="form-control" value="{{$cliente->telefono}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label>DNI: *</label>
-                <input type="text" id="txtDni" name="txtDni" class="form-control" value="{{$cliente->dni ?? ''}}" required>
+                <input type="text" id="txtDni" name="txtDni" class="form-control" value="{{$cliente->dni}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label>Correo: *</label>
-                <input type="email" id="txtCorreo" name="txtCorreo" class="form-control" value="" required>
+                <input type="email" id="txtCorreo" name="txtCorreo" class="form-control" value="{{$cliente->correo}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label>Clave: *</label>
@@ -80,6 +81,27 @@ if (isset($msg)) {
             msgShow("Corrija los errores e intente nuevamente.", "danger");
             return false;
         }
+    }
+
+    function eliminar() {
+        $.ajax({
+            type: "GET",
+            url: "{{ asset('admin/cliente/eliminar') }}",
+            data: { id:globalId },
+            async: true,
+            dataType: "json",
+            success: function (data) {
+                if (data.err = 0) {
+                    msgShow(data.mensaje, "danger");
+                    $("#btnEnviar").hide();
+                    $("#btnEliminar").hide();
+                    $('#mdlEliminar').modal('toggle');
+                } else {
+                    msgShow(data.mensaje, "success");
+                    $('#mdlEliminar').modal('toggle');
+                }
+            }
+        });
     }
 </script>
 @endsection

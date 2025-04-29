@@ -1,27 +1,33 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Entidades\Producto;
 use App\Entidades\Tipo_producto;
 use Illuminate\Http\Request;
 use Exception;
+
 require app_path() . '/start/constants.php';
 
-class ControladorProducto extends Controller{
+class ControladorProducto extends Controller
+{
 
-    public function nuevo(){
+    public function nuevo()
+    {
         $titulo = "Nuevo producto";
         $categoria = new Tipo_producto();
         $aCategorias = $categoria->obtenerTodos();
         return view("sistema.producto-nuevo", compact("titulo", "aCategorias"));
     }
 
-    public function index(){
-        $titulo ="Listado de productos";
+    public function index()
+    {
+        $titulo = "Listado de productos";
         return view("sistema.producto-listar", compact("titulo"));
     }
 
-    public function guardar(Request $request) {
+    public function guardar(Request $request)
+    {
         try {
             //Define la entidad servicio
             $titulo = "Modificar producto";
@@ -54,15 +60,16 @@ class ControladorProducto extends Controller{
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = ERRORINSERT;
         }
-        
+
         $id = $entidad->idproducto; //si da algun error al menos le deja los datos que tenía previamente
         $producto = new Producto();
         $producto->obtenerPorId($id);
 
         return view('sistema.producto-nuevo', compact('msg', 'producto', 'titulo')) . '?id=' . $producto->idproducto;
-    } 
+    }
 
-    public function editar($id){
+    public function editar($id)
+    {
         $titulo = "Editar producto";
         $producto = new Producto();
         $producto->obtenerPorId($id);
@@ -71,7 +78,20 @@ class ControladorProducto extends Controller{
         return view("sistema.producto-nuevo", compact("titulo", "producto", "aCategorias"));
     }
 
-    public function cargarGrilla(Request $request){
+    public function eliminar(Request $request)
+    {
+        $idProducto = $request->input("id");
+        $producto = new Producto();
+        $producto->idproducto = $idProducto;
+        $producto->eliminar();
+        $resultado["err"] = EXIT_SUCCESS; //del otro lado lo interpreta como data
+        $resultado["mensaje"] = "Registro eliminado exitosamente.";
+
+        return json_encode($resultado);
+    }
+
+    public function cargarGrilla(Request $request)
+    {
         $request = $_REQUEST;
 
         $entidad = new Producto();
@@ -86,7 +106,7 @@ class ControladorProducto extends Controller{
 
         for ($i = $inicio; $i < count($aProductos) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = "<a href='/admin/producto/" . $aProductos[$i]->idproducto . "'>" . $aProductos[$i]->titulo . "</a>"; 
+            $row[] = "<a href='/admin/producto/" . $aProductos[$i]->idproducto . "'>" . $aProductos[$i]->titulo . "</a>";
             $row[] = $aProductos[$i]->tipo;
             $row[] = $aProductos[$i]->precio;
             $cont++;
@@ -102,4 +122,3 @@ class ControladorProducto extends Controller{
         return json_encode($json_data);
     }
 }
-

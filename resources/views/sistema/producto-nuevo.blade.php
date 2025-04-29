@@ -34,9 +34,9 @@ if (isset($msg)) {
     echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
-
+<div id = "msg"></div>
 <div class="panel-body">
-    <form id="form1" method="POST" action="{{ url('admin/producto/nuevo') }}" enctype="multipart/form-data">
+    <form id="form1" method="POST" enctype="multipart/form-data">
         <div class="row">
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
@@ -91,6 +91,27 @@ if (isset($msg)) {
             msgShow("Corrija los errores e intente nuevamente.", "danger");
             return false;
         }
+    }
+
+    function eliminar() {
+        $.ajax({
+            type: "GET",
+            url: "{{ asset('admin/producto/eliminar') }}",
+            data: { id:globalId },
+            async: true,
+            dataType: "json",
+            success: function (data) {
+                if (data.err = 0) {
+                    msgShow(data.mensaje, "danger");
+                    $("#btnEnviar").hide();
+                    $("#btnEliminar").hide();
+                    $('#mdlEliminar').modal('toggle');
+                } else {
+                    msgShow(data.mensaje, "success");
+                    $('#mdlEliminar').modal('toggle');
+                }
+            }
+        });
     }
 </script>
 @endsection
