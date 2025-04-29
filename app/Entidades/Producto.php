@@ -45,8 +45,8 @@ class Producto extends Model
             cantidad,
             imagen,
             fk_idtipoproducto
-            FROM productos WHERE idproducto = $idProducto";
-        $lstRetorno = DB::select($sql);
+            FROM productos WHERE idproducto = ?";
+        $lstRetorno = DB::select($sql, [$idProducto]);
 
         if (count($lstRetorno) > 0) {
             $this->idproducto = $lstRetorno[0]->idproducto;

@@ -55,15 +55,16 @@ if (isset($msg)) {
             <div class="form-group col-lg-6">
                 <label for="lstTipoProducto">Tipo de producto: *</label>
                 <select class="form-control" name="lstTipoProducto" id="lstTipoProducto">
-                    <option selected="" class="form-control" value="">Seleccionar</option>
-                    @foreach ($aCategorias as $categoria) 
-                    @if ($categoria->idtipoproducto ?? '' == $producto->fk_idtipoproducto ?? '') 
-                    <option selected value="{{$categoria->idtipoproducto}}">{{$categoria->nombre}}</option>
+                    <option selected disabled value="">Seleccionar</option>
+                    @foreach ($aCategorias as $categoria)
+                    @if (isset($producto->fk_idtipoproducto) && $producto->fk_idtipoproducto == $categoria->idtipoproducto)
+                    <option selected value="{{ $categoria->idtipoproducto }}">{{ $categoria->nombre }}</option>
                     @else
-                    <option selected value="{{$categoria->idtipoproducto}}">{{$categoria->nombre}}</option>
+                    <option value="{{ $categoria->idtipoproducto }}">{{ $categoria->nombre }}</option>
                     @endif
                     @endforeach
                 </select>
+
             </div>
             <div class="form-group col-lg-6">
                 <label for="txtDescripcion">Descripción: *</label>

@@ -46,27 +46,39 @@ if (isset($msg)) {
             <div class="form-group col-lg-6">
                 <label>Sucursal: *</label>
                 <select class="form-control" name="lstSucursal" id="lstSucursal">
-                    <option selected="" class="form-control" value="">Seleccionar</option>
+                    <option selected disabled value="">Seleccionar</option>
                     @foreach ($aSucursales as $sucursal)
-                    <option value="{{$sucursal->idsucursal ?? ''}}">{{$sucursal->nombre}}</option>
+                    @if (isset($pedido->fk_idsucursal) && $pedido->fk_idsucursal == $sucursal->idsucursal)
+                    <option selected value="{{ $sucursal->idsucursal }}">{{ $sucursal->nombre }}</option>
+                    @else
+                    <option value="{{ $sucursal->idsucursal }}">{{ $sucursal->nombre }}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
             <div class="form-group col-lg-6">
                 <label>Cliente: *</label>
                 <select class="form-control" name="lstCliente" id="lstCliente">
-                    <option selected="" class="form-control" value="">Seleccionar</option>
+                    <option selected disabled value="">Seleccionar</option>
                     @foreach ($aClientes as $cliente)
-                    <option value="{{$cliente->idcliente ?? ''}}">{{$cliente->apellido}}</option>
+                    @if (isset($pedido->fk_idcliente) && $pedido->fk_idcliente == $cliente->idcliente)
+                    <option selected value="{{ $cliente->idcliente }}">{{ $cliente->apellido }}</option>
+                    @else
+                    <option value="{{ $cliente->idcliente }}">{{ $cliente->apellido }}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
             <div class="form-group col-lg-6">
                 <label>Estado del pedido: *</label>
                 <select class="form-control" name="lstEstado" id="lstEstado">
-                    <option selected="" class="form-control" value="">Seleccionar</option>
+                    <option selected disabled value="">Seleccionar</option>
                     @foreach ($aEstados as $estado)
-                    <option value="{{$estado->idestado ?? ''}}">{{$estado->nombre}}</option>
+                    @if (isset($pedido->fk_idestado) && $pedido->fk_idestado == $estado->idestado)
+                    <option selected value="{{ $estado->idestado }}">{{ $estado->nombre }}</option>
+                    @else
+                    <option value="{{ $estado->idestado }}">{{ $estado->nombre }}</option>
+                    @endif
                     @endforeach
                 </select>
             </div>
