@@ -122,6 +122,7 @@ class Pedido extends Model
                     FROM pedidos P
                     INNER JOIN sucursales S ON S.idsucursal = P.fk_idsucursal
                     INNER JOIN clientes C ON C.idcliente = P.fk_idcliente
+                    /* es probable que acá me falte agregar estado de pedidos */ 
                 WHERE 1=1
                 ";
 

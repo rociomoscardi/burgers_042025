@@ -45,8 +45,8 @@ class Cliente extends Model
                 correo,
                 dni,
                 clave
-                FROM clientes WHERE idcliente = $idCliente";
-        $lstRetorno = DB::select($sql);
+                FROM clientes WHERE idcliente = ?";
+        $lstRetorno = DB::select($sql, [$idCliente]);
 
         if (count($lstRetorno) > 0) {
             $this->idcliente = $lstRetorno[0]->idcliente;
