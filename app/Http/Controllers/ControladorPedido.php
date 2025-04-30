@@ -70,7 +70,7 @@ class ControladorPedido extends Controller
         $id = $entidad->idpedido; //si da algun error al menos le deja los datos que tenía previamente
         $pedido = new Pedido();
         $pedido->obtenerPorId($id);
-        
+
         return view('sistema.pedido-nuevo', compact('msg', 'pedido', 'titulo')) . '?id=' . $pedido->idpedido;
     }
 
@@ -86,6 +86,18 @@ class ControladorPedido extends Controller
         $estado = new Estado();
         $aEstados = $estado->obtenerTodos();
         return view("sistema.pedido-nuevo", compact("titulo", "pedido", "aSucursales", "aClientes", "aEstados"));
+    }
+
+    public function eliminar(Request $request)
+    {
+        $idPedido = $request->input("id");
+        $pedido = new Pedido();
+        $pedido->idpedido = $idPedido;
+        $pedido->eliminar();
+        $resultado["err"] = EXIT_SUCCESS;
+        $resultado["mensaje"] = "Registro eliminado exitosamente.";
+
+        return json_encode($resultado);
     }
 
     public function cargarGrilla(Request $request)

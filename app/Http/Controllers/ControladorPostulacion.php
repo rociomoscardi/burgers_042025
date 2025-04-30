@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Entidades\Postulacion;
 use Illuminate\Http\Request;
 use Exception;
+use PhpParser\Node\Expr\AssignOp\Pow;
+
 require app_path() . '/start/constants.php';
 class ControladorPostulacion extends Controller{
 
@@ -63,6 +65,18 @@ class ControladorPostulacion extends Controller{
         $postulacion = new Postulacion();
         $postulacion->obtenerPorId($id);
         return view("sistema.postulacion-nuevo", compact("titulo", "postulacion"));
+    }
+
+    public function eliminar(Request $request)
+    {
+        $idPostulacion = $request->input("id");
+        $postulacion = new Postulacion();
+        $postulacion->idpostulacion = $idPostulacion;
+        $postulacion->eliminar();
+        $resultado["err"] = EXIT_SUCCESS;
+        $resultado["mensaje"] = "Registro eliminado exitosamente.";
+
+        return json_encode($resultado);
     }
 
     public function cargarGrilla(Request $request){

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entidades\Tipo_producto;
+use App\Entidades\Producto;
 use Illuminate\Http\Request;
 use Exception;
 require app_path() . '/start/constants.php';
@@ -66,6 +67,26 @@ class ControladorCategoria extends Controller{
         $categoria->obtenerPorId($id);
         return view("sistema.categoria-nuevo", compact("titulo", "categoria"));
     }
+
+    public function eliminar(Request $request)
+    {
+        $idCategoria = $request->input("id");
+        $producto = new Producto();
+        //si la categoría tiene un producto asociado no se tiene que poder borrar
+        if ($producto->existeProductosPorCategoria($idCategoria)) {
+            $resultado["err"] = EXIT_FAILURE;
+            $resultado["mensaje"] = "No se puede eliminar una categoría con productos asociados.";
+        } else {
+            //si no, sí
+            $categoria = new Tipo_producto();
+            $categoria->idtipoproducto = $idCategoria;
+            $categoria->eliminar();
+            $resultado["err"] = EXIT_SUCCESS; //del otro lado lo interpreta como data
+            $resultado["mensaje"] = "Registro eliminado exitosamente.";
+        }
+        return json_encode($resultado);
+    }
+
 
     public function cargarGrilla(Request $request){
         $request = $_REQUEST;

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entidades\Sucursal;
+use App\Entidades\Pedido;
 use Illuminate\Http\Request;
 use Exception;
 require app_path() . '/start/constants.php';
@@ -66,6 +67,26 @@ class ControladorSucursal extends Controller{
         $sucursal->obtenerPorId($id);
         return view("sistema.sucursal-nuevo", compact("titulo", "sucursal"));
     }
+
+    public function eliminar(Request $request)
+    {
+        $idSucursal = $request->input("id");
+        $pedido = new Pedido();
+        //si la sucursal tiene un pedido asociado no se tiene que poder borrar
+        if ($pedido->existePedidosPorSucursal($idSucursal)) {
+            $resultado["err"] = EXIT_FAILURE;
+            $resultado["mensaje"] = "No se puede eliminar una sucursal con pedidos asociados.";
+        } else {
+            //si no, sí
+            $sucursal = new Sucursal();
+            $sucursal->idsucursal = $idSucursal;
+            $sucursal->eliminar();
+            $resultado["err"] = EXIT_SUCCESS; //del otro lado lo interpreta como data
+            $resultado["mensaje"] = "Registro eliminado exitosamente.";
+        }
+        return json_encode($resultado);
+    }
+
 
     public function cargarGrilla(Request $request){
         $request = $_REQUEST;

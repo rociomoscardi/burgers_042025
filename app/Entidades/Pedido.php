@@ -152,4 +152,18 @@ class Pedido extends Model
 
         return (count($lstRetorno) > 0); // si es mayor que 0 me devuleve true, y si no me devuelve false 
     }
+    
+    public function existePedidosPorSucursal($idSucursal){
+        $sql = "SELECT
+            idpedido,
+            fecha,
+            total,
+            fk_idsucursal,
+            fk_idcliente,
+            fk_idestado
+            FROM pedidos WHERE fk_idsucursal = $idSucursal";
+        $lstRetorno = DB::select($sql);
+
+        return (count($lstRetorno) > 0); // si es mayor que 0 me devuleve true, y si no me devuelve false 
+    }
 }

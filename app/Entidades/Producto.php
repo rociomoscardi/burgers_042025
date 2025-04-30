@@ -141,4 +141,19 @@ class Producto extends Model
 
         return $lstRetorno;
     }
+
+    public function existeProductosPorCategoria($idCategoria){
+        $sql = "SELECT
+            idproducto,
+            titulo,
+            descripcion,
+            precio,
+            cantidad,
+            imagen,
+            fk_idtipoproducto
+            FROM productos WHERE fk_idtipoproducto = $idCategoria";
+        $lstRetorno = DB::select($sql);
+
+        return (count($lstRetorno) > 0); // si es mayor que 0 me devuleve true, y si no me devuelve false 
+    }
 }
