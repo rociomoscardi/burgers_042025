@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Entidades\Producto;
 use App\Entidades\Tipo_producto;
+use App\Entidades\Sistema\Usuario;
+use App\Entidades\Sistema\Patente;
 use Illuminate\Http\Request;
 use Exception;
 
@@ -15,15 +17,35 @@ class ControladorProducto extends Controller
     public function nuevo()
     {
         $titulo = "Nuevo producto";
-        $categoria = new Tipo_producto();
-        $aCategorias = $categoria->obtenerTodos();
-        return view("sistema.producto-nuevo", compact("titulo", "aCategorias"));
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("PRODUCTOSALTA")) {
+                $codigo = "PRODUCTOSALTA";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $categoria = new Tipo_producto();
+                $aCategorias = $categoria->obtenerTodos();
+                return view("sistema.producto-nuevo", compact("titulo", "aCategorias"));
+            }
+        } else {
+            return redirect('admin/login');
+        }
     }
 
     public function index()
     {
         $titulo = "Listado de productos";
-        return view("sistema.producto-listar", compact("titulo"));
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("PRODUCTOCONSULTA")) {
+                $codigo = "PRODUCTOCONSULTA";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                return view("sistema.producto-listar", compact("titulo"));
+            }
+        } else {
+            return redirect('admin/login');
+        }
     }
 
     public function guardar(Request $request)
@@ -71,22 +93,42 @@ class ControladorProducto extends Controller
     public function editar($id)
     {
         $titulo = "Editar producto";
-        $producto = new Producto();
-        $producto->obtenerPorId($id);
-        $categoria = new Tipo_producto();
-        $aCategorias = $categoria->obtenerTodos();
-        return view("sistema.producto-nuevo", compact("titulo", "producto", "aCategorias"));
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("PRODUCTOEDITAR")) {
+                $codigo = "PRODUCTOEDITAR";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $producto = new Producto();
+                $producto->obtenerPorId($id);
+                $categoria = new Tipo_producto();
+                $aCategorias = $categoria->obtenerTodos();
+                return view("sistema.producto-nuevo", compact("titulo", "producto", "aCategorias"));
+            }
+        } else {
+            return redirect('admin/login');
+        }
     }
 
     public function eliminar(Request $request)
     {
-        $idProducto = $request->input("id");
-        $producto = new Producto();
-        $producto->idproducto = $idProducto;
-        $producto->eliminar();
-        $resultado["err"] = EXIT_SUCCESS; //del otro lado lo interpreta como data
-        $resultado["mensaje"] = "Registro eliminado exitosamente.";
-
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("PRODUCTOELIMINAR")) {
+                $resultado["err"] = EXIT_FAILURE;
+                $resultado["mensaje"] = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $idProducto = $request->input("id");
+                $producto = new Producto();
+                $producto->idproducto = $idProducto;
+                $producto->eliminar();
+                $resultado["err"] = EXIT_SUCCESS; //del otro lado lo interpreta como data
+                $resultado["mensaje"] = "Registro eliminado exitosamente.";
+            }
+        } else {
+            $resultado["err"] = EXIT_FAILURE;
+            $resultado["mensaje"] = "Usuario no autenticado.";
+        }
         return json_encode($resultado);
     }
 

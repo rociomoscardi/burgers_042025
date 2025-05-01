@@ -1,25 +1,53 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Entidades\Postulacion;
+use App\Entidades\Sistema\Usuario;
+use App\Entidades\Sistema\Patente;
 use Illuminate\Http\Request;
 use Exception;
 use PhpParser\Node\Expr\AssignOp\Pow;
 
 require app_path() . '/start/constants.php';
-class ControladorPostulacion extends Controller{
+class ControladorPostulacion extends Controller
+{
 
-    public function nuevo(){
+    public function nuevo()
+    {
         $titulo = "Nueva postulación";
-        return view("sistema.postulacion-nuevo", compact("titulo"));
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("POSTULANTEALTA")) {
+                $codigo = "POSTULANTEALTA";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                //si no hubiera usado ?? '' en los values acá iría: $postulacion = new Postulacion; y lo pasaba por compact
+                return view("sistema.postulacion-nuevo", compact("titulo"));
+            }
+        } else {
+            return redirect('admin/login');
+        }
     }
 
-    public function index(){
+    public function index()
+    {
         $titulo = "Listado de postulaciones";
-        return view("sistema.postulacion-listar", compact("titulo"));
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("POSTULANTECONSULTA")) {
+                $codigo = "POSTULANTECONSULTA";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                return view("sistema.postulacion-listar", compact("titulo"));
+            }
+        } else {
+            return redirect('admin/login');
+        }
     }
 
-    public function guardar(Request $request) {
+    public function guardar(Request $request)
+    {
         try {
             //Define la entidad servicio
             $titulo = "Modificar postulación";
@@ -52,7 +80,7 @@ class ControladorPostulacion extends Controller{
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = ERRORINSERT;
         }
-        
+
         $id = $entidad->idpostulacion; //si da algun error al menos le deja los datos que tenía previamente
         $postulacion = new Postulacion();
         $postulacion->obtenerPorId($id);
@@ -60,26 +88,48 @@ class ControladorPostulacion extends Controller{
         return view('sistema.postulacion-nuevo', compact('msg', 'postulacion', 'titulo')) . '?id=' . $postulacion->idpostulacion;
     }
 
-    public function editar($id){
+    public function editar($id)
+    {
         $titulo = "Editar postulación";
-        $postulacion = new Postulacion();
-        $postulacion->obtenerPorId($id);
-        return view("sistema.postulacion-nuevo", compact("titulo", "postulacion"));
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("POSTULANTEEDITAR")) {
+                $codigo = "POSTULANTEEDITAR";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $postulacion = new Postulacion();
+                $postulacion->obtenerPorId($id);
+                return view("sistema.postulacion-nuevo", compact("titulo", "postulacion"));
+            }
+        } else {
+            return redirect('admin/login');
+        }
     }
 
     public function eliminar(Request $request)
     {
-        $idPostulacion = $request->input("id");
-        $postulacion = new Postulacion();
-        $postulacion->idpostulacion = $idPostulacion;
-        $postulacion->eliminar();
-        $resultado["err"] = EXIT_SUCCESS;
-        $resultado["mensaje"] = "Registro eliminado exitosamente.";
-
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("POSTULANTEBAJA")) {
+                $resultado["err"] = EXIT_FAILURE;
+                $resultado["mensaje"] = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $idPostulacion = $request->input("id");
+                $postulacion = new Postulacion();
+                $postulacion->idpostulacion = $idPostulacion;
+                $postulacion->eliminar();
+                $resultado["err"] = EXIT_SUCCESS;
+                $resultado["mensaje"] = "Registro eliminado exitosamente.";
+            }
+        } else {
+            $resultado["err"] = EXIT_FAILURE;
+            $resultado["mensaje"] = "Usuario no autenticado.";
+        }
         return json_encode($resultado);
     }
 
-    public function cargarGrilla(Request $request){
+    public function cargarGrilla(Request $request)
+    {
         $request = $_REQUEST;
 
         $entidad = new Postulacion();
@@ -94,7 +144,7 @@ class ControladorPostulacion extends Controller{
 
         for ($i = $inicio; $i < count($aPostulacion) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = "<a href='/admin/postulacion/" . $aPostulacion[$i]->idpostulacion . "'>" . $aPostulacion[$i]->nombre . "</a>"; 
+            $row[] = "<a href='/admin/postulacion/" . $aPostulacion[$i]->idpostulacion . "'>" . $aPostulacion[$i]->nombre . "</a>";
             $row[] = $aPostulacion[$i]->apellido;
             $row[] = $aPostulacion[$i]->telefono;
             $row[] = $aPostulacion[$i]->correo;

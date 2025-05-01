@@ -4,23 +4,50 @@ namespace App\Http\Controllers;
 
 use App\Entidades\Sucursal;
 use App\Entidades\Pedido;
+use App\Entidades\Sistema\Usuario;
+use App\Entidades\Sistema\Patente;
 use Illuminate\Http\Request;
 use Exception;
+
 require app_path() . '/start/constants.php';
 
-class ControladorSucursal extends Controller{
+class ControladorSucursal extends Controller
+{
 
-    public function nuevo(){
+    public function nuevo()
+    {
         $titulo = "Nueva sucursal";
-        return view("sistema.sucursal-nuevo", compact("titulo"));
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("SUCURSALALTA")) {
+                $codigo = "SUCURSALALTA";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                return view("sistema.sucursal-nuevo", compact("titulo"));
+            }
+        } else {
+            return redirect('admin/login');
+        }
     }
 
-    public function index (){
+    public function index()
+    {
         $titulo = "Listado de sucursales";
-        return view("sistema.sucursal-listar", compact("titulo"));
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("SUCURSALCONSULTA")) {
+                $codigo = "SUCURSALCONSULTA";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                return view("sistema.sucursal-listar", compact("titulo"));
+            }
+        } else {
+            return redirect('admin/login');
+        }
     }
 
-    public function guardar(Request $request) {
+    public function guardar(Request $request)
+    {
         try {
             //Define la entidad servicio
             $titulo = "Modificar sucursal";
@@ -53,7 +80,7 @@ class ControladorSucursal extends Controller{
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = ERRORINSERT;
         }
-        
+
         $id = $entidad->idsucursal; //si da algun error al menos le deja los datos que tenía previamente
         $sucursal = new Sucursal();
         $sucursal->obtenerPorId($id);
@@ -61,34 +88,55 @@ class ControladorSucursal extends Controller{
         return view('sistema.sucursal-nuevo', compact('msg', 'sucursal', 'titulo')) . '?id=' . $sucursal->idsucursal;
     }
 
-    public function editar($id){
+    public function editar($id)
+    {
         $titulo = "Editar sucursal";
-        $sucursal = new Sucursal();
-        $sucursal->obtenerPorId($id);
-        return view("sistema.sucursal-nuevo", compact("titulo", "sucursal"));
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("SUCURSALCONSULTA")) {
+                $codigo = "SUCURSALCONSULTA";
+                $mensaje = "No tiene permisos para la operación.";
+                return view('sistema.pagina-error', compact('titulo', 'codigo', 'mensaje'));
+            } else {
+                $sucursal = new Sucursal();
+                $sucursal->obtenerPorId($id);
+                return view("sistema.sucursal-nuevo", compact("titulo", "sucursal"));
+            }
+        } else {
+            return redirect('admin/login');
+        }
     }
 
     public function eliminar(Request $request)
     {
-        $idSucursal = $request->input("id");
-        $pedido = new Pedido();
-        //si la sucursal tiene un pedido asociado no se tiene que poder borrar
-        if ($pedido->existePedidosPorSucursal($idSucursal)) {
-            $resultado["err"] = EXIT_FAILURE;
-            $resultado["mensaje"] = "No se puede eliminar una sucursal con pedidos asociados.";
+        if (Usuario::autenticado() == true) {
+            if (!Patente::autorizarOperacion("CLIENTEELIMINAR")) {
+                $resultado["err"] = EXIT_FAILURE;
+                $resultado["mensaje"] = "No tiene permisos para la operación.";
+            } else {
+                $idSucursal = $request->input("id");
+                $pedido = new Pedido();
+                //si la sucursal tiene un pedido asociado no se tiene que poder borrar
+                if ($pedido->existePedidosPorSucursal($idSucursal)) {
+                    $resultado["err"] = EXIT_FAILURE;
+                    $resultado["mensaje"] = "No se puede eliminar una sucursal con pedidos asociados.";
+                } else {
+                    //si no, sí
+                    $sucursal = new Sucursal();
+                    $sucursal->idsucursal = $idSucursal;
+                    $sucursal->eliminar();
+                    $resultado["err"] = EXIT_SUCCESS; //del otro lado lo interpreta como data
+                    $resultado["mensaje"] = "Registro eliminado exitosamente.";
+                }
+            }
         } else {
-            //si no, sí
-            $sucursal = new Sucursal();
-            $sucursal->idsucursal = $idSucursal;
-            $sucursal->eliminar();
-            $resultado["err"] = EXIT_SUCCESS; //del otro lado lo interpreta como data
-            $resultado["mensaje"] = "Registro eliminado exitosamente.";
+            $resultado["err"] = EXIT_FAILURE;
+            $resultado["mensaje"] = "Usuario no autenticado.";
         }
         return json_encode($resultado);
     }
 
-
-    public function cargarGrilla(Request $request){
+    public function cargarGrilla(Request $request)
+    {
         $request = $_REQUEST;
 
         $entidad = new Sucursal();
@@ -103,7 +151,7 @@ class ControladorSucursal extends Controller{
 
         for ($i = $inicio; $i < count($aSucursales) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = "<a href='/admin/sucursal/" . $aSucursales[$i]->idsucursal . "'>" . $aSucursales[$i]->nombre . "</a>"; 
+            $row[] = "<a href='/admin/sucursal/" . $aSucursales[$i]->idsucursal . "'>" . $aSucursales[$i]->nombre . "</a>";
             $row[] = $aSucursales[$i]->direccion;
             $row[] = "<a target='_blank' href= '" . $aSucursales[$i]->link_mapa . "'>" . $aSucursales[$i]->link_mapa . "</a>";
             $row[] = $aSucursales[$i]->telefono;

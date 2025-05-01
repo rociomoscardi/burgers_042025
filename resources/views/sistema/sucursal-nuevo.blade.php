@@ -88,12 +88,12 @@ if (isset($msg)) {
             dataType: "json",
             success: function (data) {
                 if (data.err = 0) {
-                    msgShow(data.mensaje, "success");
+                    msgShow(data.mensaje, "danger");
                     $("#btnEnviar").hide();
                     $("#btnEliminar").hide();
                     $('#mdlEliminar').modal('toggle');
                 } else {
-                    msgShow(data.mensaje, "danger");
+                    msgShow(data.mensaje, "success");
                     $('#mdlEliminar').modal('toggle');
                 }
             }
