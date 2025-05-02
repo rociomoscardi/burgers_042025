@@ -1,5 +1,5 @@
 <?php
- //use Carbon\Carbon; 
+//use Carbon\Carbon; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,29 +16,36 @@
 
 Route::group(array('domain' => '127.0.0.1'), function () {
 
+    
+    /* --------------------------------------------- */
+    /* WEB E-COMMERCE                                */
+    /* --------------------------------------------- */
+
     Route::get('/', 'ControladorWebHome@index');
- 
+    Route::get('/takeaway', 'ControladorWebTakeaway@index');
+    Route::get('/nosotros', 'ControladorWebNosotros@index');
+    Route::get('/contacto', 'ControladorWebContacto@index');
+    Route::get('/mi-cuenta', 'ControladorWebMiCuenta@index');
+    Route::get('/carrito', 'ControladorWebCarrito@index');
 
+    /* --------------------------------------------- */
+    /* CONTROLADOR LOGIN                           */
+    /* --------------------------------------------- */
     Route::get('/admin', 'ControladorHome@index');
-    Route::post('/admin/patente/nuevo', 'ControladorPatente@guardar');
-
-/* --------------------------------------------- */
-/* CONTROLADOR LOGIN                           */
-/* --------------------------------------------- */
     Route::get('/admin/login', 'ControladorLogin@index');
     Route::get('/admin/logout', 'ControladorLogin@logout');
     Route::post('/admin/logout', 'ControladorLogin@entrar');
     Route::post('/admin/login', 'ControladorLogin@entrar');
 
-/* --------------------------------------------- */
-/* CONTROLADOR RECUPERO CLAVE                    */
-/* --------------------------------------------- */
+    /* --------------------------------------------- */
+    /* CONTROLADOR RECUPERO CLAVE                    */
+    /* --------------------------------------------- */
     Route::get('/admin/recupero-clave', 'ControladorRecuperoClave@index');
     Route::post('/admin/recupero-clave', 'ControladorRecuperoClave@recuperar');
 
-/* --------------------------------------------- */
-/* CONTROLADOR PERMISO                           */
-/* --------------------------------------------- */
+    /* --------------------------------------------- */
+    /* CONTROLADOR PERMISO                           */
+    /* --------------------------------------------- */
     Route::get('/admin/usuarios/cargarGrillaFamiliaDisponibles', 'ControladorPermiso@cargarGrillaFamiliaDisponibles')->name('usuarios.cargarGrillaFamiliaDisponibles');
     Route::get('/admin/usuarios/cargarGrillaFamiliasDelUsuario', 'ControladorPermiso@cargarGrillaFamiliasDelUsuario')->name('usuarios.cargarGrillaFamiliasDelUsuario');
     Route::get('/admin/permisos', 'ControladorPermiso@index');
@@ -49,9 +56,9 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/permiso/{idpermiso}', 'ControladorPermiso@editar');
     Route::post('/admin/permiso/{idpermiso}', 'ControladorPermiso@guardar');
 
-/* --------------------------------------------- */
-/* CONTROLADOR GRUPO                             */
-/* --------------------------------------------- */
+    /* --------------------------------------------- */
+    /* CONTROLADOR GRUPO                             */
+    /* --------------------------------------------- */
     Route::get('/admin/grupos', 'ControladorGrupo@index');
     Route::get('/admin/usuarios/cargarGrillaGruposDelUsuario', 'ControladorGrupo@cargarGrillaGruposDelUsuario')->name('usuarios.cargarGrillaGruposDelUsuario'); //otra cosa
     Route::get('/admin/usuarios/cargarGrillaGruposDisponibles', 'ControladorGrupo@cargarGrillaGruposDisponibles')->name('usuarios.cargarGrillaGruposDisponibles'); //otra cosa
@@ -62,9 +69,9 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/grupo/{idgrupo}', 'ControladorGrupo@editar');
     Route::post('/admin/grupo/{idgrupo}', 'ControladorGrupo@guardar');
 
-/* --------------------------------------------- */
-/* CONTROLADOR USUARIO                           */
-/* --------------------------------------------- */
+    /* --------------------------------------------- */
+    /* CONTROLADOR USUARIO                           */
+    /* --------------------------------------------- */
     Route::get('/admin/usuarios', 'ControladorUsuario@index');
     Route::get('/admin/usuarios/nuevo', 'ControladorUsuario@nuevo');
     Route::post('/admin/usuarios/nuevo', 'ControladorUsuario@guardar');
@@ -73,9 +80,9 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/usuarios/buscarUsuario', 'ControladorUsuario@buscarUsuario');
     Route::get('/admin/usuarios/{usuario}', 'ControladorUsuario@editar');
 
-/* --------------------------------------------- */
-/* CONTROLADOR MENU                             */
-/* --------------------------------------------- */
+    /* --------------------------------------------- */
+    /* CONTROLADOR MENU                             */
+    /* --------------------------------------------- */
     Route::get('/admin/sistema/menu', 'ControladorMenu@index');
     Route::get('/admin/sistema/menu/nuevo', 'ControladorMenu@nuevo');
     Route::post('/admin/sistema/menu/nuevo', 'ControladorMenu@guardar');
@@ -83,7 +90,6 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/admin/sistema/menu/eliminar', 'ControladorMenu@eliminar');
     Route::get('/admin/sistema/menu/{id}', 'ControladorMenu@editar');
     Route::post('/admin/sistema/menu/{id}', 'ControladorMenu@guardar');
-
 });
 
 /* --------------------------------------------- */
@@ -162,4 +168,3 @@ Route::get('/admin/categorias/cargarGrilla', 'ControladorCategoria@cargarGrilla'
 Route::get('/admin/categoria/eliminar', 'ControladorCategoria@eliminar');
 Route::get('/admin/categoria/{id}', 'ControladorCategoria@editar');
 Route::post('/admin/categoria/{id}', 'ControladorCategoria@guardar');
-
