@@ -11,9 +11,9 @@
           <h1 data-aos="fade-up">Sabores que abrazan.<br>Hamburguesas que conquistan.</h1>
           <p>Disfrutamos de brindar una experiencia gastronómica única, donde calidad, ambiente y servicio se unen.</p>
         </div>
-        <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
+        <!--<div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
           <img src="web/img/hero1-img.png" class="img-fluid animated" alt="">
-        </div>
+        </div>-->
       </div>
     </div>
 
