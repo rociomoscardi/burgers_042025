@@ -784,9 +784,9 @@ section,
 .section-title p {
   color: var(--heading-color);
   margin: 10px 0 0 0;
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 500;
-  font-family: var(--heading-font);
+  font-family: var(--nav-font);
 }
 
 .section-title p .description-title {
@@ -808,16 +808,21 @@ section,
 .hero h1 {
   margin: 0;
   font-size: 45px;
-  font-weight: 500;
-  font-family: var(--nav-font)
+  font-weight: 400;
+  font-family: 'Baskervville', serif;
 }
 
 .hero p {
   color: color-mix(in srgb, var(--default-color), transparent 30%);
   margin: 5px 0 30px 0;
   font-size: 20px;
+  font-family: "Baskervville", serif;
   font-weight: 400;
-  font-family: var(--nav-font);
+  font-style: italic;
+}
+
+.hero img {
+  border-radius: 4%;
 }
 
 .hero .btn-get-started {
@@ -898,6 +903,14 @@ section,
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
+.about h1 {
+  color: var(--accent-color);
+  font-weight: 500;
+  font-size: 40px;
+  margin: 0;
+  font-family: var(--nav-font);
+}
+
 .about h3 {
   font-weight: 700;
   font-size: 28px;
@@ -1206,15 +1219,20 @@ section,
 }
 
 .testimonials .testimonial-item h3 {
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
   margin: 10px 0 5px 0;
 }
 
 .testimonials .testimonial-item h4 {
-  font-size: 14px;
+  font-size: 10px;
   color: color-mix(in srgb, var(--default-color), transparent 40%);
   margin: 0 0 10px 0;
+  font-family: "Libre Baskerville", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 .testimonials .testimonial-item .stars i {

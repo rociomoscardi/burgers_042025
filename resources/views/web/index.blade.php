@@ -12,7 +12,7 @@
           <p>Disfrutamos de brindar una experiencia gastronómica única, donde calidad, ambiente y servicio se unen.</p>
         </div>
         <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-          <img src="web/img/hero1-img.webp" class="img-fluid animated" alt="">
+          <img src="web/img/hero1-img.png" class="img-fluid animated" alt="">
         </div>
       </div>
     </div>
@@ -26,11 +26,11 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <p><span>Dónde</span> <span class="description-title">encontrarnos</span></p>
+        <p><span>¿Dónde</span> <span class="description-title">encontrarnos?</span></p>
       </div><!-- End Section Title -->
 
       <div class="mb-5">
-        <iframe style="width: 100%; height: 400px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen=""></iframe>
+        <iframe style="width: 100%; height: 400px;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d32812.13007670153!2d-58.44297161023346!3d-34.60680587519896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcca3b4ef90cbd%3A0xa0b3812e88e88e87!2sBuenos%20Aires!5e0!3m2!1sen!2sar!4v1746494828890!5m2!1sen!2sar" frameborder="0" allowfullscreen=""></iframe>
       </div><!-- End Google Maps -->
 
       <div class="row gy-4">

@@ -17,6 +17,10 @@
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baskervville:ital@0;1&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
   <!-- Vendor CSS Files -->
   <link href="web/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="web/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
@@ -49,12 +53,12 @@
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/" class="{{ Request::is('/') ? 'active' : '' }}">Inicio<br></a></li>
+          <li><a href="/" class="{{ Request::is('/') ? 'active' : '' }}">Inicio<br></a></li>
           <li><a href="/takeaway" class="{{ Request::is('takeaway') ? 'active' : '' }}">Takeaway</a></li>
           <li><a href="/nosotros" class="{{ Request::is('nosotros') ? 'active' : '' }}">Nosotros</a></li>
           <li><a href="/contacto" class="{{ Request::is('contacto') ? 'active' : '' }}">Contacto</a></li>
           <li><a href="/mi-cuenta" class="{{ Request::is('mi-cuenta') ? 'active' : '' }}">Mi cuenta</a></li>
-          <li><a href="/carrito" class="{{ Request::is('carrito') ? 'active' : '' }}"><i class="bi bi-cart4"></i></a></li>            
+          <li><a href="/carrito" class="{{ Request::is('carrito') ? 'active' : '' }}"><i class="bi bi-cart4"></i></a></li>
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
@@ -64,9 +68,9 @@
     </div>
   </header>
 
-@yield("contenido")
+  @yield("contenido")
 
-<footer id="footer" class="footer dark-background">
+  <footer id="footer" class="footer dark-background">
 
     <div class="container">
       <div class="row gy-3">
@@ -147,18 +151,17 @@
   <script src="web/js/main.js"></script>
 
   <script>
-  AOS.init({
-    once: true, // evita que se animen múltiples veces si volvés a hacer scroll
-  });
+    AOS.init({
+      once: true, // evita que se animen múltiples veces si volvés a hacer scroll
+    });
 
-  // Refresca AOS una vez que todo está completamente cargado
-  window.addEventListener('load', () => {
-    AOS.refreshHard();
-  });
-</script>
+    // Refresca AOS una vez que todo está completamente cargado
+    window.addEventListener('load', () => {
+      AOS.refreshHard();
+    });
+  </script>
 
 
 </body>
 
-</html> 
-
+</html>

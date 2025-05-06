@@ -5,8 +5,7 @@
 
 <!-- Section Title -->
 <div class="container section-title" data-aos="fade-up">
-  <h2>About Us<br></h2>
-  <p><span>Learn More</span> <span class="description-title">About Us</span></p>
+  <p><span>Sobre</span> <span class="description-title">nosotros</span></p>
 </div><!-- End Section Title -->
 
 <div class="container">
@@ -52,8 +51,8 @@
 
 <!-- Section Title -->
 <div class="container section-title" data-aos="fade-up">
-  <h2>TESTIMONIALS</h2>
-  <p>What Are They <span class="description-title">Saying About Us</span></p>
+  <h2>TESTIMONIOS</h2>
+  <p>Se dice de <span class="description-title">Lucy's Burgers</span></p>
 </div><!-- End Section Title -->
 
 <div class="container" data-aos="fade-up" data-aos-delay="100">
