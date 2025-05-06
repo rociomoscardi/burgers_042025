@@ -12,8 +12,7 @@ class Cliente extends Model
 
     protected $fillable = [
         'idcliente',
-        'nombre',
-        'apellido',
+        'nombre_comp',
         'telefono',
         'correo',
         'dni',
@@ -24,8 +23,7 @@ class Cliente extends Model
     {
         $sql = "SELECT
                     idcliente,
-                    nombre,
-                    apellido,
+                    nombre_comp,
                     telefono,
                     correo,
                     dni,
@@ -39,8 +37,7 @@ class Cliente extends Model
     {
         $sql = "SELECT
                 idcliente,
-                nombre,
-                apellido,
+                nombre_comp,
                 telefono,
                 correo,
                 dni,
@@ -50,8 +47,7 @@ class Cliente extends Model
 
         if (count($lstRetorno) > 0) {
             $this->idcliente = $lstRetorno[0]->idcliente;
-            $this->nombre = $lstRetorno[0]->nombre;
-            $this->apellido = $lstRetorno[0]->apellido;
+            $this->nombre_comp = $lstRetorno[0]->nombre_comp;
             $this->telefono = $lstRetorno[0]->telefono;
             $this->correo = $lstRetorno[0]->correo;
             $this->dni = $lstRetorno[0]->dni;
@@ -64,8 +60,7 @@ class Cliente extends Model
     public function guardar()
     {
         $sql = "UPDATE clientes SET
-            nombre='$this->nombre',
-            apellido='$this->apellido',
+            nombre='$this->nombre_comp',
             telefono='$this->telefono',
             correo='$this->correo',
             dni='$this->dni',
@@ -84,16 +79,14 @@ class Cliente extends Model
     public function insertar()
     {
         $sql = "INSERT INTO clientes (
-                nombre,
-                apellido,
+                nombre_comp,
                 telefono,
                 correo,
                 dni,
                 clave
             ) VALUES (?, ?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
-            $this->nombre,
-            $this->apellido,
+            $this->nombre_comp,
             $this->telefono,
             $this->correo,
             $this->dni,
@@ -104,8 +97,7 @@ class Cliente extends Model
 
     public function cargarDesdeRequest($request) { //recibe el request del formulario y lo empieza a setear en el propio objeto
         $this->idcliente = $request->input('id') != "0" ? $request->input('id') : $this->idcliente; //esto solo va en los int, si es un string o viene o queda un string vacío
-        $this->nombre = $request->input('txtNombre');
-        $this->apellido = $request->input('txtApellido');
+        $this->nombre_comp = $request->input('txtNombre');
         $this->telefono = $request->input('txtTelefono');
         $this->correo = $request->input('txtCorreo');
         $this->dni = $request->input('txtDni');
@@ -115,7 +107,7 @@ class Cliente extends Model
     public function obtenerFiltrado(){
         $request = $_REQUEST;
         $columns = array(
-            0 => 'nombre',
+            0 => 'nombre_comp',
             1 => 'apellido',
             2 => 'correo',
             3 => 'dni',
@@ -123,8 +115,7 @@ class Cliente extends Model
         );
         $sql = "SELECT DISTINCT
                     idcliente,
-                    nombre,
-                    apellido,
+                    nombre_comp,
                     correo,
                     dni,
                     telefono
@@ -134,8 +125,7 @@ class Cliente extends Model
 
         //Realiza el filtrado
         if (!empty($request['search']['value'])) {
-            $sql .= " AND ( nombre LIKE '%" . $request['search']['value'] . "%' ";
-            $sql .= " OR apellido LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " AND ( nombre_comp LIKE '%" . $request['search']['value'] . "%' ";
             $sql .= " OR correo LIKE '%" . $request['search']['value'] . "%' )";
             $sql .= " OR dni LIKE '%" . $request['search']['value'] . "%' )";
             $sql .= " OR telefono LIKE '%" . $request['search']['value'] . "%' )";

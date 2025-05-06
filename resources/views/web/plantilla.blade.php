@@ -43,24 +43,23 @@
 
       <a href="/" class="logo d-flex align-items-center me-auto me-xl-0">
         <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Lucy's Burgers</h1>
-        <span>.</span>
+        <img src="web/img/logo-img-1.png" alt="">
+        <h1 class="sitename">Lucy's<br>Burgers</h1>
       </a>
 
       <nav id="navmenu" class="navmenu">
         <ul>
-        <li><a href="/">Inicio<br></a></li>
-          <li><a href="/takeaway" class="active">Takeaway</a></li>
-          <li><a href="/nosotros">Nosotros</a></li>
-          <li><a href="/contacto">Contacto</a></li>
-          <li><a href="/mi-cuenta">Mi cuenta</a></li>
-          <li><a href="/carrito"><i class="bi bi-cart4"></i></a></li>            
+        <li><a href="/" class="{{ Request::is('/') ? 'active' : '' }}">Inicio<br></a></li>
+          <li><a href="/takeaway" class="{{ Request::is('takeaway') ? 'active' : '' }}">Takeaway</a></li>
+          <li><a href="/nosotros" class="{{ Request::is('nosotros') ? 'active' : '' }}">Nosotros</a></li>
+          <li><a href="/contacto" class="{{ Request::is('contacto') ? 'active' : '' }}">Contacto</a></li>
+          <li><a href="/mi-cuenta" class="{{ Request::is('mi-cuenta') ? 'active' : '' }}">Mi cuenta</a></li>
+          <li><a href="/carrito" class="{{ Request::is('carrito') ? 'active' : '' }}"><i class="bi bi-cart4"></i></a></li>            
         </ul>
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="index.html#book-a-table">Iniciar sesión</a>
+      <a class="btn-getstarted" href="index.html#book-a-table">Ingresar</a>
 
     </div>
   </header>
@@ -146,6 +145,18 @@
 
   <!-- Main JS File -->
   <script src="web/js/main.js"></script>
+
+  <script>
+  AOS.init({
+    once: true, // evita que se animen múltiples veces si volvés a hacer scroll
+  });
+
+  // Refresca AOS una vez que todo está completamente cargado
+  window.addEventListener('load', () => {
+    AOS.refreshHard();
+  });
+</script>
+
 
 </body>
 

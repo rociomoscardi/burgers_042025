@@ -41,12 +41,8 @@ if (isset($msg)) {
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
-                <label>Nombre: *</label>
+                <label>Nombre y apellido: *</label>
                 <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$postulacion->nombre ?? ''}}" required>
-            </div>
-            <div class="form-group col-lg-6">
-                <label>Apellido: *</label>
-                <input type="text" id="txtApellido" name="txtApellido" class="form-control" value="{{$postulacion->apellido ?? ''}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label>Teléfono: *</label>
@@ -56,9 +52,10 @@ if (isset($msg)) {
                 <label>Correo: *</label>
                 <input type="text" id="txtCorreo" name="txtCorreo" class="form-control" value="{{$postulacion->correo ?? ''}}" required>
             </div>
-            <div class="form-group col-lg-6 py-2">
+            <div class="form-group col-lg-6 py-4">
                 <label>Link CV: *</label>
                 <input type="file" name="fileCV" id="fileCV">
+            </div>
         </div>
     </form>
 </div>

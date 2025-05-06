@@ -12,8 +12,7 @@ class Postulacion extends Model
 
     protected $fillable = [
         'idpostulacion',
-        'nombre',
-        'apellido',
+        'nombre_comp',
         'telefono',
         'correo',
         'link_cv'
@@ -23,8 +22,7 @@ class Postulacion extends Model
     {
         $sql = "SELECT
             idpostulacion,
-            nombre,
-            apellido,
+            nombre_comp,
             telefono,
             correo,
             link_cv
@@ -37,8 +35,7 @@ class Postulacion extends Model
     {
         $sql = "SELECT
             idpostulacion,
-            nombre,
-            apellido,
+            nombre_comp,
             telefono,
             correo,
             link_cv
@@ -47,8 +44,7 @@ class Postulacion extends Model
 
         if (count($lstRetorno) > 0) {
             $this->idpostulacion = $lstRetorno[0]->idpostulacion;
-            $this->nombre = $lstRetorno[0]->nombre;
-            $this->apellido = $lstRetorno[0]->apellido;
+            $this->nombre_comp = $lstRetorno[0]->nombre_comp;
             $this->telefono = $lstRetorno[0]->telefono;
             $this->correo = $lstRetorno[0]->correo;
             $this->link_cv = $lstRetorno[0]->link_cv;
@@ -60,8 +56,7 @@ class Postulacion extends Model
     public function guardar()
     {
         $sql = "UPDATE postulaciones SET
-            nombre='$this->nombre',
-            apellido='$this->apellido',
+            nombre_comp='$this->nombre_comp',
             telefono='$this->telefono',
             correo='$this->correo',
             link_cv='$this->link_cv'
@@ -79,15 +74,13 @@ class Postulacion extends Model
     public function insertar()
     {
         $sql = "INSERT INTO postulaciones (
-            nombre,
-            apellido,
+            nombre_comp,
             telefono,
             correo,
             link_cv
             ) VALUES (?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
-            $this->nombre,
-            $this->apellido,
+            $this->nombre_comp,
             $this->telefono,
             $this->correo,
             $this->link_cv,
@@ -97,8 +90,7 @@ class Postulacion extends Model
 
     public function cargarDesdeRequest($request) { //recibe el request del formulario y lo empieza a setear en el propio objeto
         $this->idpostulacion = $request->input('id') != "0" ? $request->input('id') : $this->idpostulacion; //esto solo va en los int, si es un string o viene o queda un string vacío
-        $this->nombre = $request->input('txtNombre');
-        $this->apellido = $request->input('txtApellido');
+        $this->nombre_comp = $request->input('txtNombre');
         $this->telefono = $request->input('txtTelefono');
         $this->correo = $request->input('txtCorreo');
         //$this->link_cv = $request->input('fileCV');
@@ -107,16 +99,14 @@ class Postulacion extends Model
     public function obtenerFiltrado(){
         $request = $_REQUEST;
         $columns = array(
-            0 => 'nombre',
-            1 => 'apellido',
+            0 => 'nombre_comp',
             2 => 'telefono',
             3 => 'correo',
             4 => 'link_cv',
         );
         $sql = "SELECT DISTINCT
                     idpostulacion,
-                    nombre,
-                    apellido,
+                    nombre_comp,
                     telefono,
                     correo,
                     link_cv
@@ -126,8 +116,7 @@ class Postulacion extends Model
 
         //Realiza el filtrado
         if (!empty($request['search']['value'])) {
-            $sql .= " AND ( nombre LIKE '%" . $request['search']['value'] . "%' ";
-            $sql .= " OR apellido LIKE '%" . $request['search']['value'] . "%' ";
+            $sql .= " AND ( nombre_comp LIKE '%" . $request['search']['value'] . "%' ";
             $sql .= " OR telefono LIKE '%" . $request['search']['value'] . "%' )";
             $sql .= " OR correo LIKE '%" . $request['search']['value'] . "%' )";
             $sql .= " OR link_cv LIKE '%" . $request['search']['value'] . "%' )";

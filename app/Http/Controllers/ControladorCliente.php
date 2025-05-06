@@ -55,7 +55,7 @@ class ControladorCliente extends Controller
             $entidad->cargarDesdeRequest($request);
 
             //validaciones
-            if ($entidad->nombre == "" || $entidad->apellido == "" || $entidad->telefono == "" || $entidad->correo == "" || $entidad->dni == "" || $entidad->clave == "") {
+            if ($entidad->nombre_comp == "" || $entidad->telefono == "" || $entidad->correo == "" || $entidad->dni == "" || $entidad->clave == "") {
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = "Complete todos los datos";
             } else {
@@ -151,8 +151,7 @@ class ControladorCliente extends Controller
 
         for ($i = $inicio; $i < count($aClientes) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = "<a href='/admin/cliente/" . $aClientes[$i]->idcliente . "'>" . $aClientes[$i]->nombre . "</a>";
-            $row[] = $aClientes[$i]->apellido;
+            $row[] = "<a href='/admin/cliente/" . $aClientes[$i]->idcliente . "'>" . $aClientes[$i]->nombre_comp . "</a>";
             $row[] = $aClientes[$i]->correo;
             $row[] = $aClientes[$i]->dni;
             $row[] = $aClientes[$i]->telefono;

@@ -41,12 +41,8 @@ if (isset($msg)) {
             <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
-                <label>Nombre: *</label>
+                <label>Nombre y apellido: *</label>
                 <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$cliente->nombre}}" required>
-            </div>
-            <div class="form-group col-lg-6">
-                <label>Apellido: *</label>
-                <input type="text" id="txtApellido" name="txtApellido" class="form-control" value="{{$cliente->apellido}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label>Teléfono: *</label>

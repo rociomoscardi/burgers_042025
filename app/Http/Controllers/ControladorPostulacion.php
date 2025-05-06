@@ -55,7 +55,7 @@ class ControladorPostulacion extends Controller
             $entidad->cargarDesdeRequest($request);
 
             //validaciones
-            if ($entidad->nombre == "" || $entidad->apellido == "" || $entidad->telefono == "" || $entidad->correo == "") {
+            if ($entidad->nombre_comp == "" || $entidad->telefono == "" || $entidad->correo == "") {
                 $msg["ESTADO"] = MSG_ERROR;
                 $msg["MSG"] = "Complete todos los datos";
             } else {
@@ -144,8 +144,7 @@ class ControladorPostulacion extends Controller
 
         for ($i = $inicio; $i < count($aPostulacion) && $cont < $registros_por_pagina; $i++) {
             $row = array();
-            $row[] = "<a href='/admin/postulacion/" . $aPostulacion[$i]->idpostulacion . "'>" . $aPostulacion[$i]->nombre . "</a>";
-            $row[] = $aPostulacion[$i]->apellido;
+            $row[] = "<a href='/admin/postulacion/" . $aPostulacion[$i]->idpostulacion . "'>" . $aPostulacion[$i]->nombre_comp . "</a>";
             $row[] = $aPostulacion[$i]->telefono;
             $row[] = $aPostulacion[$i]->correo;
             $row[] = "<a href= ''> Descargar </a>";
