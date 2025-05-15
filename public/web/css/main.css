@@ -611,6 +611,11 @@ h6 {
   font-size: 13px;
 }
 
+.footer .logo img{
+  max-height: 120px;
+  margin-right: 120px;
+}
+
 /*--------------------------------------------------------------
 # Preloader
 --------------------------------------------------------------*/
@@ -769,17 +774,7 @@ section,
   position: relative;
 }
 
-.section-title h2 {
-  font-size: 13px;
-  letter-spacing: 1px;
-  font-weight: 400;
-  padding: 0;
-  margin: 0;
-  color: color-mix(in srgb, var(--default-color), transparent 50%);
-  display: inline-block;
-  text-transform: uppercase;
-  font-family: var(--default-font);
-}
+
 
 .section-title h1 {
   color: var(--heading-color);
@@ -789,8 +784,21 @@ section,
   font-family: 'Baskervville', serif;
 }
 
-.section-title h1 .description-title {
+.section-title h1 .description-title{
   color: var(--accent-color);
+  font-family: 'Baskervville', serif;
+}
+.section-title h2 {
+  color: var(--heading-color);
+  margin: 10px 0 0 0;
+  font-size: 40px;
+  font-weight: 500;
+  font-family: 'Baskervville', serif;
+}
+
+.section-title h2 .description-title{
+  color: var(--accent-color);
+  font-family: 'Baskervville', serif;
 }
 
 /*--------------------------------------------------------------
@@ -908,11 +916,10 @@ section,
 # About Section
 --------------------------------------------------------------*/
 .about h1 {
-  color: var(--accent-color);
+  color: var(--heading-color);
   font-weight: 500;
   font-size: 40px;
   margin: 0;
-  font-family: var(--nav-font);
 }
 
 .about h3 {

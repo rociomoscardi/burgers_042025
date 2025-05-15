@@ -26,7 +26,7 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <h1><span>¿Dónde</span> <span class="description-title">encontrarnos?</span></h1>
+        <h2><span>¿Dónde</span> <span class="description-title">encontrarnos?</span></h2>
       </div><!-- End Section Title -->
 
       <div class="mb-5">
@@ -43,7 +43,7 @@
               <p>{{$sucursal->direccion}}</p>
               <p>{{$sucursal->telefono}}</p>
               <p>{{$sucursal->horarios}}</p>
-              <a href="{{$sucursal->link_mapa}}" target= “_blank”> Cómo llegar </a>
+              <a href="{{$sucursal->link_mapa}}" target=“_blank”> Cómo llegar </a>
             </div>
           </div>
         </div><!-- End Info Item -->
