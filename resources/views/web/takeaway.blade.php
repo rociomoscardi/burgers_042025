@@ -1,49 +1,51 @@
 @extends("web.plantilla")
 @section("contenido")
+
 <main class="main">
     <!-- Menu Section -->
     <section id="menu" class="menu section">
 
         <!-- Section Title -->
         <div class="container section-title" data-aos="fade-up">
-            <p><span>Nuestro</span> <span class="description-title">menú</span></p>
+            <h1><span>Nuestro</span> <span class="description-title">menú</span></h1>
         </div><!-- End Section Title -->
 
         <div class="container">
-            <ul class="nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
-                <li class="nav-item">
-                    @foreach ($aCategorias as $categoria)
-                    <a class="nav-link show" data-bs-toggle="tab" data-bs-target="#{{$categoria->nombre}}">
-                        <h4>{{$categoria->nombre}}</h4>
-                    </a>
-                </li><!-- End tab nav item -->
+            <!-- CATEGORÍAS -->
+            <ul class="filters_menu nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
+                @php $first = true; @endphp
+                @foreach ($aCategorias as $categoria)
+                    <li class="nav-item">
+                        <a class="nav-link {{ $first ? 'active show' : '' }}" data-bs-toggle="tab" data-bs-target="#categoria-{{ $categoria->idtipoproducto }}">
+                            <h4>{{ $categoria->nombre }}</h4>
+                        </a>
+                    </li>
+                    @php $first = false; @endphp
                 @endforeach
             </ul>
 
+            <!-- CONTENIDO DE PRODUCTOS -->
             <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
-          
-                <div class="tab-pane fade active show" id="{{$categoria->nombre}}">
-
-                    <div class="tab-header text-center">
+                @php $first = true; @endphp
+                @foreach ($aCategorias as $categoria)
+                    <div class="tab-pane fade {{ $first ? 'active show' : '' }}" id="categoria-{{ $categoria->idtipoproducto }}">
+                        <div class="row gy-5">
+                            @foreach ($aProductos as $producto)
+                                @if ($producto->fk_idtipoproducto == $categoria->idtipoproducto)
+                                    <div class="col-3 menu-item">
+                                        <a href="{{ $producto->imagen }}" class="glightbox">
+                                            <img src="{{ $producto->imagen }}" class="menu-img img-fluid" alt="">
+                                        </a>
+                                        <h4>{{ $producto->titulo }}</h4>
+                                        <p class="ingredients">{{ $producto->descripcion }}</p>
+                                        <p class="price">${{ $producto->precio }}</p>
+                                    </div>
+                                @endif
+                            @endforeach
+                        </div>
                     </div>
-
-                    <div class="row gy-5">
-                        @foreach ($aProductos as $producto)
-                        <div class="col-3 menu-item $categoria->nombre">
-                            <a href="web/img/menu/menu-item-1.png" class="glightbox"><img src="web/img/menu/menu-item-1.png" class="menu-img img-fluid" alt=""></a>
-                            <h4>{{$producto->titulo}}</h4>
-                            <p class="ingredients">
-                                {{$producto->descripcion}}
-                            </p>
-                            <p class="price">
-                                {{$producto->precio}}
-                            </p>
-                        </div><!-- Menu Item -->
-                        @endforeach
-                    </div>
-                    
-                </div><!-- End Starter Menu Content -->
-
+                    @php $first = false; @endphp
+                @endforeach
             </div>
 
         </div>

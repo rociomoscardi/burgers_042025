@@ -26,7 +26,7 @@
 
       <!-- Section Title -->
       <div class="container section-title" data-aos="fade-up">
-        <p><span>¿Dónde</span> <span class="description-title">encontrarnos?</span></p>
+        <h1><span>¿Dónde</span> <span class="description-title">encontrarnos?</span></h1>
       </div><!-- End Section Title -->
 
       <div class="mb-5">

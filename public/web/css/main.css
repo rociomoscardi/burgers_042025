@@ -781,15 +781,15 @@ section,
   font-family: var(--default-font);
 }
 
-.section-title p {
+.section-title h1 {
   color: var(--heading-color);
   margin: 10px 0 0 0;
   font-size: 40px;
   font-weight: 500;
-  font-family: var(--nav-font);
+  font-family: 'Baskervville', serif;
 }
 
-.section-title p .description-title {
+.section-title h1 .description-title {
   color: var(--accent-color);
 }
 
@@ -1195,6 +1195,7 @@ section,
   font-family: var(--nav-font);
   color: color-mix(in srgb, var(--default-color), transparent 50%);
   margin-bottom: 5px;
+  text-align: center;
 }
 
 .menu .tab-content .menu-item .price {
