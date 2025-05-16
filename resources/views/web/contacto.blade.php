@@ -5,33 +5,34 @@
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p><span>Need Help?</span> <span class="description-title">Contact Us</span></p>
+        <h1> <span class="description-title">Contactanos</span></h1>
     </div><!-- End Section Title -->
 
-    <form action="forms/contact.php" method="post" class="php-email-form container" data-aos="fade-up" data-aos-delay="600">
-        <div class="row gy-4">
-            <div class="col-md-6">
-                <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
-            </div>
-            <div class="col-md-6 ">
-                <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
-            </div>
-            <div class="col-md-12">
-                <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
-            </div>
-            <div class="col-md-12">
-                <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
-            </div>
-            <div class="col-md-12 text-center">
-                <div class="loading">Loading</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Your message has been sent. Thank you!</div>
+    <div class="container">
+        <form action="forms/contact.php" method="post" class="" data-aos="fade-up" data-aos-delay="600">
+            <div class="row gy-4">
+                <div class="col-md-6">
+                    <label for="txtNombre">Nombre: *</label>
+                    <input type="text" name="txtNombre" id="txtNombre" class="form-control" required="">
+                </div>
+                <div class="col-md-6 ">
+                    <label for="txtCorreo">Correo: *</label>
+                    <input type="txtCorreo" class="form-control" name="txtCorreo" required="">
+                </div>
+                <div class="col-md-12">
+                    <label for="txtTelefono">Teléfono: *</label>
+                    <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" required="">
+                </div>
+                <div class="col-md-12">
+                    <label for="txtMensaje">Mensaje: *</label>
+                    <textarea class="form-control" name="txtMensaje" id="txtMensaje" rows="6" required=""></textarea>
+                </div>
+                <div class="col-md-12 text-center">
+                    <button type="submit">Enviar</button>
+                </div>
 
-                <button type="submit">Send Message</button>
             </div>
-
-        </div>
-    </form><!-- End Contact Form -->
+        </form><!-- End Contact Form -->
+    </div>
 </section>
 @endsection

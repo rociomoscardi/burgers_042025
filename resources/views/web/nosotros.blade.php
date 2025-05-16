@@ -18,8 +18,7 @@
         <div class="col-lg-5" data-aos="fade-up" data-aos-delay="250">
           <div class="content ps-0 ps-lg-5">
             <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+              En Lucy’s Burgers creemos que no hay nada más lindo que compartir una buena hamburguesa. Nacimos del amor por lo simple, lo casero y lo rico: recetas que abrazan, sabores que invitan a quedarte y un ambiente donde siempre sos bienvenido. Detrás del nombre está Lucy, nuestra gatita mimada y la inspiración de cada mordida feliz. ¡Pasá cuando quieras, siempre hay algo rico esperándote!
             </p>
             <ul>
               <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
@@ -177,22 +176,29 @@
     </div><!-- End Section Title -->
 
     <div class="container">
-      <form action="" method="post" enctype="multipart/form-data">
-        <div class="row">
-          <div class="col-12 col-sm-6 form-group">
-            <label for="txtCorreo">Correo*:</label>
-            <input type="email" name="txtCorreo" id="txtCorreo" class="form-control" required>
+      <form action="" method="post" class="php-email-form container" data-aos="fade-up" data-aos-delay="600">
+        <div class="row gy-4">
+          <div class="col-md-6">
+            <label for="txtCorreo">Correo: *</label>
+            <input type="email" name="txtCorreo" id="txtCorreo" class="form-control" required="">
+          </div>
+          <div class="col-md-6 ">
+            <label for="txtNombre">Nombre y apellido: *</label>
+            <input type="text" name="txtNombre" id="txtNombre" class="form-control" required="">
+          </div>
+          <div class="col-md-6">
+            <label for="txtTelefono">Teléfono: *</label>
+            <input type="text" name="txtTelefono" id="txtTelefono" class="form-control" required="">
+          </div>
+          <div class="col-md-6">
+            <label>CV: * <small>(.pdf, .doc, .docx)</small></label><br>
+            <input type="file" name="fileCV" id="fileCV" class="form-control">
+          </div>
+          <div class="col-md-12 py-3 text-center">
+            <button type="submit">Enviar</button>
           </div>
         </div>
-          <div class="col-12 col-sm-6 form-group">
-            <label for="txtNombre">Nombre completo*:</label>
-            <input type="text" name="txtNombre" id="txtNombre" class="form-control" required>
-          </div>
-        </div>
-      </form>
-    </div>
-
-
+      </form><!-- End Contact Form -->
   </section>
 
 </main>

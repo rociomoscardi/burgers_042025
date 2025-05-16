@@ -79,7 +79,6 @@
         </div>
 
         <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-envelope icon"></i>
           <div>
             <h4>Contactanos</h4>
             <p>
