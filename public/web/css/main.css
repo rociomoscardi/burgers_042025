@@ -766,7 +766,7 @@ section,
 .section {
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 60px 0;
+  padding: 30px 0;
   scroll-margin-top: 92px;
   overflow: clip;
 }
@@ -1020,14 +1020,26 @@ section,
 
 .gracias img {
   max-height: 500px;
-  margin-right: 500px;
-  border-radius: 50px;
-  margin-left: 50px;
+  border-radius: 10px;
+  margin-left: 200px;
 }
 
 .gracias span {
   color: var(--accent-color);
   font-family: 'Baskervville', serif;
+}
+
+@media (max-width: 1024px) {
+  .gracias img {
+    margin-left: 15px;
+  }
+
+  .gracias p {
+    font-family: 'Baskervville', serif;
+    font-weight: 500;
+    font-size: 40px;
+    margin-top: 0px;
+  }
 }
 
 /*--------------------------------------------------------------
