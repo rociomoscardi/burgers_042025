@@ -1021,7 +1021,7 @@ section,
 .gracias img {
   max-height: 500px;
   border-radius: 10px;
-  margin-left: 200px;
+  margin-left: 100px;
 }
 
 .gracias span {
@@ -1031,7 +1031,8 @@ section,
 
 @media (max-width: 1024px) {
   .gracias img {
-    margin-left: 15px;
+    margin-left: 8px;
+    max-height: 350px;
   }
 
   .gracias p {
@@ -1268,10 +1269,33 @@ section,
   text-align: center;
 }
 
+.menu .tab-content .menu-item .cantidad {
+  font-family: var(--nav-font);
+  font-size: 19px;
+  color: #212529;
+  text-align: center;
+  margin-top: 5px;
+  margin-right: 50px;
+}
+
 .menu .tab-content .menu-item .price {
   font-size: 24px;
   font-weight: 700;
   color: var(--accent-color);
+}
+
+.menu button[type=submit] {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  border: 0;
+  padding: 7px 20px;
+  transition: 0.4s;
+  border-radius: 50px;
+  margin-left: 20px;
+}
+
+.menu button[type=submit]:hover {
+  background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
 
 /*--------------------------------------------------------------
@@ -1693,7 +1717,7 @@ section,
   color: var(--accent-color);
 }
 
-@media (max-width: 575px) {
+@media (max-width: 1024px) {
   .contact .php-email-form {
     padding: 20px;
   }
@@ -1739,6 +1763,97 @@ section,
 .contact label {
   font-family: var(--nav-font);
 }
+
+/*--------------------------------------------------------------
+Registrarse Section, Mi Cuenta Section
+--------------------------------------------------------------*/
+
+.registrarse {
+  background-color: var(--surface-color);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+  padding: 20px 30px;
+}
+
+.registrarse .info-item .icon {
+  color: var(--contrast-color);
+  background-color: var(--accent-color);
+  width: 56px;
+  height: 56px;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  border-radius: 50%;
+  margin-right: 15px;
+}
+
+.registrarse .info-item h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin: 0 0 5px 0;
+  font-family: var(--default-font);
+  color: color-mix(in srgb, var(--default-color), transparent 30%);
+}
+
+.registrarse .info-item p {
+  padding: 0;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.registrarse .info-item .social-links a {
+  font-size: 24px;
+  display: inline-block;
+  line-height: 1;
+  margin: 4px 6px 0 0;
+  transition: 0.3s;
+  color: color-mix(in srgb, var(--default-color), transparent 50%);
+}
+
+.registrarse .info-item .social-links a:hover {
+  color: var(--accent-color);
+}
+
+@media (max-width: 575px) {
+  .registrarse .php-email-form {
+    padding: 20px;
+  }
+}
+
+.registrarse .php-email-form input[type=text],
+.registrarse .php-email-form input[type=email],
+.registrarse .php-email-form textarea {
+  color: var(--default-color);
+  background-color: color-mix(in srgb, var(--surface-color), transparent 50%);
+  border-color: color-mix(in srgb, var(--default-color), transparent 80%);
+  font-size: 14px;
+  padding: 10px 15px;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.mi-cuenta button[type=submit],
+.registrarse button[type=submit] {
+  color: var(--contrast-color);
+  background: var(--accent-color);
+  border: 0;
+  padding: 10px 30px;
+  transition: 0.4s;
+  border-radius: 50px;
+}
+
+.mi-cuenta button[type=submit]:hover,
+.registrarse button[type=submit]:hover {
+  background: color-mix(in srgb, var(--accent-color), transparent 20%);
+}
+
+.mi-cuenta label,
+.mi-cuenta table,
+.registrarse label {
+  font-family: var(--nav-font);
+}
+
 
 /*--------------------------------------------------------------
 # Starter Section Section

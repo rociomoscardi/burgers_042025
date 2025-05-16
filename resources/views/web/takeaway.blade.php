@@ -39,6 +39,14 @@
                                         <h4>{{ $producto->titulo }}</h4>
                                         <p class="ingredients">{{ $producto->descripcion }}</p>
                                         <p class="price">${{ $producto->precio }}</p>
+                                        <div class="row">
+                                            <div class="col-2 offset-2">
+                                                <button type="submit"><i class="bi bi-cart4"></i></button>
+                                            </div>
+                                            <div class="col-2 offset-3">
+                                                <p class="cantidad">{{ $producto->cantidad }}</p>
+                                            </div>
+                                        </div>
                                     </div>
                                 @endif
                             @endforeach
