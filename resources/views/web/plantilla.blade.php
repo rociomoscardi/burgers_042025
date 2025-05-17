@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - Lucy's Burgers</title>
+  <title>Lucy's Burgers</title>
   <meta name="description" content="Disfrutamos de brindar una experiencia gastronómica única, donde calidad, ambiente y servicio se unen. Gracias a nuestros clientes, hoy seguimos creciendo...">
   <meta name="keywords" content="">
 

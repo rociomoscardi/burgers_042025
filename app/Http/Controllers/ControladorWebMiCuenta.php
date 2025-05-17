@@ -43,7 +43,7 @@ class ControladorWebMiCuenta extends Controller
                 }
 
                 $_POST["id"] = $entidad->idcliente;
-                return view('web.mi-cuenta', compact('titulo', 'msg'));
+                return view('web.mi-cuenta', compact('msg'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;
@@ -54,6 +54,6 @@ class ControladorWebMiCuenta extends Controller
         $cliente = new Cliente();
         $cliente->obtenerPorId($id);
 
-        return view('web.mi-cuenta', compact('msg', 'cliente', 'titulo')) . '?id=' . $cliente->idcliente;
+        return view('web.mi-cuenta', compact('msg', 'cliente')) . '?id=' . $cliente->idcliente;
     } //esto recibe los valores del formulario
 }

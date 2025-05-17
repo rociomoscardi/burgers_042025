@@ -1,5 +1,18 @@
 @extends("web.plantilla")
+@section('scripts')
+<script>
+    globalId = '<?php echo isset($cliente->idcliente) && $cliente->idcliente > 0 ? $cliente->idcliente : 0; ?>';
+    <?php $globalId = isset($cliente->idcliente) ? $cliente->idcliente : "0"; ?>
+</script>
+@endsection
 @section("contenido")
+<?php
+if (isset($msg)) {
+    echo '<div id = "msg"></div>';
+    echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
+}
+?>
+<div id = "msg"></div>
 <!-- Contact Section -->
 <section id="mi-cuenta" class="mi-cuenta section">
 
@@ -9,9 +22,10 @@
     </div><!-- End Section Title -->
 
     <div class="container">
-        <form action="" method="post" class="" data-aos="fade-up" data-aos-delay="600">
+        <form action="" method="post" data-aos="fade-up" data-aos-delay="600">
             <div class="row gy-4">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
                 <div class="col-md-6">
                     <label for="txtNombre">Nombre completo: *</label>
                     <input type="text" name="txtNombre" id="txtNombre" class="form-control" value="{{$cliente->nombre_comp}}" required="">
