@@ -784,11 +784,9 @@ section,
 --------------------------------------------------------------*/
 .section-title {
   text-align: center;
-  padding-bottom: 60px;
+  padding-bottom: 40px;
   position: relative;
 }
-
-
 
 .section-title h1 {
   color: var(--heading-color);
@@ -1855,6 +1853,10 @@ Registrarse Section, Mi Cuenta Section
   font-family: var(--nav-font);
 }
 
+.mi-cuenta input[type=text],
+.mi-cuenta input[type=email] {
+  font-family: var(--nav-font);
+}
 
 /*--------------------------------------------------------------
 # Starter Section Section

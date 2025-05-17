@@ -11,6 +11,7 @@
     <div class="container">
         <form action="" method="post" class="" data-aos="fade-up" data-aos-delay="600">
             <div class="row gy-4">
+                <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <div class="col-md-6">
                     <label for="txtNombre">Nombre completo: *</label>
                     <input type="text" name="txtNombre" id="txtNombre" class="form-control" required="">
@@ -28,7 +29,7 @@
                     <input type="text" class="form-control" name="txtDni" id="txtDni" required="">
                 </div>
                 <div class="col-md-6">
-                    <label for="txtMensaje">Clave: *</label>
+                    <label for="txtMensaje">Contraseña: *</label>
                     <input type="password" class="form-control" name="txtClave" id="txtClave" required="">
                 </div>
                 <div class="col-md-12 text-center py-3">

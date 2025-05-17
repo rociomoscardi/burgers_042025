@@ -4,13 +4,13 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - Yummy Bootstrap Template</title>
+  <title>Index - Lucy's Burgers</title>
   <meta name="description" content="Disfrutamos de brindar una experiencia gastronómica única, donde calidad, ambiente y servicio se unen. Gracias a nuestros clientes, hoy seguimos creciendo...">
   <meta name="keywords" content="">
 
   <!-- Favicons -->
-  <link href="web/img/favicon.png" rel="icon">
-  <link href="web/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="web/img/logo-img-1.png" rel="icon">
+  <link href="web/img/logo-img-1.png" rel="apple-touch-icon">
 
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">

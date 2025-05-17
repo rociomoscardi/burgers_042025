@@ -2,10 +2,35 @@
 
 namespace App\Http\Controllers;
 
+use App\Entidades\Cliente;
+use Illuminate\Http\Client\Request;
+
 class ControladorWebRegistrarse extends Controller
 {
     public function index()
     {
-            return view("web.registrarse");
+        return view("web.registrarse");
+    }
+
+    public function registrarse(Request $request)
+    {
+        $titulo = "Nuevo registro";
+        $entidad = new Cliente();
+        $entidad->nombre = $request->input("txtNombre");
+        $entidad->correo = $request->input("txtCorreo");
+        $entidad->telefono = $request->input("txtTelefono");
+        $entidad->dni = $request->input("txtDni");
+        $entidad->clave = password_hash($request->input("txtClave"), PASSWORD_DEFAULT);
+
+        if ($entidad->nombre_comp == "" || $entidad->correo == "" || $entidad->telefono == "" || $entidad->dni == "" || $entidad->clave == "") {
+            $msg["ESTADO"] = MSG_ERROR;
+            $msg["MSG"] = "Complete todos los datos.";
+        } else {
+            $entidad->guardar();
+            $msg["ESTADO"] = MSG_SUCCESS;
+            $msg["MSG"] = "Registro exitoso.";
+
+            return view('web.index');
+        }
     }
 }

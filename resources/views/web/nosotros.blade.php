@@ -178,6 +178,7 @@
     <div class="container">
       <form action="" method="post" class="php-email-form container" data-aos="fade-up" data-aos-delay="600">
         <div class="row gy-4">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
           <div class="col-md-6">
             <label for="txtCorreo">Correo: *</label>
             <input type="email" name="txtCorreo" id="txtCorreo" class="form-control" required="">
