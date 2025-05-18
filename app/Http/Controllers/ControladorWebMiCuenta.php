@@ -2,18 +2,22 @@
 
 namespace App\Http\Controllers;
 use App\Entidades\Cliente;
+use App\Entidades\Sucursal;
 use Illuminate\Http\Request;
+use Session;
 use Exception;
 require app_path() . '/start/constants.php';
 
 class ControladorWebMiCuenta extends Controller
 {
     public function index()
-    {
-        $idCliente = 6;
+    {   
         $cliente = new Cliente();
+        $idCliente = Session::get("idCliente");
         $cliente->obtenerPorId($idCliente);
-        return view("web.mi-cuenta", compact("cliente"));
+        $sucursal = new Sucursal();
+        $aSucursales = $sucursal->obtenerTodos();
+        return view("web.mi-cuenta", compact("cliente", "aSucursales"));
     }
 
     public function guardar(Request $request){
@@ -43,7 +47,7 @@ class ControladorWebMiCuenta extends Controller
                 }
 
                 $_POST["id"] = $entidad->idcliente;
-                return view('web.mi-cuenta', compact('msg'));
+                return view('web.index', compact('msg'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;

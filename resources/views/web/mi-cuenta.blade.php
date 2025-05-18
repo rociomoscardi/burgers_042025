@@ -12,7 +12,7 @@ if (isset($msg)) {
     echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
-<div id = "msg"></div>
+<div id="msg"></div>
 <!-- Contact Section -->
 <section id="mi-cuenta" class="mi-cuenta section">
 
@@ -22,7 +22,7 @@ if (isset($msg)) {
     </div><!-- End Section Title -->
 
     <div class="container">
-        <form action="" method="post" data-aos="fade-up" data-aos-delay="600">
+        <form id="form1" action="" method="post" data-aos="fade-up" data-aos-delay="600">
             <div class="row gy-4">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
@@ -68,4 +68,19 @@ if (isset($msg)) {
         </div>
     </div>
 </section>
+<script>
+    //agarra el modal de boostrap y genera el submit cuando se pudo que sí.
+    $("#form1").validate();
+
+    function guardar() {
+        if ($("#form1").valid()) {
+            modificado = false;
+            form1.submit();
+        } else {
+            $("#modalGuardar").modal('toggle');
+            msgShow("Corrija los errores e intente nuevamente.", "danger");
+            return false;
+        }
+    }
+</script>
 @endsection
