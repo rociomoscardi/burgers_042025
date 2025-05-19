@@ -17,16 +17,16 @@
                     <input type="text" name="txtNombre" id="txtNombre" class="form-control" required="">
                 </div>
                 <div class="col-md-6 ">
-                    <label for="txtCorreo">Correo: *</label>
-                    <input type="txtCorreo" class="form-control" name="txtCorreo" required="">
+                    <label for="txtDni">DNI: *</label>
+                    <input type="text" class="form-control" name="txtDni" id="txtDni" required="">
                 </div>
                 <div class="col-md-6">
                     <label for="txtTelefono">Teléfono: *</label>
                     <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" required="">
                 </div>
                 <div class="col-md-6">
-                    <label for="txtMensaje">DNI: *</label>
-                    <input type="text" class="form-control" name="txtDni" id="txtDni" required="">
+                    <label for="txtCorreo">Correo: *</label>
+                    <input type="email" class="form-control" name="txtCorreo" id="txtCorreo" required="">
                 </div>
                 <div class="col-md-6">
                     <label for="txtMensaje">Contraseña: *</label>

@@ -42,7 +42,7 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Nombre y apellido: *</label>
-                <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$cliente->nombre}}" required>
+                <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$cliente->nombre_comp}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label>Teléfono: *</label>
@@ -58,7 +58,7 @@ if (isset($msg)) {
             </div>
             <div class="form-group col-lg-6">
                 <label>Clave: *</label>
-                <input type="password" id="txtClave" name="txtClave" class="form-control" value="" required>
+                <input type="password" id="txtClave" name="txtClave" class="form-control" value="{{$cliente->clave}}" required>
             </div>
         </div>
     </form>

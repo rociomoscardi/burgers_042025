@@ -63,9 +63,9 @@ if (isset($msg)) {
                     <option selected disabled value="">Seleccionar</option>
                     @foreach ($aClientes as $cliente)
                     @if (isset($pedido->fk_idcliente) && $pedido->fk_idcliente == $cliente->idcliente)
-                    <option selected value="{{ $cliente->idcliente }}">{{ $cliente->apellido }}</option>
+                    <option selected value="{{ $cliente->idcliente }}">{{ $cliente->nombre_comp }}</option>
                     @else
-                    <option value="{{ $cliente->idcliente }}">{{ $cliente->apellido }}</option>
+                    <option value="{{ $cliente->idcliente }}">{{ $cliente->nombre_comp }}</option>
                     @endif
                     @endforeach
                 </select>

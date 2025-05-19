@@ -63,7 +63,7 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
-      <a class="btn-getstarted" href="index.html#book-a-table">Ingresar</a>
+      <a class="btn-getstarted" href="/login">Ingresar</a>
 
     </div>
   </header>
@@ -82,7 +82,7 @@
           <div>
             <h4>Contactanos</h4>
             <p>
-              <strong>Email:</strong><br><a href="mailto:lucysburgers@gmail.com">lucysburgers@gmail.com</a>
+              <strong>Email:</strong><br><a href="mailto:lucysburgers@gmail.com">info@lucysburgers.com</a>
             </p>
           </div>
         </div>

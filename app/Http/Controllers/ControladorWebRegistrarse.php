@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Entidades\Cliente;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
+require app_path() . '/start/constants.php';
+
 
 class ControladorWebRegistrarse extends Controller
 {
@@ -14,7 +16,6 @@ class ControladorWebRegistrarse extends Controller
 
     public function registrarse(Request $request)
     {
-        $titulo = "Nuevo registro";
         $entidad = new Cliente();
         $entidad->nombre = $request->input("txtNombre");
         $entidad->correo = $request->input("txtCorreo");
@@ -29,8 +30,7 @@ class ControladorWebRegistrarse extends Controller
             $entidad->guardar();
             $msg["ESTADO"] = MSG_SUCCESS;
             $msg["MSG"] = "Registro exitoso.";
-
-            return view('web.index');
         }
+         return view('web.registrarse', compact('msg'));
     }
 }

@@ -28,7 +28,7 @@ class Cliente extends Model
                     correo,
                     dni,
                     clave
-                  FROM clientes ORDER BY nombre ASC";
+                  FROM clientes ORDER BY nombre_comp ASC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -57,10 +57,34 @@ class Cliente extends Model
         return null;
     }
 
+    public function obtenerPorCorreo($correo)
+    {
+        $sql = "SELECT
+                idcliente,
+                nombre_comp,
+                telefono,
+                correo,
+                dni,
+                clave
+                FROM clientes WHERE correo = '$correo'";
+        $lstRetorno = DB::select($sql);
+
+        if (count($lstRetorno) > 0) {
+            $this->idcliente = $lstRetorno[0]->idcliente;
+            $this->nombre_comp = $lstRetorno[0]->nombre_comp;
+            $this->telefono = $lstRetorno[0]->telefono;
+            $this->correo = $lstRetorno[0]->correo;
+            $this->dni = $lstRetorno[0]->dni;
+            $this->clave = $lstRetorno[0]->clave;
+            return $this;
+        }
+        return null;
+    }
+
     public function guardar()
     {
         $sql = "UPDATE clientes SET
-            nombre='$this->nombre_comp',
+            nombre_comp='$this->nombre_comp',
             telefono='$this->telefono',
             correo='$this->correo',
             dni='$this->dni',
@@ -84,7 +108,7 @@ class Cliente extends Model
                 correo,
                 dni,
                 clave
-            ) VALUES (?, ?, ?, ?, ?, ?);";
+            ) VALUES (?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->nombre_comp,
             $this->telefono,
@@ -108,10 +132,9 @@ class Cliente extends Model
         $request = $_REQUEST;
         $columns = array(
             0 => 'nombre_comp',
-            1 => 'apellido',
-            2 => 'correo',
-            3 => 'dni',
-            4 => 'telefono',
+            1 => 'correo',
+            2 => 'dni',
+            3 => 'telefono',
         );
         $sql = "SELECT DISTINCT
                     idcliente,
