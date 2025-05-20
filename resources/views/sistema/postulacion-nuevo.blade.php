@@ -42,7 +42,7 @@ if (isset($msg)) {
             <input type="hidden" id="id" name="id" class="form-control" value="{{$globalId}}" required>
             <div class="form-group col-lg-6">
                 <label>Nombre y apellido: *</label>
-                <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$postulacion->nombre ?? ''}}" required>
+                <input type="text" id="txtNombre" name="txtNombre" class="form-control" value="{{$postulacion->nombre_comp ?? ''}}" required>
             </div>
             <div class="form-group col-lg-6">
                 <label>Teléfono: *</label>

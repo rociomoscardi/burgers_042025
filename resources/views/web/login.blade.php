@@ -1,7 +1,7 @@
 @extends("web.plantilla")
 @section("contenido")
 <!-- Contact Section -->
-<section id="registrarse" class="registrarse section">
+<section id="login" class="login section">
 
     <!-- Section Title -->
     <div class="container section-title" data-aos="fade-up">

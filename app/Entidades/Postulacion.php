@@ -26,7 +26,7 @@ class Postulacion extends Model
             telefono,
             correo,
             link_cv
-            FROM postulaciones ORDER BY nombre ASC";
+            FROM postulaciones ORDER BY nombre_comp ASC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }

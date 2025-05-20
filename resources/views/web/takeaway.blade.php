@@ -32,7 +32,7 @@
                         <div class="row gy-5">
                             @foreach ($aProductos as $producto)
                                 @if ($producto->fk_idtipoproducto == $categoria->idtipoproducto)
-                                    <div class="col-3 menu-item">
+                                    <div class="col-sm-3 col-12 menu-item">
                                         <a href="{{ $producto->imagen }}" class="glightbox">
                                             <img src="{{ $producto->imagen }}" class="menu-img img-fluid" alt="">
                                         </a>
@@ -40,11 +40,11 @@
                                         <p class="ingredients">{{ $producto->descripcion }}</p>
                                         <p class="price">${{ $producto->precio }}</p>
                                         <div class="row">
-                                            <div class="col-2 offset-2">
+                                            <div class="col-sm-2 col-2 offset-sm-2 offset-2">
                                                 <button type="submit"><i class="bi bi-cart4"></i></button>
                                             </div>
-                                            <div class="col-2 offset-3">
-                                                <p class="cantidad">{{ $producto->cantidad }}</p>
+                                            <div class="col-sm-3 col-3 offset-sm-2 offset-2">
+                                                <input type="number" name="txtCantidad" id="txtCantidad" class="form-control">
                                             </div>
                                         </div>
                                     </div>

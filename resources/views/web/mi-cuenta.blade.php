@@ -6,12 +6,6 @@
 </script>
 @endsection
 @section("contenido")
-<?php
-if (isset($msg)) {
-    echo '<div id = "msg"></div>';
-    echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
-}
-?>
 <div id="msg"></div>
 <!-- Contact Section -->
 <section id="mi-cuenta" class="mi-cuenta section">
@@ -68,19 +62,4 @@ if (isset($msg)) {
         </div>
     </div>
 </section>
-<script>
-    //agarra el modal de boostrap y genera el submit cuando se pudo que sí.
-    $("#form1").validate();
-
-    function guardar() {
-        if ($("#form1").valid()) {
-            modificado = false;
-            form1.submit();
-        } else {
-            $("#modalGuardar").modal('toggle');
-            msgShow("Corrija los errores e intente nuevamente.", "danger");
-            return false;
-        }
-    }
-</script>
 @endsection
