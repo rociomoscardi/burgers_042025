@@ -118,12 +118,14 @@ class Producto extends Model
             0 => 'P.titulo',
             1 => 'C.nombre',
             2 => 'P.precio',
+            3 => 'P.imagen',
         );
         $sql = "SELECT DISTINCT
                     idproducto,
                     titulo,
                     C.nombre as tipo,
-                    precio
+                    precio,
+                    imagen
                     FROM productos P
                     LEFT JOIN tipo_productos C ON C.idtipoproducto = P.fk_idtipoproducto
                 WHERE 1=1
@@ -133,7 +135,8 @@ class Producto extends Model
         if (!empty($request['search']['value'])) {
             $sql .= " AND ( P.titulo LIKE '%" . $request['search']['value'] . "%' ";
             $sql .= " OR C.nombre LIKE '%" . $request['search']['value'] . "%' ";
-            $sql .= " OR P.Precio LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.precio LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.imagen LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
 

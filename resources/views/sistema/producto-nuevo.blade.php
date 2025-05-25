@@ -73,6 +73,7 @@ if (isset($msg)) {
             <div class="form-group col-lg-6">
                 <label for="archivo">Imagen:</label><br>
                 <input type="file" name="archivo" id="archivo">
+                <img src="" alt="">
             </div>
         </div>
     </form>

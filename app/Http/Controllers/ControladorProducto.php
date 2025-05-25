@@ -55,6 +55,14 @@ class ControladorProducto extends Controller
             $titulo = "Modificar producto";
             $entidad = new Producto();
             $entidad->cargarDesdeRequest($request);
+            
+            if ($_FILES["archivo"]["error"] === UPLOAD_ERR_OK) { //Se adjunta imagen
+              $extension = pathinfo($_FILES["archivo"]["name"], PATHINFO_EXTENSION);
+               $nombre = date("Ymdhmsi") . ".$extension";
+               $archivo = $_FILES["archivo"]["tmp_name"];
+               move_uploaded_file($archivo, env('APP_PATH') . "/public/files/$nombre"); //guardaelarchivo
+               $entidad->imagen = $nombre;
+           }
 
             //validaciones
             if ($entidad->titulo == "" || $entidad->descripcion == "" || $entidad->precio == "" || $entidad->cantidad == "" || $entidad->fk_idtipoproducto == "") {
@@ -63,6 +71,16 @@ class ControladorProducto extends Controller
             } else {
                 if ($_POST["id"] > 0) {
                     //Es actualizacion
+                    
+                    $productAnt = new Producto();
+                    $productAnt->obtenerPorId($entidad->idproducto);
+
+                    if($_FILES["archivo"]["error"] === UPLOAD_ERR_OK){
+                        //Eliminar imagen anterior
+                        @unlink(env('APP_PATH') . "/public/files/$productAnt->imagen");                          
+                    } else {
+                        $entidad->imagen = $productAnt->imagen;
+                    }
                     $entidad->guardar();
 
                     $msg["ESTADO"] = MSG_SUCCESS;
@@ -151,6 +169,7 @@ class ControladorProducto extends Controller
             $row[] = "<a href='/admin/producto/" . $aProductos[$i]->idproducto . "'>" . $aProductos[$i]->titulo . "</a>";
             $row[] = $aProductos[$i]->tipo;
             $row[] = $aProductos[$i]->precio;
+            $row[] = "<img class='img-thumbnail' src='/files/" . $aProductos[$i]->imagen . " '>";
             $cont++;
             $data[] = $row;
         }
