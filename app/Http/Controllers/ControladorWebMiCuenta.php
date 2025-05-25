@@ -6,6 +6,8 @@ use App\Entidades\Sucursal;
 use Illuminate\Http\Request;
 use Session;
 use Exception;
+use Illuminate\Contracts\Session\Session as SessionSession;
+
 require app_path() . '/start/constants.php';
 
 class ControladorWebMiCuenta extends Controller
