@@ -1833,6 +1833,7 @@ Registrarse Section, Mi Cuenta Section
 }
 
 .mi-cuenta button[type=submit],
+.login button[type=submit],
 .registrarse button[type=submit] {
   color: var(--contrast-color);
   background: var(--accent-color);
@@ -1843,6 +1844,7 @@ Registrarse Section, Mi Cuenta Section
 }
 
 .mi-cuenta button[type=submit]:hover,
+.login button[type=submit]:hover,
 .registrarse button[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }

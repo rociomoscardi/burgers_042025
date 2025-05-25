@@ -63,7 +63,11 @@
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
       </nav>
 
+      @if (Session::get("idCliente") && Session::get("idCliente") > 0)
+      <a class="btn-getstarted" href="/logout">Cerrar sesión</a>
+      @else
       <a class="btn-getstarted" href="/login">Ingresar</a>
+      @endif
 
     </div>
   </header>
@@ -134,7 +138,7 @@
     });
   </script>
 
-@yield('scripts')
+  @yield('scripts')
 
 </body>
 
