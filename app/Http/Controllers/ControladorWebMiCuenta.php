@@ -23,7 +23,6 @@ class ControladorWebMiCuenta extends Controller
     public function guardar(Request $request){
         try {
             //Define la entidad servicio
-            $titulo = "Modificar cliente";
             $entidad = new Cliente();
             $entidad->cargarDesdeRequest($request);
 
@@ -47,7 +46,7 @@ class ControladorWebMiCuenta extends Controller
                 }
 
                 $_POST["id"] = $entidad->idcliente;
-                return view('web.index', compact('msg'));
+                return view('web.index', compact('msg', 'aSucursales'));
             }
         } catch (Exception $e) {
             $msg["ESTADO"] = MSG_ERROR;

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Entidades\Cliente;
 use App\Entidades\Sucursal;
 use Illuminate\Http\Request;
-
+use Session;
 
 
 class ControladorWebLogin extends Controller
@@ -27,6 +27,7 @@ class ControladorWebLogin extends Controller
         $cliente->obtenerPorCorreo($correo);
         if ($cliente->correo != "") {
             if (password_verify($clave, $cliente->clave)) {
+                Session::put('idCliente', $cliente->idcliente);
                 return view('web.index', compact('aSucursales'));
             } else {
                 $mensaje = "Correo o contraseña incorrecto.";
