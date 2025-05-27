@@ -11,21 +11,22 @@ class ControladorWebContacto extends Controller
 {
     public function index()
     {
-            return view("web.contacto");
+        return view("web.contacto");
     }
 
-    public function enviar(Request $request){
+    public function enviar(Request $request)
+    {
 
         $correo = $request->input("txtCorreo");
 
         $cliente = new Cliente();
         $cliente->obtenerPorCorreo($correo);
         if ($cliente->correo != "") {
-            
+
             //$data = "Instrucciones";
 
             $mail = new PHPMailer(true);
-            try{
+            try {
                 //Server settings
                 $mail->SMTPDebug = 0;
                 $mail->isSMTP();
@@ -47,17 +48,19 @@ class ControladorWebContacto extends Controller
                     <strong>Cliente:</strong> {$cliente->nombre_comp}<br>
                     <strong>Correo:</strong> {$cliente->correo}<br>
                     <strong>Teléfono:</strong> {$cliente->telefono}<br>
-                    <strong>Mensaje:</strong> {txtMensaje}
+                    <strong>Mensaje:</strong> {$request->input('txtMensaje')}
                 ";
 
                 //mail->send();
 
                 return view('web.contacto-gracias');
-
             } catch (Exception $e) {
                 $mensaje = "Se produjo un error al enviar tu mensaje.";
                 return view('web.contacto', compact('mensaje'));
             }
+        } else {
+            $mensaje = "No se encontró un cliente con ese correo.";
+            return view('web.contacto', compact('mensaje'));
         }
     }
 }

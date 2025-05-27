@@ -15,7 +15,8 @@ class ControladorWebRecuperarClave extends Controller
         return view("web.recuperar-clave");
     }
 
-    public function recuperar(Request $request){
+    public function recuperar(Request $request)
+    {
 
         $correo = $request->input("txtCorreo");
         $clave = rand(1000, 9999);
@@ -23,11 +24,11 @@ class ControladorWebRecuperarClave extends Controller
         $cliente = new Cliente();
         $cliente->obtenerPorCorreo($correo);
         if ($cliente->correo != "") {
-            
+
             $data = "Instrucciones";
 
             $mail = new PHPMailer(true);
-            try{
+            try {
                 //Server settings
                 $mail->SMTPDebug = 0;
                 $mail->isSMTP();
@@ -45,15 +46,19 @@ class ControladorWebRecuperarClave extends Controller
                 //Contenido del mail, este lo resive la hamburguesería
                 $mail->isHTML(true);
                 $mail->Subject = 'Recupero de clave';
-                $mail->Body = "Los datos de acceso son:
-                Usuario: $cliente->correo
-                Clave: $clave";
+                $mail->Body = "Los datos de acceso son:<br>
+                <strong>Usuario:</strong> {$cliente->correo}<br>
+                <strong>Clave:</strong> {$clave}";
 
-                //mail->send();
-                $mensaje = "Te enviamos la nueva clave al correo ingresado.";
+                //$mail->send();
 
                 //Actualizar en el cliente la nueva ya encriptada
+                // Hashear y guardar la nueva clave:
 
+                //$cliente->clave = password_hash($clave, PASSWORD_DEFAULT);
+                //$cliente->guardar(); // Asegurate de tener este método definido
+
+                $mensaje = "Te enviamos la nueva clave al correo ingresado.";
                 return view('web.recuperar-clave', compact('mensaje'));
 
             } catch (Exception $e) {

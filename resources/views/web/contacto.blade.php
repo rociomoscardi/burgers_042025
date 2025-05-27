@@ -20,7 +20,7 @@
         </div>
         @endif
 
-        <form action="forms/contact.php" method="post" class="" data-aos="fade-up" data-aos-delay="600">
+        <form action="contacto-gracias" method="post" class="" data-aos="fade-up" data-aos-delay="600">
             <div class="row gy-4">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <div class="col-md-6">
