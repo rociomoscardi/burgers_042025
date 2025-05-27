@@ -1838,6 +1838,7 @@ Registrarse Section, Mi Cuenta Section
 
 .mi-cuenta button[type=submit],
 .login button[type=submit],
+.careers button[type=submit],
 .registrarse button[type=submit] {
   color: var(--contrast-color);
   background: var(--accent-color);

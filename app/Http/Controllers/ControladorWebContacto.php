@@ -51,16 +51,16 @@ class ControladorWebContacto extends Controller
                     <strong>Mensaje:</strong> {$request->input('txtMensaje')}
                 ";
 
-                //mail->send();
+                //$mail->send();
 
                 return view('web.contacto-gracias');
             } catch (Exception $e) {
-                $mensaje = "Se produjo un error al enviar tu mensaje.";
-                return view('web.contacto', compact('mensaje'));
+                $mensaje = "Se produjo un error al enviar tu postulación.";
+                return view('web.nosotros', compact('mensaje'));
             }
         } else {
             $mensaje = "No se encontró un cliente con ese correo.";
-            return view('web.contacto', compact('mensaje'));
+            return view('web.nosotros', compact('mensaje'));
         }
     }
 }
