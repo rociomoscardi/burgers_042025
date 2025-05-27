@@ -34,7 +34,13 @@
                 <div class="col-md-12 text-center py-3">
                     <button type="submit" name="btnIngresar" id="btnIngresar">Ingresar</button>
                 </div>
-            </div><br>
+                <div class="col-md-12 text-center py-3">
+                    <a href="/recuperar-clave">Recuperar contraseña</a>
+                </div>
+                <div class="col-md-12 text-center py-3">
+                    <a href="/cambiar-clave">Cambiar contraseña</a>
+                </div>
+            </div>
         </form><!-- End Contact Form -->
     </div>
 

@@ -35,4 +35,10 @@ class ControladorWebLogin extends Controller
             }
         }
     }
+
+    public function logout(){
+        Session::put("idCliente", "");
+
+        return redirect("/");
+    }
 }

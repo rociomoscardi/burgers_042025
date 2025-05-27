@@ -8,7 +8,18 @@
         <h1> <span class="description-title">Contactanos</span></h1>
     </div><!-- End Section Title -->
 
-    <div class="container">
+    <div class="container" data-aos="fade-up" data-aos-delay="600">
+
+        @if(isset($mensaje))
+        <div class="row gy-4">
+            <div class="col-md-6 col-12 offset-md-3 py-3">
+                <div class="alert alert-danger" role="alert">
+                    {{$mensaje}}
+                </div>
+            </div>
+        </div>
+        @endif
+
         <form action="forms/contact.php" method="post" class="" data-aos="fade-up" data-aos-delay="600">
             <div class="row gy-4">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
@@ -29,7 +40,7 @@
                     <textarea class="form-control" name="txtMensaje" id="txtMensaje" rows="6" required=""></textarea>
                 </div>
                 <div class="col-md-12 text-center py-3">
-                    <button type="submit">Enviar</button>
+                    <button type="submit" name="btnContacto" id="btnContacto">Enviar</button>
                 </div>
 
             </div>

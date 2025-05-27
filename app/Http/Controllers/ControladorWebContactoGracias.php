@@ -8,4 +8,5 @@ class ControladorWebContactoGracias extends Controller
     {
             return view("web.contacto-gracias");
     }
+
 }
