@@ -10,6 +10,18 @@
             <h1><span>Nuestro</span> <span class="description-title">menú</span></h1>
         </div><!-- End Section Title -->
 
+        <div class="container" data-aos="fade-up" data-aos-delay="600">
+            @if(isset($msg))
+            <div class="row gy-4">
+                <div class="col-md-6 col-12 offset-md-3 py-3">
+                    <div class="alert alert-{{$msg['ESTADO'] }}" role="alert">
+                        {{$msg['MSG'] }}
+                    </div>
+                </div>
+            </div>
+            @endif
+        </div>
+
         <div class="container">
             <!-- CATEGORÍAS -->
             <ul class="filters_menu nav nav-tabs d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
@@ -41,7 +53,7 @@
                             <p class="price">${{ $producto->precio }}</p>
 
                             <form id="form1" action="" method="post">
-                            <div class="row">
+                                <div class="row">
                                     <div class="col-sm-2 col-2 offset-sm-2 offset-2">
                                         <button type="submit"><i class="bi bi-cart4"></i></button>
                                     </div>
@@ -50,7 +62,7 @@
                                         <input type="hidden" name="txtProducto" id="txtProducto" value="{{ $producto->idproducto }}" class="form-control">
                                         <input type="number" name="txtCantidad" id="txtCantidad" class="form-control" required>
                                     </div>
-                            </div>
+                                </div>
                             </form>
                         </div>
                         @endif
