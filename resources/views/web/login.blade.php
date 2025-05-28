@@ -34,10 +34,13 @@
                 <div class="col-md-12 text-center py-3">
                     <button type="submit" name="btnIngresar" id="btnIngresar">Ingresar</button>
                 </div>
-                <div class="col-md-12 text-center py-3">
-                    <a href="/recuperar-clave">Recuperar contraseña</a>
+                <div class="col-md-12 text-center pt-3">
+                    <a href="/registrarse">¡Registrate!</a>
                 </div>
-                <div class="col-md-12 text-center py-3">
+                <div class="col-md-12 text-center py-2">
+                    <a href="/recuperar-clave">Olvide mi contraseña</a>
+                </div>
+                <div class="col-md-12 text-center pb-3">
                     <a href="/cambiar-clave">Cambiar contraseña</a>
                 </div>
             </div>

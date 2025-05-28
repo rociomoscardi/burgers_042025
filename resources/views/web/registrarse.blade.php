@@ -8,7 +8,18 @@
         <h1> <span class="description-title">Registrarse</span></h1>
     </div><!-- End Section Title -->
 
-    <div class="container">
+    <div class="container" data-aos="fade-up" data-aos-delay="600">
+
+        @if(isset($msg))
+        <div class="row gy-4">
+            <div class="col-md-6 col-12 offset-md-3 py-3">
+                <div class="alert alert-{{$msg['ESTADO'] }}" role="alert">
+                    {{$msg['MSG'] }}
+                </div>
+            </div>
+        </div>
+        @endif
+
         <form action="" method="post" class="" data-aos="fade-up" data-aos-delay="600">
             <div class="row gy-4">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>

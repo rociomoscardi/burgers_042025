@@ -45,6 +45,30 @@ class Carrito extends Model
         return null;
     }
 
+    public function obtenerPorCliente($idCliente)
+    {
+        $sql = "SELECT
+            idcarrito,
+            fk_idcliente,
+            fk_idproducto,
+            P.titulo AS producto,
+            P.precio
+            FROM carritos C
+            INNER JOIN productos P ON C.fkidproducto = P.idproducto
+            WHERE fk_idlciente = $idCliente";
+        $lstRetorno = DB::select($sql);
+
+        if (count($lstRetorno) > 0) {
+            $this->idcarrito = $lstRetorno[0]->idcarrito;
+            $this->fk_idcliente = $lstRetorno[0]->fk_idcliente;
+            $this->fk_idproducto = $lstRetorno[0]->fk_idproducto;
+            $this->producto = $lstRetorno[0]->producto;
+            $this->precio = $lstRetorno[0]->precio;
+            return $this;
+        }
+        return null;
+    }
+
     public function guardar()
     {
         $sql = "UPDATE clientes SET

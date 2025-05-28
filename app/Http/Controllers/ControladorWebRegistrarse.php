@@ -26,11 +26,13 @@ class ControladorWebRegistrarse extends Controller
         if ($entidad->nombre_comp == "" || $entidad->correo == "" || $entidad->telefono == "" || $entidad->dni == "" || $entidad->clave == "") {
             $msg["ESTADO"] = MSG_ERROR;
             $msg["MSG"] = "Complete todos los datos.";
+            return view('web.registrarse', compact('msg'));
         } else {
             $entidad->guardar();
-            $msg["ESTADO"] = MSG_SUCCESS;
-            $msg["MSG"] = "Registro exitoso.";
+            $mensaje = "Registro exitoso.";
+
+            //$entidad->insertar();
+            return view('web.login', compact('msg'));
         }
-         return view('web.registrarse', compact('msg'));
     }
 }

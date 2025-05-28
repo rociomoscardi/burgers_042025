@@ -1850,6 +1850,7 @@ Registrarse Section, Mi Cuenta Section
 
 .mi-cuenta button[type=submit]:hover,
 .login button[type=submit]:hover,
+.careers button[type=submit],
 .registrarse button[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
 }
