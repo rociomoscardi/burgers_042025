@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entidades\Carrito;
 use App\Entidades\Tipo_producto;
 use App\Entidades\Producto;
 use Illuminate\Http\Client\Request;
@@ -22,6 +23,16 @@ class ControladorWebTakeaway extends Controller
         $idCliente = Session::get("idCliente");
         $idProducto = $request->input("txtProducto");
         $cantidad = $request->input("txtCantidad");
+
+        if(isset($idCliente) && $idCliente > 0){
+            if(isset($cantidad) && $cantidad > 0){
+                $carrito = new Carrito();
+                $carrito->fk_idcliente = $idCliente;
+                $carrito->fk_idproducto = $idProducto;
+
+                
+            }
+        }
 
     }
 }

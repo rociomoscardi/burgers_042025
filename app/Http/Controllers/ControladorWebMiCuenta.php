@@ -1,26 +1,35 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Entidades\Cliente;
 use App\Entidades\Sucursal;
 use Illuminate\Http\Request;
 use Session;
 use Exception;
+
 require app_path() . '/start/constants.php';
 
 class ControladorWebMiCuenta extends Controller
 {
     public function index()
-    {   
-        $cliente = new Cliente();
+    {
         $idCliente = Session::get("idCliente");
-        $cliente->obtenerPorId($idCliente);
-        $sucursal = new Sucursal();
-        $aSucursales = $sucursal->obtenerTodos();
-        return view("web.mi-cuenta", compact("cliente", "aSucursales"));
+        if ($idCliente != "") {
+
+            $cliente = new Cliente();
+            $cliente->obtenerPorId($idCliente);
+            $sucursal = new Sucursal();
+            $aSucursales = $sucursal->obtenerTodos();
+            return view("web.mi-cuenta", compact("cliente", "aSucursales"));
+        } else {
+            return redirect ('/login');
+
+        }
     }
 
-    public function guardar(Request $request){
+    public function guardar(Request $request)
+    {
         try {
             //Define la entidad servicio
             $entidad = new Cliente();

@@ -39,6 +39,7 @@
                             <h4>{{ $producto->titulo }}</h4>
                             <p class="ingredients">{{ $producto->descripcion }}</p>
                             <p class="price">${{ $producto->precio }}</p>
+
                             <form id="form1" action="" method="post">
                             <div class="row">
                                     <div class="col-sm-2 col-2 offset-sm-2 offset-2">

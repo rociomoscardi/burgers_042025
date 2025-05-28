@@ -13,15 +13,21 @@ class Carrito extends Model
     protected $fillable = [
         'idcarrito',
         'fk_idcliente',
-        'fk_idproducto'
+        'fk_idproducto',
+        'cantidad'
     ];
+    protected $hidden = [];
+    private $producto;
+    private $precio;
+    private $imagen;
 
     public function obtenerTodos()
     {
         $sql = "SELECT
             idcarrito,
             fk_idcliente,
-            fk_idproducto
+            fk_idproducto,
+            cantidad
             FROM carritos ORDER BY fk_idcliente ASC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
@@ -32,7 +38,8 @@ class Carrito extends Model
         $sql = "SELECT
             idcarrito,
             fk_idcliente,
-            fk_idproducto
+            fk_idproducto,
+            cantidad
             FROM carritos WHERE idcarrito = $idCarrito";
         $lstRetorno = DB::select($sql);
 
@@ -40,6 +47,7 @@ class Carrito extends Model
             $this->idcarrito = $lstRetorno[0]->idcarrito;
             $this->fk_idcliente = $lstRetorno[0]->fk_idcliente;
             $this->fk_idproducto = $lstRetorno[0]->fk_idproducto;
+            $this->cantidad = $lstRetorno[0]->cantidad;
             return $this;
         }
         return null;
@@ -48,9 +56,10 @@ class Carrito extends Model
     public function obtenerPorCliente($idCliente)
     {
         $sql = "SELECT
-            idcarrito,
-            fk_idcliente,
-            fk_idproducto,
+            C.idcarrito,
+            C.fk_idcliente,
+            C.fk_idproducto,
+            C.cantidad,
             P.titulo AS producto,
             P.precio
             FROM carritos C
@@ -62,6 +71,7 @@ class Carrito extends Model
             $this->idcarrito = $lstRetorno[0]->idcarrito;
             $this->fk_idcliente = $lstRetorno[0]->fk_idcliente;
             $this->fk_idproducto = $lstRetorno[0]->fk_idproducto;
+            $this->cantidad = $lstRetorno[0]->cantidad;
             $this->producto = $lstRetorno[0]->producto;
             $this->precio = $lstRetorno[0]->precio;
             return $this;
@@ -73,7 +83,8 @@ class Carrito extends Model
     {
         $sql = "UPDATE clientes SET
             fk_idcliente=$this->fk_idcliente,
-            fk_idproducto=$this->fk_idproducto
+            fk_idproducto=$this->fk_idproducto,
+            cantidad=$this->cantidad
             WHERE idcarrito=?";
         $affected = DB::update($sql, [$this->idcarrito]);
     }
@@ -89,11 +100,13 @@ class Carrito extends Model
     {
         $sql = "INSERT INTO carritos (
             fk_idcliente,
-            fk_idproducto
-            ) VALUES (?, ?);";
+            fk_idproducto,
+            cantidad
+            ) VALUES (?, ?, ?);";
         $result = DB::insert($sql, [
             $this->fk_idcliente,
             $this->fk_idproducto,
+            $this->cantidad,
         ]);
         return $this->idcarrito = DB::getPdo()->lastInsertId();
     }
