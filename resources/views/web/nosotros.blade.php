@@ -72,11 +72,10 @@
                                     <div class="testimonial-content">
                                         <p>
                                             <i class="bi bi-quote quote-icon-left"></i>
-                                            <span>Proin iaculis purus consequat sem cure digni ssim donec porttitora entum suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et. Maecen aliquam, risus at semper.</span>
+                                            <span>¡La mejor sorpresa en cada pedido! Las hamburguesas siempre llegan calentitas, el pan suave y el cheddar perfectamente derretido. Todo un mimo para el paladar.</span>
                                             <i class="bi bi-quote quote-icon-right"></i>
                                         </p>
-                                        <h3>Saul Goodman</h3>
-                                        <h4>Ceo &amp; Founder</h4>
+                                        <h3>Nahuel M.</h3>
                                         <div class="stars">
                                             <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                                         </div>
@@ -96,11 +95,10 @@
                                     <div class="testimonial-content">
                                         <p>
                                             <i class="bi bi-quote quote-icon-left"></i>
-                                            <span>Export tempor illum tamen malis malis eram quae irure esse labore quem cillum quid cillum eram malis quorum velit fore eram velit sunt aliqua noster fugiat irure amet legam anim culpa.</span>
+                                            <span>Pido todas las semanas y nunca falla: la calidad, el sabor y la presentación son impecables. ¡Se nota el amor con el que hacen cada hamburguesa!</span>
                                             <i class="bi bi-quote quote-icon-right"></i>
                                         </p>
-                                        <h3>Sara Wilsson</h3>
-                                        <h4>Designer</h4>
+                                        <h3>Maritza P.</h3>
                                         <div class="stars">
                                             <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                                         </div>
@@ -120,11 +118,10 @@
                                     <div class="testimonial-content">
                                         <p>
                                             <i class="bi bi-quote quote-icon-left"></i>
-                                            <span>Enim nisi quem export duis labore cillum quae magna enim sint quorum nulla quem veniam duis minim tempor labore quem eram duis noster aute amet eram fore quis sint minim.</span>
+                                            <span>Rapidísimo, práctico y delicioso. Me encanta poder pedir online y pasar a buscar algo tan rico. Los aros de cebolla también son un golazo.</span>
                                             <i class="bi bi-quote quote-icon-right"></i>
                                         </p>
-                                        <h3>Jena Karlis</h3>
-                                        <h4>Store Owner</h4>
+                                        <h3>Lola M.</h3>
                                         <div class="stars">
                                             <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                                         </div>
@@ -144,11 +141,10 @@
                                     <div class="testimonial-content">
                                         <p>
                                             <i class="bi bi-quote quote-icon-left"></i>
-                                            <span>Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore quem dolore labore illum veniam.</span>
+                                            <span>¡Increíble experiencia desde la primera mordida! Siempre cumplen con el tiempo y el sabor es de otro planeta. Lucy’s es mi lugar de confianza.</span>
                                             <i class="bi bi-quote quote-icon-right"></i>
                                         </p>
-                                        <h3>John Larson</h3>
-                                        <h4>Entrepreneur</h4>
+                                        <h3>Esteban M.</h3>
                                         <div class="stars">
                                             <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
                                         </div>
