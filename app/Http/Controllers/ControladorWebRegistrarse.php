@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entidades\Cliente;
 use Illuminate\Http\Request;
+
 require app_path() . '/start/constants.php';
 
 
@@ -17,7 +18,7 @@ class ControladorWebRegistrarse extends Controller
     public function registrarse(Request $request)
     {
         $entidad = new Cliente();
-        $entidad->nombre = $request->input("txtNombre");
+        $entidad->nombre_comp = $request->input("txtNombre");
         $entidad->correo = $request->input("txtCorreo");
         $entidad->telefono = $request->input("txtTelefono");
         $entidad->dni = $request->input("txtDni");
@@ -29,10 +30,10 @@ class ControladorWebRegistrarse extends Controller
             return view('web.registrarse', compact('msg'));
         } else {
             $entidad->guardar();
-            $mensaje = "Registro exitoso.";
+            $mensaje = "¡Bienvenido! Ya podés iniciar sesión.";
 
-            //$entidad->insertar();
-            return view('web.login', compact('msg'));
+            $entidad->insertar();
+            return view('web.login', compact('mensaje'));
         }
     }
 }

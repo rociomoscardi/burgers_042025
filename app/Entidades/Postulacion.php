@@ -78,7 +78,7 @@ class Postulacion extends Model
             telefono,
             correo,
             link_cv
-            ) VALUES (?, ?, ?, ?, ?);";
+            ) VALUES (?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->nombre_comp,
             $this->telefono,

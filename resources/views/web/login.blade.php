@@ -12,7 +12,7 @@
         @if(isset($mensaje))
         <div class="row gy-4">
             <div class="col-md-6 col-12 offset-md-3 py-3">
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-success" role="alert">
                     {{$mensaje}}
                 </div>
             </div>
@@ -35,7 +35,7 @@
                     <button type="submit" name="btnIngresar" id="btnIngresar">Ingresar</button>
                 </div>
                 <div class="col-md-12 text-center pt-3">
-                    <a href="/registrarse">¡Registrate!</a>
+                    <a href="/registrarse">¿Aún no tenes una cuenta? ¡Registrate!</a>
                 </div>
                 <div class="col-md-12 text-center py-2">
                     <a href="/recuperar-clave">Olvide mi contraseña</a>

@@ -2,65 +2,44 @@
 
 namespace App\Http\Controllers;
 
-use App\Entidades\Cliente;
+use App\Entidades\Postulacion;
 use Illuminate\Http\Request;
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+
+require app_path() . '/start/constants.php';
 
 class ControladorWebNosotros extends Controller
 {
     public function index()
     {
-            return view("web.nosotros");
+        return view("web.nosotros");
     }
 
-    public function insertarPostulacion(Request $request){
-        
-        $correo = $request->input("txtCorreo");
+    public function insertarPostulacion(Request $request)
+    {
 
-        $cliente = new Cliente();
-        $cliente->obtenerPorCorreo($correo);
-        if ($cliente->correo != "") {
+        $entidad = new Postulacion();
+        $entidad->nombre_comp = $request->input("txtNombre");
+        $entidad->correo = $request->input("txtCorreo");
+        $entidad->telefono = $request->input("txtTelefono");
+        $entidad->link_cv = $request->input("fileCV");
 
-            //$data = "Instrucciones";
+        if ($_FILES["fileCV"]["error"] === UPLOAD_ERR_OK) { //Se adjunta imagen
+            $extension = pathinfo($_FILES["fileCV"]["name"], PATHINFO_EXTENSION);
+            $nombre = date("Ymdhmsi") . ".$extension";
+            $archivo = $_FILES["fileCV"]["tmp_name"];
+            move_uploaded_file($archivo, env('APP_PATH') . "/public/files/$nombre"); //guardaelarchivo
+            $entidad->link_cv = $nombre;
+        }
 
-            $mail = new PHPMailer(true);
-            try {
-                //Server settings
-                $mail->SMTPDebug = 0;
-                $mail->isSMTP();
-                $mail->Host = env('MAIL_HOST');         //a partir de acá toma todo del archivo .env, son constantes. esto lo provee el hosting.
-                $mail->SMTPAuth = true;
-                $mail->Username = env('MAIL_USERNAME');
-                $mail->Password = env('MAIL_PASSWORD');
-                $mail->SMTPSecure = env('MAIL_ENCRYPTION');
-                $mail->Port = env('MAIL_PORT');
-
-                //Recipients (arma los destinatarios)
-                $mail->setFrom(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
-                $mail->addAddress('info@lucysburgers.com');
-
-                //Contenido del mail, este lo resive la hamburguesería
-                $mail->isHTML(true);
-                $mail->Subject = 'Gracias por contactarte';             //en el cuerpo del mail van los datos del formulario.
-                $mail->Body =  "
-                    <strong>Cliente:</strong> {$cliente->nombre_comp}<br>
-                    <strong>Correo:</strong> {$cliente->correo}<br>
-                    <strong>Teléfono:</strong> {$cliente->telefono}<br>
-                    <strong>CV:</strong> {$request->input('fileCV')}
-                ";
-
-                //$mail->send();
-
-                return view('web.postulacion-gracias');
-                
-            } catch (Exception $e) {
-                $mensaje = "Se produjo un error al enviar tu mensaje.";
-                return view('web.contacto', compact('mensaje'));
-            }
+        if ($entidad->nombre_comp == "" || $entidad->correo == "" || $entidad->telefono == "" || $entidad->link_cv == "") {
+            $msg["ESTADO"] = MSG_ERROR;
+            $msg["MSG"] = "Complete todos los datos.";
+            return view('web.nosotros', compact('msg'));
         } else {
-            $mensaje = "No se encontró un cliente con ese correo.";
-            return view('web.contacto', compact('mensaje'));
+            $entidad->guardar();
+
+            $entidad->insertar();
+            return view('web.postulacion-gracias');
         }
     }
 }

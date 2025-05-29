@@ -177,18 +177,18 @@
 
         <div class="container" data-aos="fade-up" data-aos-delay="600">
 
-            @if(isset($mensaje))
+            @if(isset($msg))
             <div class="row gy-4">
                 <div class="col-md-6 col-12 offset-md-3 py-3">
-                    <div class="alert alert-danger" role="alert">
-                        {{$mensaje}}
+                    <div class="alert alert-{{$msg['ESTADO'] }}" role="alert">
+                        {{$msg['MSG'] }}
                     </div>
                 </div>
             </div>
             @endif
 
 
-            <form action="postulacion-gracias" method="post" class="" data-aos="fade-up" data-aos-delay="600">
+            <form action="" method="post" class="" enctype="multipart/form-data" data-aos="fade-up" data-aos-delay="600">
                 <div class="row gy-4">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                     <div class="col-md-6">
