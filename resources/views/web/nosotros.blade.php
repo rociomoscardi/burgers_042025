@@ -201,7 +201,7 @@
                     </div>
                     <div class="col-md-6">
                         <label>CV: * <small>(.pdf, .doc, .docx)</small></label><br>
-                        <input type="file" name="fileCV" id="fileCV" class="form-control">
+                        <input type="file" name="fileCV" id="fileCV" accept=".pdf, .doc, .docx" class="form-control">
                     </div>
                     <div class="col-md-12 py-3 text-center">
                         <button type="submit" name="btnPostulacion" id="btnPostulacion">Enviar</button>
