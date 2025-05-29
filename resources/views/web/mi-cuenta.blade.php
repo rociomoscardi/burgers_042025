@@ -37,6 +37,9 @@
                 </div>
             </div>
         </form><!-- End Contact Form -->
+        <div class="col-md-12 text-center pb-4" data-aos="fade-up" data-aos-delay="600">
+            <a href="/cambiar-clave">Cambiar contraseña</a>
+        </div>
     </div>
 
     <div class="container">
