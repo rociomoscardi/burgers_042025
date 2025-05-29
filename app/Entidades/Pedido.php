@@ -33,6 +33,22 @@ class Pedido extends Model
         return $lstRetorno;
     }
 
+    public function obtenerPedidosActivos()
+    {
+        $sql = "SELECT
+            P.idpedido,
+            DATE_FORMAT(P.fecha, '%d/%m/%Y') AS fecha,
+            P.total,
+            S.nombre AS sucursal,
+            E.nombre AS estado
+            FROM pedidos P 
+            INNER JOIN sucursales S ON S.idsucursal = P.fk_idsucursal
+            INNER JOIN estados E ON E.idestado = P.fk_idestado
+            ORDER BY fecha DESC";
+        $lstRetorno = DB::select($sql);
+        return $lstRetorno;
+    }
+
     public function obtenerPorId($idPedido)
     {
         $sql = "SELECT

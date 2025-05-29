@@ -54,9 +54,16 @@
                         <th>Estado del pedido</th>
                         <th>Importe</th>
                     </thead>
+
+                    @foreach ($aPedidos as $pedido)
                     <tbody>
-                        <td>b</td>
+                        <td>{{$pedido->fecha}}</td>
+                        <td>{{$pedido->idpedido}}</td>
+                        <td>{{$pedido->sucursal}}</td>
+                        <td>{{$pedido->estado}}</td>
+                        <td>${{number_format($pedido->total, 2, ',', '.') }}</td>
                     </tbody>
+                    @endforeach
                 </table>
             </div>
         </div>

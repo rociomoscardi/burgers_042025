@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Entidades\Cliente;
+use App\Entidades\Pedido;
 use App\Entidades\Sucursal;
 use Illuminate\Http\Request;
 use Session;
@@ -19,9 +20,12 @@ class ControladorWebMiCuenta extends Controller
 
             $cliente = new Cliente();
             $cliente->obtenerPorId($idCliente);
+
             $sucursal = new Sucursal();
             $aSucursales = $sucursal->obtenerTodos();
-            return view("web.mi-cuenta", compact("cliente", "aSucursales"));
+            $pedido = new Pedido();
+            $aPedidos = $pedido->obtenerPedidosActivos();
+            return view("web.mi-cuenta", compact("cliente", "aSucursales", "aPedidos"));
         } else {
             return redirect ('/login');
 
