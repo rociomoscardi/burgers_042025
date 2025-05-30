@@ -272,12 +272,14 @@ h6 {
   margin: 0;
   border-radius: 50px;
   transition: 0.3s;
+  font-family: var(--nav-font);
 }
 
 .header .btn-getstarted:hover,
 .header .btn-getstarted:focus:hover {
   color: var(--contrast-color);
   background: color-mix(in srgb, var(--accent-color), transparent 15%);
+  font-family: var(--nav-font);
 }
 
 @media (max-width: 1200px) {
@@ -565,7 +567,7 @@ h6 {
 # Global Footer
 --------------------------------------------------------------*/
 .footer {
-  --heading-font: var(--default-font);
+  --heading-font: var(--nav-font);
   color: var(--default-color);
   background-color: var(--background-color);
   font-size: 14px;
@@ -584,10 +586,16 @@ h6 {
   font-size: 16px;
   font-weight: 700;
   margin-bottom: 15px;
+  font-family: var(--nav-font);
 }
 
 .footer .address p {
   margin-bottom: 0px;
+}
+
+.footer a,
+.footer p {
+  font-family: var(--nav-font);
 }
 
 .footer .social-links a {
@@ -612,10 +620,12 @@ h6 {
 .footer .copyright {
   padding-top: 20px;
   border-top: 1px solid color-mix(in srgb, var(--default-color), transparent 90%);
+  font-family: var(--nav-font);
 }
 
 .footer .copyright p {
   margin-bottom: 0;
+  font-family: var(--nav-font);
 }
 
 .footer .credits {
@@ -814,7 +824,7 @@ section,
   font-family: 'Baskervville', serif;
 }
 
-.login p{
+.login p {
   font-family: var(--nav-font);
 }
 
@@ -945,6 +955,16 @@ section,
   margin-bottom: 20px;
 }
 
+.about img {
+  max-height: 500px;
+  border-radius: 20px;
+}
+
+.about .sobre_nosotros {
+  font-family: var(--nav-font);
+  font-size: 17px;
+}
+
 .about .book-a-table {
   text-align: center;
   border: 4px solid color-mix(in srgb, var(--default-color), transparent 30%);
@@ -996,22 +1016,30 @@ section,
   top: calc(50% - 47px);
 }
 
-.careers .php-email-form button[type=submit] {
+.nosotros {
+  width: 100%;
+  min-height: 75vh;
+  position: relative;
+  padding: 60px 0;
+  display: flex;
+  align-items: center;
+  background-image: url('../img/banner-1-nosotros.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.nosotros h1 {
+  margin: 0;
+  font-size: 100px;
+  font-weight: 400;
+  font-family: 'Baskervville', serif;
   color: var(--contrast-color);
-  background: var(--accent-color);
-  border: 0;
-  padding: 10px 30px;
-  transition: 0.4s;
-  border-radius: 50px;
 }
 
-.careers .php-email-form button[type=submit]:hover {
-  background: color-mix(in srgb, var(--accent-color), transparent 20%);
-}
+/*--------------------------------------------------------------
+# Careers Section
+--------------------------------------------------------------*/
 
-.careers .php-email-form label {
-  font-family: var(--nav-font);
-}
 
 .gracias p {
   font-family: 'Baskervville', serif;
@@ -1211,7 +1239,7 @@ section,
   font-size: 18px;
   font-weight: 400;
   margin: 0;
-  font-family: var(--default-font);
+  font-family: var(--nav-font);
 }
 
 @media (max-width: 575px) {
@@ -1697,7 +1725,7 @@ section,
   font-size: 20px;
   font-weight: 700;
   margin: 0 0 5px 0;
-  font-family: var(--default-font);
+  font-family: var(--nav-font);
   color: color-mix(in srgb, var(--default-color), transparent 30%);
 }
 
@@ -1705,6 +1733,11 @@ section,
   padding: 0;
   margin-bottom: 0;
   font-size: 14px;
+  font-family: var(--nav-font);
+}
+
+.contact a {
+  font-family: var(--nav-font);
 }
 
 .contact .info-item .social-links a {
@@ -1714,6 +1747,7 @@ section,
   margin: 4px 6px 0 0;
   transition: 0.3s;
   color: color-mix(in srgb, var(--default-color), transparent 50%);
+  font-family: var(--nav-font);
 }
 
 .contact .info-item .social-links a:hover {
@@ -1724,30 +1758,6 @@ section,
   .contact .php-email-form {
     padding: 20px;
   }
-}
-
-.contact .php-email-form input[type=text],
-.contact .php-email-form input[type=email],
-.contact .php-email-form textarea {
-  color: var(--default-color);
-  background-color: color-mix(in srgb, var(--surface-color), transparent 50%);
-  border-color: color-mix(in srgb, var(--default-color), transparent 80%);
-  font-size: 14px;
-  padding: 10px 15px;
-  box-shadow: none;
-  border-radius: 0;
-}
-
-.contact .php-email-form input[type=text]:focus,
-.contact .php-email-form input[type=email]:focus,
-.contact .php-email-form textarea:focus {
-  border-color: var(--accent-color);
-}
-
-.contact .php-email-form input[type=text]::placeholder,
-.contact .php-email-form input[type=email]::placeholder,
-.contact .php-email-form textarea::placeholder {
-  color: color-mix(in srgb, var(--default-color), transparent 70%);
 }
 
 .contact button[type=submit] {
@@ -1839,6 +1849,7 @@ Registrarse Section, Mi Cuenta Section
 .mi-cuenta button[type=submit],
 .login button[type=submit],
 .careers button[type=submit],
+.contact button[type=submit],
 .registrarse button[type=submit] {
   color: var(--contrast-color);
   background: var(--accent-color);
@@ -1846,23 +1857,41 @@ Registrarse Section, Mi Cuenta Section
   padding: 10px 30px;
   transition: 0.4s;
   border-radius: 50px;
+  font-family: var(--nav-font);
 }
 
 .mi-cuenta button[type=submit]:hover,
 .login button[type=submit]:hover,
 .careers button[type=submit]:hover,
+.contact button[type=submit]:hover,
 .registrarse button[type=submit]:hover {
   background: color-mix(in srgb, var(--accent-color), transparent 20%);
+  font-family: var(--nav-font);
 }
 
 .mi-cuenta label,
+.careers label,
 .mi-cuenta table,
-.registrarse label {
+.contact table,
+.registrarse label,
+.login label {
   font-family: var(--nav-font);
 }
 
 .mi-cuenta input[type=text],
-.mi-cuenta input[type=email] {
+.mi-cuenta input[type=email],
+.careers input[type=text],
+.careers input[type=file],
+.careers input[type=email],
+.contact input[type=text],
+.contact input[type=email],
+.login input[type=email] {
+  font-family: var(--nav-font);
+}
+
+.contact textarea,
+.mi-cuenta a,
+.login a {
   font-family: var(--nav-font);
 }
 

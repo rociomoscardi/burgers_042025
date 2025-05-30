@@ -29,7 +29,7 @@
                 </div>
                 <div class="col-md-6 ">
                     <label for="txtCorreo">Correo: *</label>
-                    <input type="txtCorreo" class="form-control" name="txtCorreo" required="">
+                    <input type="email" name="txtCorreo" id="txtCorreo" class="form-control" required="">
                 </div>
                 <div class="col-md-12">
                     <label for="txtTelefono">Teléfono: *</label>

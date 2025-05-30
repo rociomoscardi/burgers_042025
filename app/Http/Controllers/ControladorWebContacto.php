@@ -56,11 +56,11 @@ class ControladorWebContacto extends Controller
                 return view('web.contacto-gracias');
             } catch (Exception $e) {
                 $mensaje = "Se produjo un error al enviar tu postulación.";
-                return view('web.nosotros', compact('mensaje'));
+                return view('web.contacto', compact('mensaje'));
             }
         } else {
             $mensaje = "No se encontró un cliente con ese correo.";
-            return view('web.nosotros', compact('mensaje'));
+            return view('web.contacto', compact('mensaje'));
         }
     }
 }

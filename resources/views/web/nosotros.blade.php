@@ -1,33 +1,33 @@
 @extends("web.plantilla")
 @section("contenido")
 <main class="main">
+
+    <!-- Banner Section -->
+    <section id="nosotros" class="nosotros section light-background">
+
+        <div class="container">
+            <div class="row gy-4 justify-content-center justify-content-lg-between">
+                <div class="col-lg-12 order-2 order-lg-1 d-flex flex-column text-center">
+                    <h1 data-aos="fade-up">Sobre nosotros.</h1>
+                </div>
+            </div>
+        </div>
+
+    </section><!-- /Banner Section -->
+
     <!-- About Section -->
     <section id="about" class="about section">
-
-        <!-- Section Title -->
-        <div class="container section-title" data-aos="fade-up">
-            <h1><span>Sobre</span> <span class="description-title">nosotros</span></h1>
-        </div><!-- End Section Title -->
 
         <div class="container">
 
             <div class="row gy-4">
-                <div class="col-lg-7" data-aos="fade-up" data-aos-delay="100">
-                    <img src="web/img/about.jpg" class="img-fluid mb-4" alt="">
+                <div class="col-lg-6 " data-aos="fade-up" data-aos-delay="100">
+                    <img src="web/img/sobre-nosotros-img.png" class="img-fluid mb-4" alt="">
                 </div>
-                <div class="col-lg-5" data-aos="fade-up" data-aos-delay="250">
+                <div class="col-lg-6" data-aos="fade-up" data-aos-delay="250">
                     <div class="content ps-0 ps-lg-5">
-                        <p class="fst-italic">
-                            En Lucy’s Burgers creemos que no hay nada más lindo que compartir una buena hamburguesa. Nacimos del amor por lo simple, lo casero y lo rico: recetas que abrazan, sabores que invitan a quedarte y un ambiente donde siempre sos bienvenido. Detrás del nombre está Lucy, nuestra gatita mimada y la inspiración de cada mordida feliz. ¡Pasá cuando quieras, siempre hay algo rico esperándote!
-                        </p>
-                        <ul>
-                            <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-                            <li><i class="bi bi-check-circle-fill"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-                            <li><i class="bi bi-check-circle-fill"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
-                        </ul>
-                        <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident
+                        <p class="sobre_nosotros py-5">
+                            En <strong> Lucy’s Burgers </strong> creemos que no hay nada más lindo que compartir una buena hamburguesa. <br> Nacimos del amor por <strong>lo simple, lo casero y lo rico:</strong>  recetas que abrazan y sabores que invitan a quedarte. <br> Detrás del nombre está Lucy, nuestra gatita mimada y la inspiración de cada mordida feliz. <br><br> Pedí através de nuestra tienda online y retira por nuestra sucursal más cercana. <br> ¡Te esperamos!
                         </p>
                     </div>
                 </div>
