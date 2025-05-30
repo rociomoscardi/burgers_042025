@@ -9,7 +9,7 @@
       <div class="row gy-4 justify-content-center justify-content-lg-between">
         <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center">
           <h1 data-aos="fade-up">Sabores que abrazan.<br>Hamburguesas que conquistan.</h1>
-          <p>Disfrutamos de brindar una experiencia gastronómica única, donde calidad, ambiente y servicio se unen.</p>
+          <p data-aos="fade-up">Disfrutamos de brindar una experiencia gastronómica única, donde calidad, ambiente y servicio se unen.</p>
         </div>
         <!--<div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
           <img src="web/img/hero1-img.png" class="img-fluid animated" alt="">

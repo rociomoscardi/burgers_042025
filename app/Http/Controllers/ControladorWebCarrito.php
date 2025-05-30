@@ -43,11 +43,7 @@ class ControladorWebCarrito extends Controller
     }
 
     public function insertarPedido(Request $request){
-        $cantidad = $request->input("txtCantidad");
-        $carrito = new Carrito();
-        $carrito->cantidad = $cantidad;
-        $carrito->insertar();
-        return view ("web.carrito");
+    
     }
 
     public function actualizar(Request $request){

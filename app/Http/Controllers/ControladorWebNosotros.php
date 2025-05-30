@@ -27,7 +27,11 @@ class ControladorWebNosotros extends Controller
             $extension = pathinfo($_FILES["fileCV"]["name"], PATHINFO_EXTENSION);
             $nombre = date("Ymdhmsi") . ".$extension";
             $archivo = $_FILES["fileCV"]["tmp_name"];
-            move_uploaded_file($archivo, env('APP_PATH') . "/public/files/$nombre"); //guardaelarchivo
+            if ($extension == "pdf" || $extension == "doc" || $extension == "docx") {
+                move_uploaded_file($archivo, env('APP_PATH') . "/public/files/$nombre"); //guardaelarchivo
+            } else {
+                return "";
+            }
             $entidad->link_cv = $nombre;
         }
 
