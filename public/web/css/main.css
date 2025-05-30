@@ -1884,6 +1884,7 @@ Registrarse Section, Mi Cuenta Section
 .careers input[type=file],
 .careers input[type=email],
 .contact input[type=text],
+.contact select,
 .contact input[type=email],
 .login input[type=email] {
   font-family: var(--nav-font);
