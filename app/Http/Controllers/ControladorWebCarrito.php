@@ -21,7 +21,7 @@ class ControladorWebCarrito extends Controller
 
         $sucursal = new Sucursal();
         $aSucursales = $sucursal->obtenerTodos();
-        return view("web.carrito", compact("aCarritos", "aSucursales"));
+        return view("web.carrito", compact("aCarritos", "aSucursales", "aCarritos"));
     }
 
     public function procesar(Request $request){
@@ -33,13 +33,18 @@ class ControladorWebCarrito extends Controller
     }
 
     public function eliminar(Request $request){
+        $idCliente = Session::get("idCliente");
         $idCarrito = $request->input("txtCarrito");
         $carrito = new Carrito();
         $carrito->idcarrito = $idCarrito;
         $carrito->eliminar();
         $resultado["err"] = EXIT_SUCCESS;
         $resultado["mensaje"] = "El producto ha sido eliminado.";
-        return view ("web.carrito", compact("resultado"));
+       
+        $carrito = new Carrito();
+        $aCarritos = $carrito->obtenerPorCliente($idCliente);
+
+        return view ("web.carrito", compact("resultado", "aCarritos"));
     }
 
     public function insertarPedido(Request $request){

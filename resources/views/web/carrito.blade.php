@@ -46,11 +46,6 @@
                     </tfoot>
                 </table>
             </div>
-            @else
-            <div class="container section-title" data-aos="fade-up">
-                <h2>No hay productos seleccionados.</h2>
-            </div>
-            @endif
             <div class="col-sm-5 col-12">
                 <label for="lstSucursal">Sucursal donde retirará el pedido:</label><br>
                 <select class="form-control" name="lstSucursal" id="lstSucursal">
@@ -66,7 +61,7 @@
                     <option value="">Mercado Pago</option>
                 </select><br>
                 <textarea name="txtComentario" id="txtComentario" class="form-control">Añadir comentario...</textarea><br>
-                <a class="btn-getstarted px-sm-5" href="/takeaway" >Continuar pedido</a>
+                <a class="btn-getstarted px-sm-5" href="/takeaway">Continuar pedido</a>
                 <button type="submit" name="btnFinalizar" id="btnFinalizar" class="px-5">Finalizar pedido</button>
             </div>
         </div>
@@ -78,8 +73,12 @@
                 <button type="submit" class="px-5">Finalizar pedido</button>
             </div>
         </div>
+        @else
+        <div class="container section-title" data-aos="fade-up">
+            <h2>No hay productos seleccionados.</h2><br><br><br><br><br><br><br><br>
+        </div>
+        @endif
     </div>
-
 
 </section>
 @endsection
