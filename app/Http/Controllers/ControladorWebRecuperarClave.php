@@ -23,6 +23,7 @@ class ControladorWebRecuperarClave extends Controller
 
         $cliente = new Cliente();
         $cliente->obtenerPorCorreo($correo);
+
         if ($cliente->correo != "") {
 
             $data = "Instrucciones";
@@ -53,17 +54,14 @@ class ControladorWebRecuperarClave extends Controller
                 //$mail->send();
 
                 //Actualizar en el cliente la nueva ya encriptada
-                // Hashear y guardar la nueva clave:
+                $cliente->clave = password_hash($clave, PASSWORD_DEFAULT);
+                $cliente->guardar();
 
-                //$cliente->clave = password_hash($clave, PASSWORD_DEFAULT);
-                //$cliente->guardar(); // Asegurate de tener este método definido
-
-                $mensaje = "Te enviamos la nueva clave al correo ingresado.";
-                return view('web.recuperar-clave', compact('mensaje'));
-
+                $mensaje1 = "Te enviamos tu nueva contraseña al correo ingresado! ($clave)";
+                return view('web.recuperar-clave', compact('mensaje1'));
             } catch (Exception $e) {
-                $mensaje = "Se produjo un error al enviar el correo.";
-                return view('web.recuperar-clave', compact('mensaje'));
+                $mensaje2 = "Se produjo un error al enviar el correo. Mensaje: " . $e->getMessage();
+                return view('web.recuperar-clave', compact('mensaje2'));
             }
         } else {
             $mensaje = "El correo ingresado no existe.";

@@ -7,7 +7,6 @@ use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
 use Illuminate\Http\Request;
 use Exception;
-use PhpParser\Node\Expr\AssignOp\Pow;
 
 require app_path() . '/start/constants.php';
 class ControladorPostulacion extends Controller
@@ -147,7 +146,7 @@ class ControladorPostulacion extends Controller
             $row[] = "<a href='/admin/postulacion/" . $aPostulacion[$i]->idpostulacion . "'>" . $aPostulacion[$i]->nombre_comp . "</a>";
             $row[] = $aPostulacion[$i]->telefono;
             $row[] = $aPostulacion[$i]->correo;
-            $row[] = "<a href= ''> Descargar </a>";
+            $row[] = "<a target='_blank' href= '/files/" . $aPostulacion[$i]->link_cv . "' > Descargar </a>";
             $cont++;
             $data[] = $row;
         }

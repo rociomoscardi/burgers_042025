@@ -12,7 +12,7 @@
         @if(isset($mensaje))
         <div class="row gy-4">
             <div class="col-md-6 col-12 offset-md-3 py-3">
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-danger" role="alert">
                     {{$mensaje}}
                 </div>
             </div>
@@ -39,9 +39,6 @@
                 </div>
                 <div class="col-md-12 text-center py-2">
                     <a href="/recuperar-clave">Olvide mi contraseña</a>
-                </div>
-                <div class="col-md-12 text-center pb-3">
-                    <a href="/cambiar-clave">Cambiar contraseña</a>
                 </div>
             </div>
         </form><!-- End Contact Form -->

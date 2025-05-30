@@ -1892,7 +1892,8 @@ Registrarse Section, Mi Cuenta Section
 
 .contact textarea,
 .mi-cuenta a,
-.login a {
+.login a,
+.alert {
   font-family: var(--nav-font);
 }
 

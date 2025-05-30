@@ -10,11 +10,21 @@
 
         <div class="container" data-aos="fade-up" data-aos-delay="600">
 
-        @if(isset($mensaje))
+        @if(isset($mensaje1))
+        <div class="row gy-4">
+            <div class="col-md-6 col-12 offset-md-3 py-3">
+                <div class="alert alert-success" role="alert">
+                    {{$mensaje1}}
+                </div>
+            </div>
+        </div>
+        @endif
+
+        @if(isset($mensaje2))
         <div class="row gy-4">
             <div class="col-md-6 col-12 offset-md-3 py-3">
                 <div class="alert alert-danger" role="alert">
-                    {{$mensaje}}
+                    {{$mensaje2}}
                 </div>
             </div>
         </div>
