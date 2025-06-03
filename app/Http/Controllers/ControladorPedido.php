@@ -31,8 +31,10 @@ class ControladorPedido extends Controller
                 $aClientes = $cliente->obtenerTodos();
                 $estado = new Estado();
                 $aEstados = $estado->obtenerTodos();
-                return view("sistema.pedido-nuevo", compact("titulo", "aSucursales", "aClientes", "aEstados"));
+                $pedido = new Pedido();
+                $aPedidos = $estado->obtenerTodos();
             }
+            return view("sistema.pedido-nuevo", compact("titulo", "aSucursales", "aClientes", "aEstados", "aPedidos"));
         } else {
             return redirect('admin/login');
         }
@@ -61,6 +63,12 @@ class ControladorPedido extends Controller
             $titulo = "Modificar pedido";
             $entidad = new Pedido();
             $entidad->cargarDesdeRequest($request);
+            $sucursal = new Sucursal();
+            $aSucursales = $sucursal->obtenerTodos();
+            $cliente = new Cliente();
+            $aClientes = $cliente->obtenerTodos();
+            $estado = new Estado();
+            $aEstados = $estado->obtenerTodos();
 
             //validaciones
             if ($entidad->fecha == "" || $entidad->fk_idsucursal == "" || $entidad->fk_idcliente == "" || $entidad->fk_idestado == "" || $entidad->total == "") {
@@ -93,7 +101,7 @@ class ControladorPedido extends Controller
         $pedido = new Pedido();
         $pedido->obtenerPorId($id);
 
-        return view('sistema.pedido-nuevo', compact('msg', 'pedido', 'titulo')) . '?id=' . $pedido->idpedido;
+        return view('sistema.pedido-nuevo', compact('msg', 'pedido', 'titulo', "aSucursales", "aClientes", "aEstados")) . '?id=' . $pedido->idpedido;
     }
 
     public function editar($id)

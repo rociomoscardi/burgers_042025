@@ -9,6 +9,18 @@
     </div><!-- End Section Title -->
 
     <div class="container" data-aos="fade-up" data-aos-delay="600">
+        @if(isset($msg))
+        <div class="row gy-4">
+            <div class="col-md-6 col-12 offset-md-3 py-3">
+                <div class="alert alert-{{$msg['ESTADO'] }}" role="alert">
+                    {{$msg['MSG'] }}
+                </div>
+            </div>
+        </div>
+        @endif
+    </div>
+
+    <div class="container" data-aos="fade-up" data-aos-delay="600">
         <div class="row">
             @if($aCarritos)
             @php $totalCarrito = 0; @endphp
@@ -47,22 +59,25 @@
                 </table>
             </div>
             <div class="col-sm-5 col-12">
-                <label for="lstSucursal">Sucursal donde retirará el pedido:</label><br>
-                <select class="form-control" name="lstSucursal" id="lstSucursal">
-                    <option selected disabled value="">Seleccionar</option>
-                    @foreach ($aSucursales as $sucursal)
-                    <option value="">{{ $sucursal->nombre }}</option>
-                    @endforeach
-                </select><br>
-                <label for="lstPago">Método dede pago:</label><br>
-                <select class="form-control" name="lstPago" id="lstPago">
-                    <option selected disabled value="">Seleccionar</option>
-                    <option value="Efectivo">Efectivo</option>
-                    <option value="Mercadopago">Mercado Pago</option>
-                </select><br>
-                <textarea name="txtComentario" id="txtComentario" class="form-control" placeholder="Añadir comentario..."></textarea><br>
-                <a class="btn-getstarted px-sm-5" href="/takeaway">Continuar pedido</a>
-                <button type="submit" name="btnFinalizar" id="btnFinalizar" class="px-5">Finalizar pedido</button>
+                <form id="form2" action="" method="post" data-aos="fade-up" data-aos-delay="600">
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
+                    <label for="lstSucursal">Sucursal donde retirará el pedido:</label><br>
+                    <select class="form-control" name="lstSucursal" id="lstSucursal" required>
+                        <option selected disabled value="">Seleccionar</option>
+                        @foreach ($aSucursales as $sucursal)
+                        <option value="{{ $sucursal->idsucursal }}">{{ $sucursal->nombre }}</option>
+                        @endforeach
+                    </select><br>
+                    <label for="lstPago">Método de pago:</label><br>
+                    <select class="form-control" name="lstPago" id="lstPago" required>
+                        <option selected disabled value="">Seleccionar</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Mercadopago">Mercado Pago</option>
+                    </select><br>
+                    <textarea name="txtComentario" id="txtComentario" class="form-control" placeholder="Añadir comentario..."></textarea><br>
+                    <a class="btn-getstarted px-sm-5" href="/takeaway">Continuar pedido</a>
+                    <button type="submit" name="btnFinalizar" id="btnFinalizar" class="px-5">Finalizar pedido</button>
+                </form>
             </div>
         </div>
         <div class="row d-none">

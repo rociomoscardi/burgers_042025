@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Entidades\Carrito;
 use App\Entidades\Pedido;
+use App\Entidades\Pedido_producto;
 use App\Entidades\Sucursal;
 use Illuminate\Http\Request;
 use Session;
@@ -29,9 +30,9 @@ class ControladorWebCarrito extends Controller
     public function procesar(Request $request)
     {
         if (isset($_POST["btnBorrar"])) {
-            $this->eliminar($request);
+            return $this->eliminar($request);
         } else if (isset($_POST["btnFinalizar"])) {
-            $this->insertarPedido($request);
+            return $this->insertarPedido($request);
         }
     }
 
@@ -47,25 +48,30 @@ class ControladorWebCarrito extends Controller
 
         $carrito = new Carrito();
         $aCarritos = $carrito->obtenerPorCliente($idCliente);
+        $sucursal = new Sucursal();
+        $aSucursales = $sucursal->obtenerTodos();
 
-        return view("web.carrito", compact("resultado", "aCarritos"));
+        return view("web.carrito", compact("resultado", "aCarritos", "aSucursales"));
     }
 
     public function insertarPedido(Request $request)
     {
         $idCliente = Session::get("idCliente");;
-        
+
         $carrito = new Carrito();
         $aCarritos = $carrito->obtenerPorCliente($idCliente);
+        $sucursal = new Sucursal();
+        $aSucursales = $sucursal->obtenerTodos();
 
         $totalCarrito = 0;
-        foreach ($aCarritos as $carrito){
-            $totalCarrito += $carrito->cantidad * $carrito->precio;
+        foreach ($aCarritos as $item) {
+            $totalCarrito += $item->cantidad * $item->precio;
         }
 
         $sucursal = $request->input("lstSucursal");
         $pago = $request->input("lstPago");
         $fecha = date("Y-m-d");
+        $comentario = $request->input("txtComentario");
 
         $pedido = new Pedido();
         $pedido->fk_idsucursal = $sucursal;
@@ -73,8 +79,22 @@ class ControladorWebCarrito extends Controller
         $pedido->fk_idestado = 4;
         $pedido->fecha = $fecha;
         $pedido->total = $totalCarrito;
-        
+        $pedido->m_pago = $pago;
+        $pedido->comentario = $comentario;
+        $pedido->insertar();
 
+        $pedidoProducto = new Pedido_producto();
+        foreach ($aCarritos as $item) {
+            $pedidoProducto->fk_idproducto = $item->fk_idproducto;
+            $pedidoProducto->fk_idpedido = $pedido->idpedido;
+            $pedidoProducto->insertar();
+        }
+
+        $carrito->eliminarPorCliente($idCliente);
+
+        $msg["ESTADO"] = MSG_SUCCESS;
+        $msg["MSG"] = "Su pedido se ha realizado correctamente.";
+        return view("web.carrito", compact("msg", "aCarritos", "aSucursales"));
     }
 
     public function actualizar(Request $request)

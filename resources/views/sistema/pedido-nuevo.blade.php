@@ -84,8 +84,20 @@ if (isset($msg)) {
                 </select>
             </div>
             <div class="form-group col-lg-6">
+                <label>Método de pago: *</label>
+                <select class="form-control" name="lstPago" id="lstPago">
+                    <option selected disabled value="">Seleccionar</option>
+                    <option <?php echo $pedido->m_pago == "Efectivo"? "selected" : "";?> value="Efectivo">Efectivo</option>
+                    <option <?php echo $pedido->m_pago == "Mercadopago"? "selected" : "";?> value="Mercadopago">Mercado Pago</option>
+                </select>
+            </div>
+            <div class="form-group col-lg-6">
                 <label>Total: *</label>
                 <input type="text" name="txtTotal" id="txtTotal" class="form-control" value="{{$pedido->total ?? ''}}" placeholder="$0,00" required>
+            </div>
+            <div class="form-group col-lg-6">
+                <label>Instrucciones para el pedido:</label>
+                <textarea name="txtComentario" id="txtComentario" class="form-control">{{$pedido->comentario ?? ''}}</textarea>
             </div>
         </div>
     </form>
