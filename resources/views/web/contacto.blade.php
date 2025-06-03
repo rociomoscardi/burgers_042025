@@ -25,15 +25,15 @@
                 <input type="hidden" name="_token" value="{{ csrf_token() }}"></input>
                 <div class="col-md-6">
                     <label for="txtNombre">Nombre: *</label>
-                    <input type="text" name="txtNombre" id="txtNombre" class="form-control" required="">
+                    <input type="text" name="txtNombre" id="txtNombre" class="form-control" value="{{$cliente->nombre_comp}}" required="">
                 </div>
                 <div class="col-md-6 ">
                     <label for="txtCorreo">Correo: *</label>
-                    <input type="email" name="txtCorreo" id="txtCorreo" class="form-control" required="">
+                    <input type="email" name="txtCorreo" id="txtCorreo" class="form-control" value="{{$cliente->correo}}" required="">
                 </div>
                 <div class="col-md-12">
                     <label for="txtTelefono">Teléfono: *</label>
-                    <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" required="">
+                    <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" value="{{$cliente->telefono}}" required="">
                 </div>
                 <div class="col-md-12">
                     <label for="txtMensaje">Mensaje: *</label>

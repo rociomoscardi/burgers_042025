@@ -6,12 +6,17 @@ use App\Entidades\Cliente;
 use Illuminate\Http\Request;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Session;
 
 class ControladorWebContacto extends Controller
 {
     public function index()
     {
-        return view("web.contacto");
+        $idCliente = Session::get("idCliente");
+        $cliente = new Cliente();
+        $cliente->obtenerPorId($idCliente);
+
+        return view("web.contacto", compact('cliente'));
     }
 
     public function enviar(Request $request)
