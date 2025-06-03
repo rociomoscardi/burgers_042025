@@ -57,10 +57,10 @@
                 <label for="lstPago">Método dede pago:</label><br>
                 <select class="form-control" name="lstPago" id="lstPago">
                     <option selected disabled value="">Seleccionar</option>
-                    <option value="">Efectivo</option>
-                    <option value="">Mercado Pago</option>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Mercadopago">Mercado Pago</option>
                 </select><br>
-                <textarea name="txtComentario" id="txtComentario" class="form-control">Añadir comentario...</textarea><br>
+                <textarea name="txtComentario" id="txtComentario" class="form-control" placeholder="Añadir comentario..."></textarea><br>
                 <a class="btn-getstarted px-sm-5" href="/takeaway">Continuar pedido</a>
                 <button type="submit" name="btnFinalizar" id="btnFinalizar" class="px-5">Finalizar pedido</button>
             </div>

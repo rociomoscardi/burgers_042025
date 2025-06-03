@@ -74,7 +74,7 @@ class Carrito extends Model
         $sql = "UPDATE clientes SET
             fk_idcliente=$this->fk_idcliente,
             fk_idproducto=$this->fk_idproducto,
-            cantidad=$this->cantidad
+            cantidad=$this->cantidad,
             WHERE idcarrito=?";
         $affected = DB::update($sql, [$this->idcarrito]);
     }

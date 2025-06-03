@@ -16,7 +16,8 @@ class Pedido extends Model
         'total',
         'fk_idsucursal',
         'fk_idcliente',
-        'fk_idestado'
+        'fk_idestado',
+        'm_pago'
     ];
 
     public function obtenerTodos()
@@ -27,7 +28,8 @@ class Pedido extends Model
             total,
             fk_idsucursal,
             fk_idcliente,
-            fk_idestado
+            fk_idestado,
+            m_pago
             FROM pedidos ORDER BY fecha DESC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
@@ -57,7 +59,8 @@ class Pedido extends Model
             total,
             fk_idsucursal,
             fk_idcliente,
-            fk_idestado
+            fk_idestado,
+            m_pago
             FROM pedidos WHERE idpedido = ?";
         $lstRetorno = DB::select($sql, [$idPedido]);
 
@@ -68,6 +71,7 @@ class Pedido extends Model
             $this->fk_idsucursal = $lstRetorno[0]->fk_idsucursal;
             $this->fk_idcliente = $lstRetorno[0]->fk_idcliente;
             $this->fk_idestado = $lstRetorno[0]->fk_idestado;
+            $this->m_pago = $lstRetorno[0]->m_pago;
             return $this;
         }
         return null;
@@ -80,7 +84,8 @@ class Pedido extends Model
             total=$this->total,
             fk_idsucursal=$this->fk_idsucursal,
             fk_idcliente=$this->fk_idcliente,
-            fk_idestado=$this->fk_idestado
+            fk_idestado=$this->fk_idestado,
+            m_pago='$this->m_pago'
             WHERE idpedido=?";
         $affected = DB::update($sql, [$this->idpedido]);
     }
@@ -99,14 +104,16 @@ class Pedido extends Model
             total,
             fk_idsucursal,
             fk_idcliente,
-            fk_idestado
-            ) VALUES (?, ?, ?, ?, ?);";
+            fk_idestado,
+            m_pago
+            ) VALUES (?, ?, ?, ?, ?, ?);";
         $result = DB::insert($sql, [
             $this->fecha,
             $this->total,
             $this->fk_idsucursal,
             $this->fk_idcliente,
             $this->fk_idestado,
+            $this->m_pago,
         ]);
         return $this->idpedido = DB::getPdo()->lastInsertId();
     }
@@ -118,6 +125,7 @@ class Pedido extends Model
         $this->fk_idsucursal = $request->input('lstSucursal') != "0" ? $request->input('lstSucursal') : $this->fk_idsucursal;
         $this->fk_idcliente = $request->input('lstCliente') != "0" ? $request->input('lstCliente') : $this->fk_idcliente;
         $this->fk_idestado = $request->input('lstEstado') != "0" ? $request->input('lstEstado') : $this->fk_idestado;
+        $this->m_pago = $request->input('lstPago') != "0" ? $request->input('lstPago') : $this->m_pago;
     }
 
     public function obtenerFiltrado(){
@@ -128,13 +136,15 @@ class Pedido extends Model
             2 => 'C.nombre_comp',
             3 => 'P.fecha',
             4 => 'P.total',
+            5 => 'P.m_pago',
         );
         $sql = "SELECT DISTINCT
                     P.idpedido,
                     S.nombre as sucursal,
                     C.nombre_comp as cliente,
                     P.fecha,
-                    P.total
+                    P.total,
+                    P.m_pago
                     FROM pedidos P
                     INNER JOIN sucursales S ON S.idsucursal = P.fk_idsucursal
                     INNER JOIN clientes C ON C.idcliente = P.fk_idcliente
@@ -148,6 +158,7 @@ class Pedido extends Model
             $sql .= " OR C.nombre_comp LIKE '%" . $request['search']['value'] . "%' ";
             $sql .= " OR P.fecha LIKE '%" . $request['search']['value'] . "%' )";
             $sql .= " OR P.total LIKE '%" . $request['search']['value'] . "%' )";
+            $sql .= " OR P.m_pago LIKE '%" . $request['search']['value'] . "%' )";
         }
         $sql .= " ORDER BY " . $columns[$request['order'][0]['column']] . "   " . $request['order'][0]['dir'];
 
@@ -163,7 +174,8 @@ class Pedido extends Model
             total,
             fk_idsucursal,
             fk_idcliente,
-            fk_idestado
+            fk_idestado,
+            m_pago
             FROM pedidos WHERE fk_idcliente = $idCliente";
         $lstRetorno = DB::select($sql);
 
@@ -177,7 +189,8 @@ class Pedido extends Model
             total,
             fk_idsucursal,
             fk_idcliente,
-            fk_idestado
+            fk_idestado,
+            m_pago
             FROM pedidos WHERE fk_idsucursal = $idSucursal";
         $lstRetorno = DB::select($sql);
 
