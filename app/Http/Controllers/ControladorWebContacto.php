@@ -22,11 +22,14 @@ class ControladorWebContacto extends Controller
     public function enviar(Request $request)
     {
 
+        $nombre = $request->input("txtNombre");
         $correo = $request->input("txtCorreo");
+        $telefono = $request->input("txtTelefono");
+        $mensaje = $request->input('txtMensaje');
 
         $cliente = new Cliente();
         $cliente->obtenerPorCorreo($correo);
-        if ($cliente->correo != "") {
+        if ($cliente->nombre_comp != "" && $cliente->correo != "" && $cliente->telefono != "" && $mensaje != "") {
 
             //$data = "Instrucciones";
 
@@ -50,22 +53,28 @@ class ControladorWebContacto extends Controller
                 $mail->isHTML(true);
                 $mail->Subject = 'Gracias por contactarte';             //en el cuerpo del mail van los datos del formulario.
                 $mail->Body =  "
-                    <strong>Cliente:</strong> {$cliente->nombre_comp}<br>
-                    <strong>Correo:</strong> {$cliente->correo}<br>
-                    <strong>Teléfono:</strong> {$cliente->telefono}<br>
-                    <strong>Mensaje:</strong> {$request->input('txtMensaje')}
+                    <strong>Cliente:</strong> $nombre <br>
+                    <strong>Correo:</strong> $correo <br>
+                    <strong>Teléfono:</strong> $telefono <br>
+                    <strong>Mensaje:</strong> $mensaje <br>
                 ";
 
                 //$mail->send();
 
                 return view('web.contacto-gracias');
             } catch (Exception $e) {
-                $mensaje = "Se produjo un error al enviar tu postulación.";
-                return view('web.contacto', compact('mensaje'));
+                $cliente = new Cliente();
+                $cliente->obtenerPorCorreo($correo);
+
+                $mensaje = "Se produjo un error al enviar tu mensaje.";
+                return view('web.contacto', compact('mensaje', 'cliente'));
             }
         } else {
-            $mensaje = "No se encontró un cliente con ese correo.";
-            return view('web.contacto', compact('mensaje'));
+            $cliente = new Cliente();
+            $cliente->obtenerPorCorreo($correo);
+
+            $mensaje = "Complete todos los datos.";
+            return view('web.contacto', compact('mensaje', 'cliente'));
         }
     }
 }
