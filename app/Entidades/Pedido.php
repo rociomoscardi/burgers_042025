@@ -50,7 +50,7 @@ class Pedido extends Model
             FROM pedidos P 
             INNER JOIN sucursales S ON S.idsucursal = P.fk_idsucursal
             INNER JOIN estados E ON E.idestado = P.fk_idestado
-            ORDER BY fecha DESC";
+            ORDER BY P.idpedido DESC";
         $lstRetorno = DB::select($sql);
         return $lstRetorno;
     }
@@ -127,10 +127,11 @@ class Pedido extends Model
         return $this->idpedido = DB::getPdo()->lastInsertId();
     }
 
-    public function cargarDesdeRequest($request) { //recibe el request del formulario y lo empieza a setear en el propio objeto
+    public function cargarDesdeRequest($request)
+    { //recibe el request del formulario y lo empieza a setear en el propio objeto
         $this->idpedido = $request->input('id') != "0" ? $request->input('id') : $this->idpedido; //esto solo va en los int, si es un string o viene o queda un string vacío
         $this->fecha = $request->input('txtFecha');
-        $this->total = $request->input('txtTotal')!= "0" ? $request->input('txtTotal') : $this->total;
+        $this->total = $request->input('txtTotal') != "0" ? $request->input('txtTotal') : $this->total;
         $this->fk_idsucursal = $request->input('lstSucursal') != "0" ? $request->input('lstSucursal') : $this->fk_idsucursal;
         $this->fk_idcliente = $request->input('lstCliente') != "0" ? $request->input('lstCliente') : $this->fk_idcliente;
         $this->fk_idestado = $request->input('lstEstado') != "0" ? $request->input('lstEstado') : $this->fk_idestado;
@@ -138,19 +139,22 @@ class Pedido extends Model
         $this->comentario = $request->input('txtComentario');
     }
 
-    public function obtenerFiltrado(){
+    public function obtenerFiltrado()
+    {
         $request = $_REQUEST;
         $columns = array(
             0 => 'P.idpedido',
-            1 => 'S.nombre',
-            2 => 'C.nombre_comp',
-            3 => 'P.fecha',
-            4 => 'P.total',
-            5 => 'P.m_pago',
-            6 => 'P.comentario',
+            1 => 'E.nombre',
+            2 => 'S.nombre',
+            3 => 'C.nombre_comp',
+            4 => 'P.fecha',
+            5 => 'P.total',
+            6 => 'P.m_pago',
+            7 => 'P.comentario',
         );
         $sql = "SELECT DISTINCT
                     P.idpedido,
+                    E.nombre as estado,
                     S.nombre as sucursal,
                     C.nombre_comp as cliente,
                     P.fecha,
@@ -160,7 +164,7 @@ class Pedido extends Model
                     FROM pedidos P
                     INNER JOIN sucursales S ON S.idsucursal = P.fk_idsucursal
                     INNER JOIN clientes C ON C.idcliente = P.fk_idcliente
-                    /* es probable que acá me falte agregar estado de pedidos */ 
+                    INNER JOIN estados E ON E.idestado = P.fk_idestado
                 WHERE 1=1
                 ";
 
@@ -180,7 +184,8 @@ class Pedido extends Model
         return $lstRetorno;
     }
 
-    public function existePedidosPorCliente($idCliente){
+    public function existePedidosPorCliente($idCliente)
+    {
         $sql = "SELECT
             idpedido,
             fecha,
@@ -195,8 +200,9 @@ class Pedido extends Model
 
         return (count($lstRetorno) > 0); // si es mayor que 0 me devuleve true, y si no me devuelve false 
     }
-    
-    public function existePedidosPorSucursal($idSucursal){
+
+    public function existePedidosPorSucursal($idSucursal)
+    {
         $sql = "SELECT
             idpedido,
             fecha,

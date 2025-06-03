@@ -34,7 +34,7 @@ if (isset($msg)) {
     echo '<script>msgShow("' . $msg["MSG"] . '", "' . $msg["ESTADO"] . '")</script>';
 }
 ?>
-<div id = "msg"></div>
+<div id="msg"></div>
 <div class="panel-body">
     <form id="form1" method="POST">
         <div class="row">
@@ -87,18 +87,36 @@ if (isset($msg)) {
                 <label>Método de pago: *</label>
                 <select class="form-control" name="lstPago" id="lstPago">
                     <option selected disabled value="">Seleccionar</option>
-                    <option <?php echo $pedido->m_pago == "Efectivo"? "selected" : "";?> value="Efectivo">Efectivo</option>
-                    <option <?php echo $pedido->m_pago == "Mercadopago"? "selected" : "";?> value="Mercadopago">Mercado Pago</option>
+                    <option <?php echo $pedido->m_pago == "Efectivo" ? "selected" : ""; ?> value="Efectivo">Efectivo</option>
+                    <option <?php echo $pedido->m_pago == "Mercadopago" ? "selected" : ""; ?> value="Mercadopago">Mercado Pago</option>
                 </select>
             </div>
             <div class="form-group col-lg-6">
                 <label>Total: *</label>
                 <input type="text" name="txtTotal" id="txtTotal" class="form-control" value="{{$pedido->total ?? ''}}" placeholder="$0,00" required>
             </div>
-            <div class="form-group col-lg-6">
+            <div class="form-group col-lg-12">
                 <label>Instrucciones para el pedido:</label>
                 <textarea name="txtComentario" id="txtComentario" class="form-control">{{$pedido->comentario ?? ''}}</textarea>
             </div>
+            @if ($pedido->idpedido > 0)
+            <div class="form-group col-lg-12">
+                <label>Listado de productos</label>
+                <table class="table table-hover border">
+                    <tr>
+                        <th>Producto</th>
+                        <th>Cantidad</th>
+                    </tr>
+                    @foreach ($aPedidosProductos as $producto)
+                    <tr>
+                        <td><img src="/files/{{$producto->imagen}}" class="img-thumbnail" style="width:90px" alt=""></td>
+                        <td>{{$producto->titulo}}</td>
+                        <td>{{$producto->cantidad}}</td>
+                    </tr>
+                    @endforeach
+                </table>
+            </div>
+            @endif
         </div>
     </form>
 </div>
@@ -122,10 +140,12 @@ if (isset($msg)) {
         $.ajax({
             type: "GET",
             url: "{{ asset('admin/pedido/eliminar') }}",
-            data: { id:globalId },
+            data: {
+                id: globalId
+            },
             async: true,
             dataType: "json",
-            success: function (data) {
+            success: function(data) {
                 if (data.err = 0) {
                     msgShow(data.mensaje, "danger");
                     $("#btnEnviar").hide();

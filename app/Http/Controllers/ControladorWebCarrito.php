@@ -87,13 +87,14 @@ class ControladorWebCarrito extends Controller
         foreach ($aCarritos as $item) {
             $pedidoProducto->fk_idproducto = $item->fk_idproducto;
             $pedidoProducto->fk_idpedido = $pedido->idpedido;
+            $pedidoProducto->cantidad = $item->cantidad;
             $pedidoProducto->insertar();
         }
 
         $carrito->eliminarPorCliente($idCliente);
 
         $msg["ESTADO"] = MSG_SUCCESS;
-        $msg["MSG"] = "Su pedido se ha realizado correctamente.";
+        $msg["MSG"] = "Tu pedido se realizó correctamente. Ya lo podés ver en tu cuenta!";
         return view("web.carrito", compact("msg", "aCarritos", "aSucursales"));
     }
 

@@ -29,6 +29,10 @@
                     <input type="email" class="form-control" name="txtCorreo" id="txtCorreo" value="{{$cliente->correo}}" required="">
                 </div>
                 <div class="col-md-6">
+                    <label for="txtDni">DNI: *</label>
+                    <input type="text" class="form-control" name="txtDni" id="txtDni" value="{{$cliente->dni}}" required="">
+                </div>
+                <div class="col-md-6">
                     <label for="txtTelefono">Teléfono: *</label>
                     <input type="text" class="form-control" name="txtTelefono" id="txtTelefono" value="{{$cliente->telefono}}" required="">
                 </div>
@@ -59,6 +63,7 @@
                     </thead>
 
                     @foreach ($aPedidos as $pedido)
+                    @if ($pedido->estado != "Entregado")
                     <tbody>
                         <td>{{$pedido->fecha}}</td>
                         <td>{{$pedido->idpedido}}</td>
@@ -66,6 +71,7 @@
                         <td>{{$pedido->estado}}</td>
                         <td>${{number_format($pedido->total, 2, ',', '.') }}</td>
                     </tbody>
+                    @endif
                     @endforeach
                 </table>
             </div>

@@ -25,6 +25,7 @@ if (isset($msg)) {
     <thead>
         <tr>
             <th>N° pedido</th>
+            <th>Estado</th>
             <th>Sucursal</th>
             <th>Cliente</th>
             <th>Fecha</th>

@@ -6,6 +6,7 @@ use App\Entidades\Pedido;
 use App\Entidades\Sucursal;
 use App\Entidades\Cliente;
 use App\Entidades\Estado;
+use App\Entidades\Pedido_producto;
 use App\Entidades\Sistema\Usuario;
 use App\Entidades\Sistema\Patente;
 use Illuminate\Http\Request;
@@ -121,7 +122,9 @@ class ControladorPedido extends Controller
                 $aClientes = $cliente->obtenerTodos();
                 $estado = new Estado();
                 $aEstados = $estado->obtenerTodos();
-                return view("sistema.pedido-nuevo", compact("titulo", "pedido", "aSucursales", "aClientes", "aEstados"));
+                $pedidosproductos = new Pedido_producto();
+                $aPedidosProductos = $pedidosproductos->obtenerPorPedido($id);
+                return view("sistema.pedido-nuevo", compact("titulo", "pedido", "aSucursales", "aClientes", "aEstados", "aPedidosProductos"));
             }
         } else {
             return redirect('admin/login');
@@ -166,6 +169,7 @@ class ControladorPedido extends Controller
         for ($i = $inicio; $i < count($aPedidos) && $cont < $registros_por_pagina; $i++) {
             $row = array();
             $row[] = "<a href='/admin/pedido/" . $aPedidos[$i]->idpedido . "'>" . $aPedidos[$i]->idpedido . "</a>";
+            $row[] = $aPedidos[$i]->estado;
             $row[] = $aPedidos[$i]->sucursal;
             $row[] = $aPedidos[$i]->cliente;
             $row[] = date_format(date_create($aPedidos[$i]->fecha), "d/m/Y");
