@@ -45,6 +45,9 @@ Route::group(array('domain' => '127.0.0.1'), function () {
     Route::get('/login', 'ControladorWebLogin@index');
     Route::post('/login', 'ControladorWebLogin@ingresar');
     Route::get('/logout', 'ControladorWebLogin@logout');
+    Route::get('/mercado-pago/aprobado/{idPedido}', 'ControladorMercadoPago@aprobar'); //estos 3 simplemente van a cambiar el estado del pedido, el pago ya lo hace MP.
+    Route::get('/mercado-pago/pendiente/{idPedido}', 'ControladorMercadoPago@pendiente');
+    Route::get('/mercado-pago/error/{idPedido}', 'ControladorMercadoPago@error');
 
     /* --------------------------------------------- */
     /* CONTROLADOR LOGIN                           */
